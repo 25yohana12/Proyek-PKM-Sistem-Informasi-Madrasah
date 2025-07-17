@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Acara;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class AcaraController extends Controller
 {
@@ -42,30 +43,44 @@ class AcaraController extends Controller
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'tanggalAcara' => 'required|date',
-            'gambar' => 'required|array|size:3',  // Validasi gambar harus ada 3 gambar
+            'gambar' => 'nullable|array', // Gambar opsional, bisa array kosong
             'gambar.*' => 'mimes:jpeg,jpg,png,gif|max:2048', // Validasi format gambar dan ukuran
         ]);
 
-        // Menyimpan data acara baru
-        $acara = new Acara();
-        $acara->superAdmin_id = 1; // Set default superAdmin_id ke 1
-        $acara->judul = $request->judul;
-        $acara->deskripsi = $request->deskripsi;
-        $acara->tanggalAcara = $request->tanggalAcara;
+        try {
+            // Cek apakah superAdmin_id = 1 ada di database
+            $superAdminExists = DB::table('superadmin')->where('superAdmin_id', 1)->exists();
+            
+            if (!$superAdminExists) {
+                return redirect()->back()->with('error', 'Super Admin tidak ditemukan.');
+            }
 
-        // Menyimpan gambar
-        $images = [];
-        foreach ($request->file('gambar') as $image) {
-            $path = $image->store('acara_images', 'public');
-            $images[] = $path;
+            // Menyimpan data acara baru
+            $acara = new Acara();
+            $acara->superAdmin_id = 1;
+            $acara->judul = $request->judul;
+            $acara->deskripsi = $request->deskripsi;
+            $acara->tanggalAcara = $request->tanggalAcara;
+
+            // Menyimpan gambar jika ada
+            $images = [];
+            if ($request->hasFile('gambar')) {
+                foreach ($request->file('gambar') as $image) {
+                    $path = $image->store('acara_images', 'public');
+                    $images[] = $path;
+                }
+            }
+
+            // Menyimpan path gambar dalam format JSON (bisa array kosong)
+            $acara->gambar = json_encode($images);
+
+            $acara->save();
+
+            return redirect()->route('acara.index')->with('success', 'Acara berhasil disimpan!');
+            
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
-        // Menyimpan path gambar dalam format JSON
-        $acara->gambar = json_encode($images);
-
-        $acara->save();
-
-        return redirect()->route('acara.index')->with('success', 'Acara berhasil disimpan!');
     }
 
     /**
@@ -93,32 +108,37 @@ class AcaraController extends Controller
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'tanggalAcara' => 'required|date',
-            'gambar' => 'nullable|array|size:3',  // Validasi gambar harus ada 3 gambar jika ada
+            'gambar' => 'nullable|array', // Gambar opsional
             'gambar.*' => 'mimes:jpeg,jpg,png,gif|max:2048', // Validasi format gambar dan ukuran
         ]);
 
-        // Memperbarui acara
-        $acara->judul = $request->judul;
-        $acara->deskripsi = $request->deskripsi;
-        $acara->tanggalAcara = $request->tanggalAcara;
+        try {
+            // Memperbarui acara
+            $acara->judul = $request->judul;
+            $acara->deskripsi = $request->deskripsi;
+            $acara->tanggalAcara = $request->tanggalAcara;
 
-        // Menyimpan gambar baru jika ada
-        if ($request->hasFile('gambar')) {
-            $images = json_decode($acara->gambar, true); // Mengambil gambar lama
+            // Menyimpan gambar baru jika ada
+            if ($request->hasFile('gambar')) {
+                $images = json_decode($acara->gambar, true) ?? []; // Mengambil gambar lama atau array kosong
 
-            // Menyimpan gambar baru
-            foreach ($request->file('gambar') as $image) {
-                $path = $image->store('acara_images', 'public');
-                $images[] = $path;
+                // Menyimpan gambar baru
+                foreach ($request->file('gambar') as $image) {
+                    $path = $image->store('acara_images', 'public');
+                    $images[] = $path;
+                }
+
+                // Menyimpan gambar yang sudah diperbarui dalam format JSON
+                $acara->gambar = json_encode($images);
             }
 
-            // Menyimpan gambar yang sudah diperbarui dalam format JSON
-            $acara->gambar = json_encode($images);
+            $acara->save();
+
+            return redirect()->route('acara.index')->with('success', 'Acara berhasil diperbarui!');
+            
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
-        $acara->save();
-
-        return redirect()->route('acara.index')->with('success', 'Acara berhasil diperbarui!');
     }
 
     /**
@@ -129,7 +149,7 @@ class AcaraController extends Controller
      */
     public function show(Acara $acara)
     {
-        return view('superadmin.acara.show', compact('acara'));
+        return view('superadmin.showacara', compact('acara'));
     }
 
     /**
@@ -140,15 +160,22 @@ class AcaraController extends Controller
      */
     public function destroy(Acara $acara)
     {
-        // Menghapus gambar-gambar terkait dari storage
-        $images = json_decode($acara->gambar, true);
-        foreach ($images as $image) {
-            Storage::disk('public')->delete($image); // Menghapus gambar dari storage
+        try {
+            // Menghapus gambar-gambar terkait dari storage
+            $images = json_decode($acara->gambar, true) ?? [];
+            if (!empty($images)) {
+                foreach ($images as $image) {
+                    Storage::disk('public')->delete($image);
+                }
+            }
+
+            // Menghapus data acara dari database
+            $acara->delete();
+
+            return redirect()->route('acara.index')->with('success', 'Acara berhasil dihapus!');
+            
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
-
-        // Menghapus data acara dari database
-        $acara->delete();
-
-        return redirect()->route('acara.index')->with('success', 'Acara berhasil dihapus!');
     }
 }
