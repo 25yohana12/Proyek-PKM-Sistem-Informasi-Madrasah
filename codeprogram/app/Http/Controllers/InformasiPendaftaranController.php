@@ -13,6 +13,19 @@ class InformasiPendaftaranController extends Controller
     public function index()
     {
         $informasi = InformasiPendaftaran::first();
+        
+        // Jika belum ada data, buat data default
+        if (!$informasi) {
+            $informasi = InformasiPendaftaran::create([
+                'tahunAjaran' => '2025/2026',
+                'tanggalPendaftaran' => now(),
+                'tanggalPengumuman' => now()->addDays(30),
+                'tanggalPenutupan' => now()->addDays(60),
+                'jumlahSiswa' => 100,
+                'pengumuman' => 'Pendaftaran siswa baru akan segera dibuka.'
+            ]);
+        }
+        
         return view('superadmin.informasipendaftaran', compact('informasi'));
     }
 
@@ -31,12 +44,12 @@ class InformasiPendaftaranController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tahunAjaran'         => 'required|string|max:50',
+            'tahunAjaran' => 'required|string|max:50',
             'tanggalPendaftaran' => 'required|date',
-            'tanggalPengumuman'  => 'required|date',
-            'tanggalPenutupan'   => 'required|date',
-            'jumlahSiswa'        => 'required|integer|min:0',
-            'pengumuman'         => 'nullable|string',
+            'tanggalPengumuman' => 'required|date',
+            'tanggalPenutupan' => 'required|date',
+            'jumlahSiswa' => 'required|integer|min:0',
+            'pengumuman' => 'nullable|string',
         ]);
 
         $informasi = InformasiPendaftaran::findOrFail($id);

@@ -21,5 +21,11 @@ class InformasiPendaftaran extends Model
         'pengumuman',
     ];
 
+    protected $casts = [
+        'tanggalPendaftaran' => 'date',
+        'tanggalPengumuman' => 'date',
+        'tanggalPenutupan' => 'date',
+    ];
+
     public $timestamps = true; // created_at dan updated_at aktif
 }

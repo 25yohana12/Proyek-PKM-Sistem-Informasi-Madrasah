@@ -69,6 +69,14 @@
             <li><a href="#" class="{{ request()->routeIs('pendaftaran.*') ? 'active' : '' }}">
                 <i class="fas fa-user-plus"></i>Pendaftaran
             </a></li>
+
+            <li><a href="{{ route('informasi.index') }}" class="sub-menu {{ request()->routeIs('informasi.*') ? 'active' : '' }}">
+                <i class="fas fa-info-circle"></i>Informasi Pendaftaran
+            </a></li>
+            
+            <li><a href="#" class="sub-menu {{ request()->routeIs('daftar-pendaftar.*') ? 'active' : '' }}">
+                <i class="fas fa-list-ul"></i>Daftar Pendaftar
+            </a></li>
             
             <!-- Logout -->
             <li><a href="#" onclick="confirmLogout()">
