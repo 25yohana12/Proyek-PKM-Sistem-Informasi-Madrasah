@@ -8,6 +8,9 @@ use App\Http\Controllers\PrestasiController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\AcaraController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\InformasiPendaftaranController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('guest.home');});
@@ -35,6 +38,18 @@ Route::prefix('superadmin')->group(function () {
     Route::get('/galeri/{galeri}/edit', [GaleriController::class, 'edit'])->name('galeri.edit'); // Menampilkan form edit galeri
     Route::put('/galeri/{galeri}', [GaleriController::class, 'update'])->name('galeri.update'); // Memperbarui galeri
     Route::delete('/galeri/{galeri}', [GaleriController::class, 'destroy'])->name('galeri.destroy'); // Menghapus galeri
+    Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa.index');
+    Route::get('/siswa/create', [SiswaController::class, 'create'])->name('siswa.create');
+    Route::post('/siswa', [SiswaController::class, 'store'])->name('siswa.store');
+    Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit'])->name('siswa.edit');
+    Route::put('/siswa/{id}', [SiswaController::class, 'update'])->name('siswa.update');
+    Route::delete('/siswa/{id}', [SiswaController::class, 'destroy'])->name('siswa.destroy');
+    Route::get('/sekolah', [SekolahController::class, 'index'])->name('sekolah.index');
+    Route::get('/sekolah/{id}/edit', [SekolahController::class, 'edit'])->name('sekolah.edit');
+    Route::put('/sekolah/{id}', [SekolahController::class, 'update'])->name('sekolah.update');
+    Route::get('/informasipendaftaran', [InformasiPendaftaranController::class, 'index'])->name('informasi.index');
+    Route::get('/informasipendaftaran/{id}/edit', [InformasiPendaftaranController::class, 'edit'])->name('informasi.edit');
+    Route::put('/informasipendaftaran/{id}', [InformasiPendaftaranController::class, 'update'])->name('informasi.update');
 
     // Menampilkan semua acara
     Route::get('/acara', [AcaraController::class, 'index'])->name('acara.index'); 
