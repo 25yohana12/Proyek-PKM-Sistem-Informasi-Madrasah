@@ -11,7 +11,9 @@ use App\Http\Controllers\AcaraController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\InformasiPendaftaranController;
+use App\Http\Controllers\PendaftarController; 
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {return view('guest.home');});
 Route::get('/guru', [GuruController::class, 'guest'])->name('data.guru');
@@ -50,6 +52,13 @@ Route::prefix('superadmin')->group(function () {
     Route::get('/informasipendaftaran', [InformasiPendaftaranController::class, 'index'])->name('informasi.index');
     Route::get('/informasipendaftaran/{id}/edit', [InformasiPendaftaranController::class, 'edit'])->name('informasi.edit');
     Route::put('/informasipendaftaran/{id}', [InformasiPendaftaranController::class, 'update'])->name('informasi.update');
+    Route::get('/daftar-pendaftar', [PendaftarController::class, 'index'])->name('daftar-pendaftar.index');
+    Route::get('/daftar-pendaftar/create', [PendaftarController::class, 'create'])->name('daftar-pendaftar.create');
+    Route::post('/daftar-pendaftar', [PendaftarController::class, 'store'])->name('daftar-pendaftar.store');
+    Route::get('/daftar-pendaftar/{id}', [PendaftarController::class, 'show'])->name('daftar-pendaftar.show');
+    Route::get('/daftar-pendaftar/{id}/edit', [PendaftarController::class, 'edit'])->name('daftar-pendaftar.edit');
+    Route::put('/daftar-pendaftar/{id}', [PendaftarController::class, 'update'])->name('daftar-pendaftar.update');
+    Route::delete('/daftar-pendaftar/{id}', [PendaftarController::class, 'destroy'])->name('daftar-pendaftar.destroy');
 
     // Menampilkan semua acara
     Route::get('/acara', [AcaraController::class, 'index'])->name('acara.index'); 
