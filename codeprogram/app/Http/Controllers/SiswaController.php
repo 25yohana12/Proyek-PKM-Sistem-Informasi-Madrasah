@@ -117,4 +117,13 @@ class SiswaController extends Controller
 
     return redirect()->route('siswa.index')->with('success', 'Data kelas berhasil diperbarui.');
 }
+
+    public function guest()
+    {
+        // Ambil semua data siswa, urutkan misalnya berdasarkan kelas
+        $siswas = Siswa::orderBy('kelas')->get();
+
+        // Kirim ke view siswa.blade.php
+        return view('guest.siswa', compact('siswas'));
+    }
 }

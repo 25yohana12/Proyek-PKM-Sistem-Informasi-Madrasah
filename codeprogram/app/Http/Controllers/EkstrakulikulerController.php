@@ -52,7 +52,7 @@ public function store(Request $request)
         'namaekstrakulikuler' => 'required|string|max:255',
         'deskripsi' => 'required|string',
         'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Image validation
-        'gambar' => 'required|min:3', // At least 3 images required
+        'gambar' => 'required|min:1', // At least 3 images required
     ]);
 
     $imagePaths = [];
@@ -97,7 +97,7 @@ public function store(Request $request)
             'namaekstrakulikuler' => 'required|string|max:255',
             'deskripsi' => 'required|string',
             'gambar.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'gambar' => 'nullable|min:3',
+            'gambar' => 'nullable|min:1',
         ]);
 
         // Handle image uploads (if any)
@@ -110,13 +110,12 @@ public function store(Request $request)
 
         // Update the extracurricular activity
         $ekstrakulikuler->update([
-            'superAdmin_id' => $request->superAdmin_id ?? 1,
             'namaekstrakulikuler' => $request->namaekstrakulikuler,
             'deskripsi' => $request->deskripsi,
-            'gambar' => json_encode($imagePaths), // Update image paths
+            'gambar' => json_encode($imagePaths), // Store updated image paths in JSON format
         ]);
 
-        return redirect()->route('superadmin.ekstrakulikuler')->with('success', 'Ekstrakurikuler updated successfully!');
+        return redirect()->route('ekstrakulikuler.index')->with('success', 'Ekstrakurikuler updated successfully!');
     }
 
     /**
@@ -129,15 +128,17 @@ public function store(Request $request)
     {
         // Delete the images from storage
         $images = json_decode($ekstrakulikuler->gambar, true);
-        foreach ($images as $image) {
-            if (Storage::exists('public/' . $image)) {
-                Storage::delete('public/' . $image);
+        if (is_array($images)) {
+            foreach ($images as $image) {
+                if (Storage::exists('public/' . $image)) {
+                    Storage::delete('public/' . $image);
+                }
             }
         }
 
         // Delete the extracurricular activity record
         $ekstrakulikuler->delete();
 
-        return redirect()->route('superadmin.ekstrakulikuler')->with('success', 'Ekstrakurikuler deleted successfully!');
+        return redirect()->route('ekstrakulikuler.index')->with('success', 'Ekstrakurikuler deleted successfully!');
     }
 }

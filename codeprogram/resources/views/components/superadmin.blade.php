@@ -74,7 +74,7 @@
                 <i class="fas fa-info-circle"></i>Informasi Pendaftaran
             </a></li>
             
-            <li><a href="#" class="sub-menu {{ request()->routeIs('daftar-pendaftar.*') ? 'active' : '' }}">
+            <li><a href="{{ route('daftar-pendaftar.index') }}" class="sub-menu {{ request()->routeIs('daftar-pendaftar.*') ? 'active' : '' }}">
                 <i class="fas fa-list-ul"></i>Daftar Pendaftar
             </a></li>
             

@@ -178,4 +178,12 @@ class AcaraController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
+        public function guest()
+    {
+        // Ambil semua data acara, terbaru di atas
+        $acaras = Acara::orderByDesc('tanggalAcara')->get();
+
+        return view('guest.acara', compact('acaras'));
+    }
 }
