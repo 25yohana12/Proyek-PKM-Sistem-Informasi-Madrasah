@@ -30,5 +30,22 @@ class RoleSeeder extends Seeder
         } else {
             echo "Role Super Admin sudah ada!\n";
         }
+
+        // Cek apakah sudah ada data role dengan ID 2
+        $existsAdmin = DB::table('role')->where('role_id', 2)->exists();
+        
+        if (!$existsAdmin) {
+            DB::table('role')->insert([
+                'role_id' => 2,
+                'namaRole' => 'Admin', // Role untuk Admin
+                'deskripsi' => 'Administrator dengan akses terbatas',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            
+            echo "Role Admin berhasil ditambahkan!\n";
+        } else {
+            echo "Role Admin sudah ada!\n";
+        }
     }
 }
