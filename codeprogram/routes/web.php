@@ -17,13 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('guest.home');});
 Route::get('/guru', [GuruController::class, 'guest'])->name('data.guru');
-Route::get('ekstrakulikuler', [EkstrakulikulerController::class, 'index'])->name('ekstrakulikuler.index'); // Show all Ekstrakurikuler
-Route::get('ekstrakulikuler/create', [EkstrakulikulerController::class, 'create'])->name('ekstrakulikuler.create'); // Show form to create Ekstrakurikuler
-Route::post('ekstrakulikuler', [EkstrakulikulerController::class, 'store'])->name('ekstrakulikuler.store'); // Store new Ekstrakurikuler
-Route::get('ekstrakulikuler/{ekstrakulikuler}/edit', [EkstrakulikulerController::class, 'edit'])->name('ekstrakulikuler.edit'); // Show form to edit Ekstrakurikuler
-Route::put('ekstrakulikuler/{ekstrakulikuler}', [EkstrakulikulerController::class, 'update'])->name('ekstrakulikuler.update'); // Update Ekstrakurikuler
-Route::delete('ekstrakulikuler/{ekstrakulikuler}', [EkstrakulikulerController::class, 'destroy'])->name('ekstrakulikuler.destroy'); // Delete Ekstrakurikuler
-Route::get('ekstrakulikuler/{ekstrakulikuler}', [EkstrakulikulerController::class, 'show'])->name('ekstrakulikuler.show');
 
 Route::prefix('superadmin')->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('dashboard');
@@ -59,6 +52,13 @@ Route::prefix('superadmin')->group(function () {
     Route::get('/daftar-pendaftar/{id}/edit', [PendaftarController::class, 'edit'])->name('daftar-pendaftar.edit');
     Route::put('/daftar-pendaftar/{id}', [PendaftarController::class, 'update'])->name('daftar-pendaftar.update');
     Route::delete('/daftar-pendaftar/{id}', [PendaftarController::class, 'destroy'])->name('daftar-pendaftar.destroy');
+    Route::get('/ekstrakulikuler', [EkstrakulikulerController::class, 'index'])->name('ekstrakulikuler.index'); // Menampilkan daftar ekstrakurikuler
+    Route::get('/ekstrakulikuler/create', [EkstrakulikulerController::class, 'create'])->name('ekstrakulikuler.create'); // Menampilkan form tambah ekstrakurikuler
+    Route::post('/ekstrakulikuler', [EkstrakulikulerController::class, 'store'])->name('ekstrakulikuler.store'); // Menyimpan ekstrakurikuler baru
+    Route::get('/ekstrakulikuler/{ekstrakulikuler}', [EkstrakulikulerController::class, 'show'])->name('ekstrakulikuler.show'); // Menampilkan detail ekstrakurikuler
+    Route::get('/ekstrakulikuler/{ekstrakulikuler}/edit', [EkstrakulikulerController::class, 'edit'])->name('ekstrakulikuler.edit'); // Menampilkan form edit ekstrakurikuler
+    Route::put('/ekstrakulikuler/{ekstrakulikuler}', [EkstrakulikulerController::class, 'update'])->name('ekstrakulikuler.update'); // Memperbarui ekstrakurikuler
+    Route::delete('/ekstrakulikuler/{ekstrakulikuler}', [EkstrakulikulerController::class, 'destroy'])->name('ekstrakulikuler.destroy'); // Menghapus ekstrakurikuler
 
     // Menampilkan semua acara
     Route::get('/acara', [AcaraController::class, 'index'])->name('acara.index'); 
