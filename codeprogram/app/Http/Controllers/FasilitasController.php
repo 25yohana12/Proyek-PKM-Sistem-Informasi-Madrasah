@@ -97,4 +97,13 @@ class FasilitasController extends Controller
         $fasilitas->delete();
         return response()->json(null, 204);
     }
+
+        public function guest()
+    {
+        // Ambil data (ganti ->paginate(6) jika butuh pagination)
+        $fasilitas = Fasilitas::latest()->get();
+
+        // Kirim ke Blade resources/views/fasilitas/index.blade.php
+        return view('guest.fasilitas', compact('fasilitas'));
+    }
 }

@@ -21,6 +21,9 @@ Route::get('/guru', [GuruController::class, 'guest'])->name('data.guru');
 Route::get('/siswa', function () {return view('guest.siswa');});
 Route::get('/siswa', [SiswaController::class, 'guest'])->name('guest.siswa');
 Route::get('/perayaan', [AcaraController::class, 'guest'])->name('guest.acara');
+Route::get('/prestasi', [PrestasiController::class, 'guest'])->name('guest.prestasi');
+Route::get('/fasilitas', [FasilitasController::class, 'guest'])->name('guest.Fasilitas');
+Route::get('/galeri', [GaleriController::class, 'guest']) ->name('galeri.guest');
 
 Route::prefix('superadmin')->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('dashboard');
