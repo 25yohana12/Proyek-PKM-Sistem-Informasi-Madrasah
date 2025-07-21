@@ -235,4 +235,13 @@ class PrestasiController extends Controller
 
         return view('superadmin.prestasi', compact('prestasis', 'query'));
     }
+
+        public function guest()
+    {
+        // Ambil semua prestasi (urut terbaru). Ganti →paginate(6) jika mau paging
+        $prestasi = Prestasi::latest()->get();
+
+        // Kirim ke Blade: resources/views/prestasi/index.blade.php
+        return view('guest.prestasi', compact('prestasi'));
+    }
 }

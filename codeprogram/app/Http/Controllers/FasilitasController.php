@@ -119,4 +119,13 @@ class FasilitasController extends Controller
         $fasilitas->delete();
         return redirect()->route('fasilitas.index')->with('success', 'Fasilitas berhasil dihapus!');
     }
+
+        public function guest()
+    {
+        // Ambil data (ganti ->paginate(6) jika butuh pagination)
+        $fasilitas = Fasilitas::latest()->get();
+
+        // Kirim ke Blade resources/views/fasilitas/index.blade.php
+        return view('guest.fasilitas', compact('fasilitas'));
+    }
 }

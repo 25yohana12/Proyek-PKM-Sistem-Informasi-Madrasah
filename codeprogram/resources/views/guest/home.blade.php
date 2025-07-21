@@ -55,7 +55,7 @@
             <div class="card-text">
                 <h3>Students</h3>
                 <p>We take pride in nurturing our students for their future success.</p>
-                <a href="#" class="button">Learn More</a>
+                <a href="{{ route('siswa.index') }}" class="button">Learn More</a>
             </div>
         </div>
     </div>

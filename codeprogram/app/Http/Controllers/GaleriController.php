@@ -214,4 +214,13 @@ class GaleriController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
+        public function guest()
+    {
+        // Ambil semua foto, urut terbaru (ganti ->paginate() jika mau paging)
+        $galeri = Galeri::latest()->get();
+
+        // Kirim ke view resources/views/galeri/index.blade.php
+        return view('guest.galeri', compact('galeri'));
+    }
 }
