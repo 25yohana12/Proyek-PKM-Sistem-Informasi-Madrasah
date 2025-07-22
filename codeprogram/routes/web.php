@@ -10,6 +10,7 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\AcaraController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\InformasiPendaftaranController;
 use App\Http\Controllers\PendaftarController; 
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ Route::get('/perayaan', [AcaraController::class, 'guest'])->name('guest.acara');
 Route::get('/prestasi', [PrestasiController::class, 'guest'])->name('guest.prestasi');
 Route::get('/fasilitas', [FasilitasController::class, 'guest'])->name('guest.Fasilitas');
 Route::get('/galeri', [GaleriController::class, 'guest']) ->name('galeri.guest');
+Route::get('/strukturorganisasi', [StrukturOrganisasiController::class, 'guest']) ->name('strukturorganisasi.guest');
 
 Route::prefix('superadmin')->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('dashboard');
@@ -73,6 +75,29 @@ Route::prefix('superadmin')->group(function () {
     Route::put('/ekstrakulikuler/{ekstrakulikuler}', [EkstrakulikulerController::class, 'update'])->name('ekstrakulikuler.update'); // Update Ekstrakurikuler
     Route::delete('/ekstrakulikuler/{ekstrakulikuler}', [EkstrakulikulerController::class, 'destroy'])->name('ekstrakulikuler.destroy'); // Delete Ekstrakurikuler
     Route::get('/ekstrakulikuler/{ekstrakulikuler}', [EkstrakulikulerController::class, 'show'])->name('ekstrakulikuler.show');
+
+    /* INDEX – daftar */
+    Route::get('/strukturorganisasi',[StrukturOrganisasiController::class, 'index'])->name('strukturOrganisasi.index');
+
+    /* CREATE – form tambah */
+    Route::get('/strukturorganisasi/create',[StrukturOrganisasiController::class, 'create'])->name('strukturOrganisasi.create');
+
+    /* STORE – proses simpan data baru */
+    Route::post('/strukturorganisasi',[StrukturOrganisasiController::class, 'store'])->name('strukturOrganisasi.store');
+
+    /* SHOW – detail satu entri */
+    Route::get('/strukturorganisasi/{strukturOrganisasi}',[StrukturOrganisasiController::class, 'show'])->name('strukturOrganisasi.show');
+
+    /* EDIT – form edit */
+    Route::get('/strukturorganisasi/{strukturOrganisasi}/edit',[StrukturOrganisasiController::class, 'edit'])->name('strukturOrganisasi.edit');
+
+    /* UPDATE – proses update */
+    Route::put('/strukturorganisasi/{strukturOrganisasi}',[StrukturOrganisasiController::class, 'update'])->name('strukturOrganisasi.update');
+    //  └─ bisa juga ->patch(…) bila ingin PATCH
+
+    /* DESTROY – hapus data */
+    Route::delete('/strukturorganisasi/{strukturOrganisasi}',[StrukturOrganisasiController::class, 'destroy']) ->name('strukturOrganisasi.destroy');
+    
     // Menampilkan semua acara
     Route::get('/acara', [AcaraController::class, 'index'])->name('acara.index'); 
 

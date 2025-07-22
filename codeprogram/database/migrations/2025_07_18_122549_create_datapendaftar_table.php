@@ -34,12 +34,11 @@ return new class extends Migration
             $table->string('citaCita', 255)->nullable();
             $table->string('telepon', 50)->nullable();
             $table->string('hobi', 255)->nullable();
-            $table->enum('pembiaya', ['OrangTua','Beasiswa','Lainnya'])->nullable();
+            $table->enum('pembiaya', ['OrangTua','Wali Siswa'])->nullable();
             $table->enum('kebutuhanKhusus', [
-                'Tidak','Netra','Rungu','Wicara','Daksa','Grahita','DownSyndrome','Autis','Lainnya'
+                'Tidak','Tuna Netra','Tuna Rungu','TunaWicara','Tuna Daksa','Tuna Grahita','Lainnya'
             ])->nullable();
-            $table->string('praSekolah', 255)->nullable();
-
+            $table->enum('praSekolah', ['Pernah PAUD', 'Pernah TK/RA'])->nullable();
             // --- Keluarga -----------------------------------------------------
             $table->string('noKartuKeluarga', 50)->nullable();
             $table->string('kepalaKeluarga', 255)->nullable();
@@ -49,13 +48,13 @@ return new class extends Migration
 
             // Ayah
             $table->string('namaAyah', 255)->nullable();
-            $table->enum('statusAyah', ['Hidup','Meninggal'])->nullable();
+            $table->enum('statusAyah', ['Hidup','Meninggal', 'Tidak Diketahui'])->nullable();
             $table->string('nikAyah', 20)->nullable();
             $table->string('tempatLahirAyah', 100)->nullable();
             $table->date('tanggalLahirAyah')->nullable();
-            $table->enum('pendidikanAyah', ['SD','SMP','SMA','D3','S1','S2','S3'])->nullable();
+            $table->enum('pendidikanAyah', ['SD','SMP','SMA','D1','D2','D3','D4/S1','S2','S3', 'Tidak Sekolah'])->nullable();
             $table->string('pekerjaanAyah', 255)->nullable();
-            $table->enum('pendapatanAyah', ['<1juta','1-3juta','3-5juta','>5juta'])->nullable();
+            $table->enum('pendapatanAyah', ['500.000 - 1.000.000','1.000.000 - 2.000.000','2.000.000 - 3.000.000','3.000.000 - 5.000.000','Lebih Dari 5.000.000', 'Tidak Ada'])->nullable();
 
             // Ibu
             $table->string('namaIbu', 255)->nullable();
@@ -63,9 +62,9 @@ return new class extends Migration
             $table->string('nikIbu', 20)->nullable();
             $table->string('tempatLahirIbu', 100)->nullable();
             $table->date('tanggalLahirIbu')->nullable();
-            $table->enum('pendidikanIbu', ['SD','SMP','SMA','D3','S1','S2','S3'])->nullable();
+            $table->enum('pendidikanIbu', ['SD','SMP','SMA','D1','D2','D3','D4/S1','S2','S3'])->nullable();
             $table->string('pekerjaanIbu', 255)->nullable();
-            $table->enum('pendapatanIbu', ['<1juta','1-3juta','3-5juta','>5juta'])->nullable();
+            $table->enum('pendapatanIbu', ['500.000 - 1.000.000','1.000.000 - 2.000.000','2.000.000 - 3.000.000','3.000.000 - 5.000.000','Lebih Dari 5.000.000', 'Tidak Ada'])->nullable();
 
             // Wali (opsional)
             $table->string('namaWali', 255)->nullable();
@@ -73,20 +72,20 @@ return new class extends Migration
             $table->string('nikWali', 20)->nullable();
             $table->string('tempatLahirWali', 100)->nullable();
             $table->date('tanggalLahirWali')->nullable();
-            $table->enum('pendidikanWali', ['SD','SMP','SMA','D3','S1','S2','S3'])->nullable();
+            $table->enum('pendidikanWali', ['SD','SMP','SMA','D1','D2','D3','D4/S1','S2','S3'])->nullable();
             $table->string('pekerjaanWali', 255)->nullable();
-            $table->enum('pendapatanWali', ['<1juta','1-3juta','3-5juta','>5juta'])->nullable();
+            $table->enum('pendapatanWali', ['500.000 - 1.000.000','1.000.000 - 2.000.000','2.000.000 - 3.000.000','3.000.000 - 5.000.000','Lebih Dari 5.000.000', 'Tidak Ada'])->nullable();
 
             // --- Alamat & Transport ------------------------------------------
             $table->string('provinsi', 255)->nullable();
             $table->string('kabupaten', 255)->nullable();
-            $table->enum('statusRumah', ['Milik Sendiri','Sewa','Kontrak','Menumpang'])->nullable();
+            $table->enum('statusRumah', ['Milik Sendiri','Sewa/Kontrak','Rumah Dinas','Rumah Saudara'])->nullable();
             $table->string('kecamatan', 255)->nullable();
             $table->string('desa', 255)->nullable();
             $table->string('alamat', 255)->nullable();
-            $table->string('jarakRumah', 255)->nullable();
-            $table->enum('kendaraan', ['Jalan Kaki','Sepeda','Motor','Mobil','Angkutan Umum'])->nullable();
-            $table->enum('waktuPerjalanan', ['<15m','15-30m','30-60m','>60m'])->nullable();
+            $table->enum('jarakRumah', ['<5 Km','5 - 10 Km','11 - 20 Km', '21 - 30 Km', '>30 Km'])->nullable();
+            $table->enum('kendaraan', ['Jalan Kaki','Sepeda','Sepeda Motor','Mobil Pribadi','Antar Jemput','Angkutan Umum'])->nullable();
+            $table->enum('waktuPerjalanan', ['<1 - 10 menit','10 - 19 menit','20 - 29 menit','30 - 39 menit', '1 - 2 jam'])->nullable();
 
             // --- Lain‑lain ----------------------------------------------------
             $table->enum('konfirmasi', ['Belum','Diterima','Ditolak'])->default('Belum');
