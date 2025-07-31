@@ -57,4 +57,23 @@ class InformasiPendaftaranController extends Controller
 
         return redirect()->route('informasi.index')->with('success', 'Informasi pendaftaran berhasil diperbarui.');
     }
+
+    public function guest()
+    {
+        $informasi = InformasiPendaftaran::first();
+        
+        // Jika belum ada data, buat data default
+        if (!$informasi) {
+            $informasi = InformasiPendaftaran::create([
+                'tahunAjaran' => '2025/2026',
+                'tanggalPendaftaran' => now(),
+                'tanggalPengumuman' => now()->addDays(30),
+                'tanggalPenutupan' => now()->addDays(60),
+                'jumlahSiswa' => 100,
+                'pengumuman' => 'Pendaftaran siswa baru akan segera dibuka.'
+            ]);
+        }
+        
+        return view('guest.pengumuman', compact('informasi'));
+    }
 }

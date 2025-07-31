@@ -54,7 +54,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ url('/pendaftaran/formulir') }}">Formulir</a></li>
-            <li><a class="dropdown-item" href="{{ url('/pendaftaran/jadwal') }}">Jadwal</a></li>
+            <li><a class="dropdown-item" href="{{ route('informasipendaftaran.guest') }}">Jadwal</a></li>
             <li><a class="dropdown-item" href="{{ url('/pendaftaran/syarat') }}">Syarat</a></li>
           </ul>
         </li>
