@@ -12,7 +12,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\InformasiPendaftaranController;
-use App\Http\Controllers\PendaftarController; 
+use App\Http\Controllers\PendaftaranController; 
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,6 +26,18 @@ Route::get('/prestasi', [PrestasiController::class, 'guest'])->name('guest.prest
 Route::get('/fasilitas', [FasilitasController::class, 'guest'])->name('guest.Fasilitas');
 Route::get('/galeri', [GaleriController::class, 'guest']) ->name('galeri.guest');
 Route::get('/strukturorganisasi', [StrukturOrganisasiController::class, 'guest']) ->name('strukturorganisasi.guest');
+Route::get('/pendaftaran', [InformasiPendaftaranController::class, 'guest']) ->name('informasipendaftaran.guest');
+
+Route::prefix('siswa')->name('siswa.')->group(function () {
+    // Menampilkan formulir pendaftaran
+    Route::get('/pendaftaran', [PendaftaranController::class, 'create'])->name('create.pendaftaran');
+
+    // Menyimpan data pendaftaran
+    Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('store.pendaftaran');
+
+    // Menampilkan halaman sukses
+    Route::get('/pendaftaran/success', [PendaftaranController::class, 'success'])->name('success');
+});
 
 Route::prefix('superadmin')->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('dashboard');
