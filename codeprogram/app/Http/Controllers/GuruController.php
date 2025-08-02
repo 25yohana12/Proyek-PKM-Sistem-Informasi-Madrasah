@@ -9,14 +9,11 @@ use Illuminate\Http\Request;
 class GuruController extends Controller
 {
     // Menampilkan semua data guru
-    public function index()
-    {
-        // Ambil data guru dari database
-        $gurus = Guru::all();
-
-        // Return view dengan data guru
-        return view('superadmin.guru', compact('gurus'));
-    }
+public function index()
+{
+    $gurus = Guru::paginate(10);  // Ambil 10 data per halaman
+    return view('superadmin.guru', compact('gurus'));
+}
 
     // Menampilkan data guru berdasarkan ID
     public function show($id)
