@@ -69,6 +69,19 @@ Route::prefix('superadmin')->name('superadmin.')->group(function () {
         Route::delete('{id}', [SiswaController::class, 'destroy'])->name('destroy');
     });
 
+    // Prestasi
+    Route::prefix('prestasi')->name('prestasi.')->group(function () {
+        Route::get('/', [PrestasiController::class, 'index'])->name('index');
+        Route::get('/create', [PrestasiController::class, 'create'])->name('create');
+        Route::post('/', [PrestasiController::class, 'store'])->name('store');
+        Route::get('/{id}', [PrestasiController::class, 'show'])->name('show');
+        Route::get('/{id}/edit', [PrestasiController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [PrestasiController::class, 'update'])->name('update');
+        Route::delete('/{id}', [PrestasiController::class, 'destroy'])->name('destroy');
+        Route::post('/{id}/delete-image', [PrestasiController::class, 'deleteImage'])->name('deleteImage');
+        Route::get('/search/query', [PrestasiController::class, 'search'])->name('search');
+    });
+
     // Sekolah Routes
     Route::prefix('sekolah')->name('sekolah.')->group(function () {
         Route::get('/', [SekolahController::class, 'index'])->name('index');
@@ -81,6 +94,17 @@ Route::prefix('superadmin')->name('superadmin.')->group(function () {
         Route::get('/', [InformasiPendaftaranController::class, 'index'])->name('index');
         Route::get('{id}/edit', [InformasiPendaftaranController::class, 'edit'])->name('edit');
         Route::put('{id}', [InformasiPendaftaranController::class, 'update'])->name('update');
+    });
+
+    // Pendaftaran
+    Route::prefix('pendaftaran')->name('pendaftaran.')->group(function () {
+        Route::get('/', [PendaftaranController::class, 'index'])->name('index'); // Daftar semua pendaftar
+        Route::get('/create', [PendaftaranController::class, 'create'])->name('create'); // Form input pendaftar (jika perlu)
+        Route::post('/', [PendaftaranController::class, 'store'])->name('store'); // Simpan data baru
+        Route::get('/{id}', [PendaftaranController::class, 'show'])->name('show'); // Detail pendaftar
+        Route::get('/{id}/edit', [PendaftaranController::class, 'edit'])->name('edit'); // Edit pendaftar
+        Route::put('/{id}', [PendaftaranController::class, 'update'])->name('update'); // Update
+        Route::delete('/{id}', [PendaftaranController::class, 'destroy'])->name('destroy'); // Hapus
     });
 
     // Ekstrakurikuler Routes

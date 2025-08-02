@@ -4,7 +4,7 @@
 <div class="container py-4">
     <h2>Edit Data Sekolah</h2>
 
-    <form action="{{ route('sekolah.update', $sekolah->sekolah_id) }}" method="POST">
+    <form action="{{ route('superadmin.sekolah.update', $sekolah->sekolah_id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -39,7 +39,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Simpan Perubahan</button>
-        <a href="{{ route('sekolah.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('superadmin.sekolah.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

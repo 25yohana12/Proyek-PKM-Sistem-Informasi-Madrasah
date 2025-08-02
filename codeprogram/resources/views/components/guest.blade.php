@@ -43,7 +43,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ route('guest.acara') }}" style="color: black; font-size: 18px;">Perayaan & Event</a></li>
             <li><a class="dropdown-item" href="{{ route('guest.prestasi') }}" style="color: black; font-size: 18px;">Prestasi</a></li>
-            <li><a class="dropdown-item" href="{{ route('guest.Fasilitas') }}" style="color: black; font-size: 18px;">Fasilitas</a></li>
+            <li><a class="dropdown-item" href="{{ route('guest.fasilitas') }}" style="color: black; font-size: 18px;">Fasilitas</a></li>
           </ul>
         </li>
 

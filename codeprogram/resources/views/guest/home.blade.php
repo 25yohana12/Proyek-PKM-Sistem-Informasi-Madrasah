@@ -64,7 +64,7 @@ Kurikulum MIN sama dengan SD, namun dengan porsi pelajaran agama Islam yang lebi
             <div class="card-text">
                 <h3>Students</h3>
                 <p>Murid atau siswa adalah individu yang tengah menjalani proses pendidikan untuk mengembangkan diri baik secara intelektual maupun emosional. Setiap siswa memiliki potensi yang unik dan beragam yang perlu dipupuk dan dikembangkan melalui berbagai pengalaman belajar. Sebagai bagian dari komunitas pendidikan, siswa tidak hanya berfokus pada pencapaian akademik, tetapi juga pada pengembangan karakter, keterampilan sosial, dan kecakapan hidup. Melalui berbagai kegiatan di sekolah, baik di dalam kelas maupun di luar kelas, siswa diajak untuk belajar bekerja sama, menghargai perbedaan, serta mengasah kemampuan diri agar siap menghadapi tantangan di masa depan. Peran siswa sangat penting dalam menciptakan lingkungan belajar yang dinamis dan penuh inovasi, sehingga mereka dapat tumbuh menjadi pribadi yang berkualitas dan siap berkontribusi pada masyarakat.</p>
-                <a href="{{ route('siswa.index') }}" class="button">Learn More</a>
+                <a href="{{ route('guest.siswa') }}" class="button">Learn More</a>
             </div>
         </div>
     </div>
