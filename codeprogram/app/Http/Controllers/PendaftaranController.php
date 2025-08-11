@@ -8,6 +8,29 @@ use Illuminate\Support\Facades\Hash;
 
 class PendaftaranController extends Controller
 {
+
+    public function registerAwal()
+{
+    return view('guest.registrasi');
+}
+
+public function storeAwal(Request $request)
+{
+    $validated = $request->validate([
+        'namaPendaftar' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:dataPendaftar,email',
+        'sandi' => 'required|string|min:6|confirmed',
+    ]);
+
+    $pendaftar = new DataPendaftar();
+    $pendaftar->namaPendaftar = $validated['namaPendaftar'];
+    $pendaftar->email = $validated['email'];
+    $pendaftar->sandi = Hash::make($validated['sandi']);
+    $pendaftar->save();
+
+    return redirect()->route('guest.home')->with('success', 'Registrasi awal berhasil. Silakan lengkapi data!');
+}
+
     // Menampilkan formulir pendaftaran
     public function create()
     {

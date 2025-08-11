@@ -13,7 +13,7 @@
                 <p class="page-subtitle">Koleksi foto dan dokumentasi kegiatan madrasah</p>
             </div>
             <div class="header-actions">
-                <button class="btn btn-primary add-btn" onclick="window.location.href='{{ route('galeri.create') }}'">
+                <button class="btn btn-primary add-btn" onclick="window.location.href='{{ route('superadmin.galeri.create') }}'">
                     <i class="fas fa-plus"></i>
                     <span>Tambah Galeri</span>
                 </button>
@@ -110,19 +110,19 @@
                                     </td>
                                     <td>
                                         <div class="action-buttons">
-                                            <a href="{{ route('galeri.show', $item->galeri_id) }}" 
+                                            <a href="{{ route('superadmin.galeri.show', $item->galeri_id) }}" 
                                                class="btn btn-info btn-sm" 
                                                title="Lihat Detail">
                                                 <i class="fas fa-eye"></i>
                                                 <span>Lihat</span>
                                             </a>
-                                            <a href="{{ route('galeri.edit', $item->galeri_id) }}" 
+                                            <a href="{{ route('superadmin.galeri.edit', $item->galeri_id) }}" 
                                                class="btn btn-edit btn-sm" 
                                                title="Edit Galeri">
                                                 <i class="fas fa-edit"></i>
                                                 <span>Edit</span>
                                             </a>
-                                            <form action="{{ route('galeri.destroy', $item->galeri_id) }}" 
+                                            <form action="{{ route('superadmin.galeri.destroy', $item->galeri_id) }}" 
                                                   method="POST" 
                                                   class="delete-form" 
                                                   onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?')">
@@ -147,7 +147,7 @@
                                             </div>
                                             <h3 class="empty-title">Belum ada galeri</h3>
                                             <p class="empty-subtitle">Mulai dengan menambahkan galeri pertama Anda</p>
-                                            <button class="btn btn-primary" onclick="window.location.href='{{ route('galeri.create') }}'">
+                                            <button class="btn btn-primary" onclick="window.location.href='{{ route('superadmin.galeri.create') }}'">
                                                 <i class="fas fa-plus"></i>
                                                 Tambah Galeri
                                             </button>

@@ -10,7 +10,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h4">Struktur Organisasi</h1>
-        <a href="{{ route('strukturOrganisasi.create') }}" class="btn btn-primary">+ Tambah Data</a>
+        <a href="{{ route('superadmin.strukturorganisasi.create') }}" class="btn btn-primary">+ Tambah Data</a>
     </div>
 
     <div class="table-responsive shadow-sm rounded">
@@ -37,9 +37,8 @@
                         <td>{{ $item->nip }}</td>
                         <td>{{ $item->jabatan }}</td>
                         <td class="text-end">
-                            <a href="{{ route('strukturOrganisasi.show',  $item) }}" class="btn btn-sm btn-info me-1">Detail</a>
-                            <a href="{{ route('strukturOrganisasi.edit',  $item) }}" class="btn btn-sm btn-warning me-1">Edit</a>
-                            <form action="{{ route('strukturOrganisasi.destroy', $item) }}"
+                            <a href="{{ route('superadmin.strukturorganisasi.edit',  $item) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+                            <form action="{{ route('superadmin.strukturorganisasi.destroy', $item) }}"
                                   method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
                                 @csrf @method('DELETE')
                                 <button class="btn btn-sm btn-danger">Hapus</button>

@@ -3,18 +3,6 @@
 @section('title', 'Data Siswa | MIN Toba Samosir')
 
 @section('content')
-    <!-- Hero / Banner -->
-    <section class="container-fluid p-0">
-        <div class="position-relative">
-            <img src="{{ asset('images/banner.jpg') }}" class="w-100" style="height: 280px; object-fit: cover;" alt="Banner">
-            <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,.45);"></div>
-            <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
-                <h1 class="fw-bold display-5">MIN TOBA SAMOSIR</h1>
-                <p class="fs-5 fst-italic">Madrasah, Tempat Belajar, Tempat Beramal</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Judul Section -->
     <h2 class="text-center fw-bold my-4 text-success">SISWA</h2>
 

@@ -13,7 +13,7 @@
                 <p class="page-subtitle">Tambahkan prestasi baru siswa atau sekolah</p>
             </div>
             <div class="header-actions">
-                <a href="{{ route('prestasi.index') }}" class="btn btn-secondary">
+                <a href="{{ route('superadmin.prestasi.index') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i>
                     <span>Kembali</span>
                 </a>
@@ -29,7 +29,7 @@
                 </h2>
             </div>
             <div class="card-body">
-                <form action="{{ route('prestasi.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
+                <form action="{{ route('superadmin.prestasi.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
                     @csrf
 
                     <!-- Nama Prestasi -->
@@ -137,7 +137,7 @@
                             <i class="fas fa-save"></i>
                             <span>Simpan Prestasi</span>
                         </button>
-                        <a href="{{ route('prestasi.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('superadmin.prestasi.index') }}" class="btn btn-secondary">
                             <i class="fas fa-times"></i>
                             <span>Batal</span>
                         </a>

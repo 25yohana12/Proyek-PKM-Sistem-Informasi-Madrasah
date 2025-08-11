@@ -4,7 +4,7 @@
     <div class="bg-white p-6 rounded-lg shadow-lg">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-semibold">Admin Pendaftaran Calon Siswa/i</h1>
-            <a href="{{ route('admin.create') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300">Tambah Admin</a>
+            <a href="{{ route('superadmin.admin.create') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300">Tambah Admin</a>
         </div>
 
         <table class="min-w-full bg-white table-auto rounded-lg overflow-hidden shadow-md">
@@ -27,7 +27,7 @@
                         <td class="py-2 px-4 border-b">{{ $admin->email }}</td>
                         <td class="py-2 px-4 border-b">{{ $admin->sandi }}</td>
                         <td class="py-2 px-4 border-b">
-                            <a href="{{ route('admin.edit', $admin->admin_id) }}" class="text-blue-500 hover:text-blue-700 transition duration-300">Edit</a>
+                            <a href="{{ route('superadmin.admin.edit', $admin->admin_id) }}" class="text-blue-500 hover:text-blue-700 transition duration-300">Edit</a>
                         </td>
                     </tr>
                 @endforeach

@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Tambah Data Guru</h2>
     
-    <form action="{{ route('guru.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('superadmin.guru.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div class="mb-3">
@@ -33,7 +33,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Simpan</button>
-        <a href="{{ route('data.guru') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('superadmin.guru.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>
 

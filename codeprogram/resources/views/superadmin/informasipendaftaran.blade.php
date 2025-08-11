@@ -14,7 +14,7 @@
             </div>
             <div class="header-actions">
                 @if($informasi)
-                    <a href="{{ route('informasi.edit', $informasi->informasi_id) }}" class="btn btn-primary">
+                    <a href="{{ route('superadmin.informasipendaftaran.edit', $informasi->informasi_id) }}" class="btn btn-primary">
                         <i class="fas fa-edit"></i>
                         <span>Edit Informasi</span>
                     </a>

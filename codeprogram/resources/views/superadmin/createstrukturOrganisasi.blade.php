@@ -6,10 +6,10 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h4 mb-0">Tambah Struktur Organisasi</h1>
-        <a href="{{ route('strukturOrganisasi.index') }}" class="btn btn-secondary">‹ Kembali</a>
+        <a href="{{ route('superadmin.strukturorganisasi.index') }}" class="btn btn-secondary">‹ Kembali</a>
     </div>
 
-    <form action="{{ route('strukturOrganisasi.store') }}"
+    <form action="{{ route('superadmin.strukturorganisasi.store') }}"
           method="POST" enctype="multipart/form-data"
           class="card shadow-sm p-4">
         @csrf

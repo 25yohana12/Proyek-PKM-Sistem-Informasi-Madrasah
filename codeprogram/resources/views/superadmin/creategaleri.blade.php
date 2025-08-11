@@ -13,7 +13,7 @@
                 <p class="page-subtitle">Tambahkan foto dan gambar baru ke galeri madrasah</p>
             </div>
             <div class="breadcrumb">
-                <a href="{{ route('galeri.index') }}" class="breadcrumb-link">
+                <a href="{{ route('superadmin.galeri.index') }}" class="breadcrumb-link">
                     <i class="fas fa-images"></i> Galeri
                 </a>
                 <span class="breadcrumb-separator">/</span>
