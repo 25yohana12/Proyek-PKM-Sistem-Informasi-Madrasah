@@ -3,7 +3,7 @@
 @section('title', 'Perayaan | MIN Toba Samosir')
 
 @section('content')
-    <!-- Hero / Banner (reuse banner asset) -->
+    <!-- Hero / Banner -->
     <section class="container-fluid p-0">
         <div class="position-relative">
             <img src="{{ asset('images/banner.jpg') }}" class="w-100" style="height: 350px; object-fit: cover;" alt="Banner">
@@ -22,16 +22,15 @@
                 <h3 class="fw-bold text-uppercase text-success mb-3">{{ $acara->judul }}</h3>
 
                 @php
-                    // Kolom `gambar` diasumsikan menyimpan path yang dipisahkan tanda | untuk lebih dari 1 gambar
                     $images = $acara->gambar ? explode('|', $acara->gambar) : [];
                 @endphp
 
                 @if(count($images))
-                    <div id="carousel{{ $acara->id }}" class="carousel slide mb-3" data-bs-ride="carousel">
+                    <div id="carousel{{ $acara->id }}" class="carousel slide mb-4" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             @foreach($images as $index => $img)
                                 <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                    <img src="{{ Storage::url($img) }}" class="d-block w-100 rounded-2" style="height: 250px; object-fit: cover;" alt="foto acara">
+                                    <img src="{{ Storage::url($img) }}" class="d-block w-100 rounded-2" style="height: 300px; object-fit: cover;" alt="foto acara">
                                 </div>
                             @endforeach
                         </div>
