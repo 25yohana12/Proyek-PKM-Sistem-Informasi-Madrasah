@@ -3,32 +3,105 @@
 @section('title', 'Data Siswa | MIN Toba Samosir')
 
 @section('content')
-    <!-- Judul Section -->
-    <h2 class="text-center fw-bold my-4 text-success">SISWA</h2>
+  <h2 class="text-center fw-bold my-4 text-success">SISWA</h2>
 
-    <!-- Grid Kartu Siswa -->
-    <div class="container">
-        <div class="row g-4">
-            @forelse($siswas as $siswa)
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="card shadow-sm h-100 border-0">
-                        <img src="{{ $siswa->gambar ? Storage::url($siswa->gambar) : asset('images/default-class.jpg') }}" class="card-img-top" style="height: 190px; object-fit: cover;" alt="{{ $siswa->kelas }}">
-                        <div class="card-body bg-success text-white py-2">
-                            <h5 class="card-title text-center mb-0">KELAS {{ strtoupper($siswa->kelas) }}</h5>
-                        </div>
-                        <div class="card-footer bg-light">
-                            <p class="mb-1 fw-semibold">WALI KELAS: <span class="fw-normal">{{ $siswa->namaWali ?? '-' }}</span></p>
-                            <p class="mb-0 fw-semibold">Jumlah Siswa: <span class="fw-normal">{{ $siswa->jumlahSiswa ?? $siswa->jumlahMurid ?? '0' }}</span></p>
-                        </div>
-                    </div>
-                </div>
-            @empty
-                <div class="col-12">
-                    <p class="text-center">Belum ada data siswa.</p>
-                </div>
-            @endforelse
-        </div>
+  <div class="students-wrap">
+    <div class="students-grid">
+      @forelse($siswas as $siswa)
+        <article class="student-card">
+          <div class="photo">
+            <img src="{{ asset('images/siswa.jpg') }}" alt="Kelas {{ $siswa->kelas }}">
+          </div>
+
+
+          <div class="class-band">
+            <h5>KELAS {{ strtoupper($siswa->kelas) }}</h5>
+          </div>
+
+          <div class="info">
+            <p class="label">WALI KELAS : <span class="value">{{ $siswa->namaWali ?? '-' }}</span></p>
+            <p class="label">Jumlah Siswa : <span class="value">{{ $siswa->jumlahSiswa ?? $siswa->jumlahMurid ?? '0' }}</span></p>
+          </div>
+        </article>
+      @empty
+        <p class="text-center">Belum ada data siswa.</p>
+      @endforelse
     </div>
+  </div>
 
-    <div class="my-5"></div>
+  <div class="my-5"></div>
+@endsection
+
+@section('styles')
+<style>
+  /* Pembungkus utk batasi lebar & beri ruang kiri-kanan */
+  .students-wrap{
+    max-width: 1120px;
+    margin: 0 auto 48px;
+    padding: 0 16px;
+  }
+
+  /* Grid responsif: 3 kolom desktop, 2 tablet, 1 mobile */
+  .students-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px; /* jarak antar kartu seperti contoh */
+  }
+  @media (max-width: 992px){
+    .students-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 576px){
+    .students-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* Kartu */
+  .student-card{
+    background: #a8e6cf; /* transparan; warna kartu ada di bagian dalam */
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    overflow: hidden; /* untuk merapikan shadow & rounded */
+    padding: 0;       /* struktur internal yang atur padding */
+  }
+
+  /* Foto: tinggi konsisten, rounded dan ada margin dalam kartu */
+  .photo {
+    padding: 0; /* hilangkan padding */
+   }
+   .photo img {
+    width: 100%;
+    height: 190px;       /* tinggi gambar seragam */
+    object-fit: cover;   /* potong rapi tanpa distorsi */
+    display: block;
+    }
+
+  /* Pita hijau muda dengan judul kelas di tengah */
+  .class-band{
+    background: #a8e6cf;     /* hijau muda seperti contoh */
+    color: #000;
+    text-align: center;
+    padding: 10px 12px;
+  }
+  .class-band h5{
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: .5px;
+  }
+
+  /* Info wali kelas & jumlah siswa */
+  .info{
+    background: #a8e6cf;     /* lanjutkan warna kartu */
+    padding: 14px 18px 18px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+  .info .label {
+    margin: 0 0 6px;
+    font-weight: 700; /* bold */
+    color: #000;      /* hitam pekat */
+}
+.info .value {
+    font-weight: 500;
+    color: #000;
+}
+</style>
 @endsection
