@@ -13,6 +13,8 @@
 
     <!-- Link to Custom CSS File -->
     <link rel="stylesheet" href="{{ asset('css/layoutguest.css') }}">
+
+    @yield('styles')
 </head>
 
 <body>
