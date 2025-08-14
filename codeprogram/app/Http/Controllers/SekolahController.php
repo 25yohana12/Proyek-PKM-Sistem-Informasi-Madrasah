@@ -42,6 +42,6 @@ class SekolahController extends Controller
         $sekolah = Sekolah::findOrFail($id);
         $sekolah->update($request->all());
 
-        return redirect()->route('sekolah.index')->with('success', 'Profil sekolah berhasil diperbarui.');
+        return redirect()->route('superadmin.sekolah.index')->with('success', 'Profil sekolah berhasil diperbarui.');
     }
 }

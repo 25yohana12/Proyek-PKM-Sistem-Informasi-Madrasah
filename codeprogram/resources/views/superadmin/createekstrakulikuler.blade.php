@@ -23,7 +23,7 @@
 
         <!-- Form Container -->
         <div class="form-container">
-            <form action="{{ route('ekstrakulikuler.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
+            <form action="{{ route('superadmin.ekstrakulikuler.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
                 @csrf
 
                 <!-- Nama Ekstrakurikuler -->

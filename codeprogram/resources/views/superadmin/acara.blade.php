@@ -13,7 +13,7 @@
                 <p class="page-subtitle">Koleksi acara dan perayaan madrasah</p>
             </div>
             <div class="header-actions">
-                <button class="btn btn-primary add-btn" onclick="window.location.href='{{ route('acara.create') }}'">
+                <button class="btn btn-primary add-btn" onclick="window.location.href='{{ route('superadmin.acara.create') }}'">
                     <i class="fas fa-plus"></i>
                     <span>Tambah Acara</span>
                 </button>
@@ -58,12 +58,12 @@
                                         {{ \Carbon\Carbon::parse($acara->tanggalAcara)->format('d M Y') }}
                                     </div>
                                     <div class="acara-actions">
-                                        <a href="{{ route('acara.edit', $acara->acara_id) }}" 
+                                        <a href="{{ route('superadmin.acara.edit', $acara->acara_id) }}" 
                                            class="action-btn edit-btn" 
                                            title="Edit Acara">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('acara.destroy', $acara->acara_id) }}" 
+                                        <form action="{{ route('superadmin.acara.destroy', $acara->acara_id) }}" 
                                               method="POST" 
                                               class="delete-form"
                                               onsubmit="return confirm('Apakah Anda yakin ingin menghapus acara ini?')">
@@ -137,7 +137,7 @@
                             </div>
                             <h3 class="empty-title">Belum ada acara</h3>
                             <p class="empty-subtitle">Mulai dengan menambahkan acara pertama Anda</p>
-                            <button class="btn btn-primary" onclick="window.location.href='{{ route('acara.create') }}'">
+                            <button class="btn btn-primary" onclick="window.location.href='{{ route('superadmin.acara.create') }}'">
                                 <i class="fas fa-plus"></i>
                                 Tambah Acara
                             </button>

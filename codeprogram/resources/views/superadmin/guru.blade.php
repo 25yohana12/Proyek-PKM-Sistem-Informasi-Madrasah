@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Data Guru</h2>
     
-    <a href="{{ route('guru.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
+    <a href="{{ route('superadmin.guru.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
     
     <div class="row">
         @foreach ($gurus as $guru)
@@ -19,8 +19,8 @@
                     
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('guru.edit', $guru->guru_id) }}" class="btn btn-success">Edit</a>
-                    <form action="{{ route('guru.destroy', $guru->guru_id) }}" method="POST" style="display:inline-block;">
+                    <a href="{{ route('superadmin.guru.edit', $guru->guru_id) }}" class="btn btn-success">Edit</a>
+                    <form action="{{ route('superadmin.guru.destroy', $guru->guru_id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>

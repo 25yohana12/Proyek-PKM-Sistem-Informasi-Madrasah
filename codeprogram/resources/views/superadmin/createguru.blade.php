@@ -4,17 +4,7 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4 fw-bold" style="letter-spacing:1px;">Tambah Data Guru</h2>
     
-    @if ($errors->any())
-        <div class="alert alert-danger shadow-sm">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li><i class="fas fa-exclamation-circle"></i> {{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <form action="{{ route('guru.store') }}" method="POST" enctype="multipart/form-data" class="modern-form p-4 rounded-4 shadow-lg bg-white">
+    <form action="{{ route('superadmin.guru.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         
         <div class="mb-3">
@@ -60,14 +50,8 @@
             @enderror
         </div>
 
-        <div class="d-flex gap-2 mt-4">
-            <button type="submit" class="btn btn-success px-4 py-2 fw-semibold shadow-sm">
-                <i class="fas fa-save"></i> Simpan
-            </button>
-            <a href="{{ route('data.guru') }}" class="btn btn-secondary px-4 py-2 fw-semibold shadow-sm">
-                <i class="fas fa-arrow-left"></i> Kembali
-            </a>
-        </div>
+        <button type="submit" class="btn btn-success">Simpan</button>
+        <a href="{{ route('superadmin.guru.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>
 

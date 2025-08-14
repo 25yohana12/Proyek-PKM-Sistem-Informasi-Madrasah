@@ -13,7 +13,7 @@
                 <p class="page-subtitle">Kegiatan pengembangan bakat dan minat siswa</p>
             </div>
             <div class="header-actions">
-                <button class="btn btn-primary add-btn" onclick="window.location.href='{{ route('ekstrakulikuler.create') }}'">
+                <button class="btn btn-primary add-btn" onclick="window.location.href='{{ route('superadmin.ekstrakurikuler.create') }}'">
                     <i class="fas fa-plus"></i>
                     <span>Tambah Ekstrakurikuler</span>
                 </button>
@@ -110,19 +110,13 @@
                                     </td>
                                     <td>
                                         <div class="action-buttons">
-                                            <a href="{{ route('ekstrakulikuler.show', $item->ekstrakulikuler_id) }}" 
-                                               class="btn btn-info btn-sm" 
-                                               title="Lihat Detail">
-                                                <i class="fas fa-eye"></i>
-                                                <span>Lihat</span>
-                                            </a>
-                                            <a href="{{ route('ekstrakulikuler.edit', $item->ekstrakulikuler_id) }}" 
+                                            <a href="{{ route('superadmin.ekstrakurikuler.edit', $item->ekstrakulikuler_id) }}" 
                                                class="btn btn-edit btn-sm" 
                                                title="Edit">
                                                 <i class="fas fa-edit"></i>
                                                 <span>Edit</span>
                                             </a>
-                                            <form action="{{ route('ekstrakulikuler.destroy', $item->ekstrakulikuler_id) }}" 
+                                            <form action="{{ route('superadmin.ekstrakurikuler.destroy', $item->ekstrakulikuler_id) }}" 
                                                   method="POST" 
                                                   class="delete-form" 
                                                   onsubmit="return confirm('Apakah Anda yakin ingin menghapus kegiatan ini?')">
@@ -147,7 +141,7 @@
                                             </div>
                                             <h3 class="empty-title">Belum ada ekstrakurikuler</h3>
                                             <p class="empty-subtitle">Klik tombol di atas untuk menambahkan ekstrakulikuler baru</p>
-                                            <button class="btn btn-primary" onclick="window.location.href='{{ route('ekstrakulikuler.create') }}'">
+                                            <button class="btn btn-primary" onclick="window.location.href='{{ route('superadmin.ekstrakurikuler.create') }}'">
                                                 <i class="fas fa-plus"></i>
                                                 Tambah Ekstrakurikuler
                                             </button>

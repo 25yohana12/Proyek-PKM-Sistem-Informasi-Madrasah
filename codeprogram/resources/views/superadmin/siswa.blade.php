@@ -5,7 +5,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2><strong>Data Kelas</strong></h2>
-        <a href="{{ route('siswa.create') }}" class="btn btn-success">Tambah Data</a>
+        <a href="{{ route('superadmin.siswa.create') }}" class="btn btn-success">Tambah Data</a>
     </div>
 
     <div class="mb-3">
@@ -25,10 +25,10 @@
                 @endif
 
                 <div class="position-absolute top-0 start-0 p-2">
-                    <a href="{{ route('siswa.edit', $item->siswa_id) }}" class="btn btn-sm btn-success">Edit</a>
+                    <a href="{{ route('superadmin.siswa.edit', $item->siswa_id) }}" class="btn btn-sm btn-success">Edit</a>
                 </div>
                 <div class="position-absolute top-0 end-0 p-2">
-                    <form action="{{ route('siswa.destroy', $item->siswa_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                    <form action="{{ route('superadmin.siswa.destroy', $item->siswa_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-sm btn-danger">Delete</button>

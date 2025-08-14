@@ -4,7 +4,7 @@
     <div class="bg-white p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl font-semibold mb-4">Tambah Admin</h1>
 
-        <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('superadmin.admin.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
                 <label for="namaAdmin" class="block text-sm font-medium text-gray-700">Nama Admin</label>

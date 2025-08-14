@@ -39,7 +39,7 @@
             </div>
 
             <div class="card-body">
-                <form action="{{ route('acara.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
+                <form action="{{ route('superadmin.acara.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
                     @csrf
 
                     <!-- Judul Acara -->
@@ -151,7 +151,7 @@
                             <i class="fas fa-save"></i>
                             <span>Simpan Acara</span>
                         </button>
-                        <a href="{{ route('acara.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('superadmin.acara.index') }}" class="btn btn-secondary">
                             <i class="fas fa-times"></i>
                             <span>Batal</span>
                         </a>

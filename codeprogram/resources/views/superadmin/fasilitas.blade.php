@@ -13,7 +13,7 @@
                 <p class="page-subtitle">Daftar fasilitas, sarana, dan prasarana madrasah</p>
             </div>
             <div class="header-actions">
-                <button class="btn btn-primary add-btn" onclick="window.location.href='{{ route('fasilitas.create') }}'">
+                <button class="btn btn-primary add-btn" onclick="window.location.href='{{ route('superadmin.fasilitas.create') }}'">
                     <i class="fas fa-plus"></i>
                     <span>Tambah Fasilitas</span>
                 </button>
@@ -109,15 +109,15 @@
                                     </td>
                                     <td>
                                         <div class="action-buttons">
-                                            <button class="btn btn-info btn-sm" onclick="window.location.href='{{ route('fasilitas.show', $item->fasilitas_id) }}'">
+                                            <button class="btn btn-info btn-sm" onclick="window.location.href='{{ route('superadmin.fasilitas.show', $item->fasilitas_id) }}'">
                                                 <i class="fas fa-eye"></i>
                                                 <span>Detail</span>
                                             </button>
-                                            <button class="btn btn-edit btn-sm" onclick="window.location.href='{{ route('fasilitas.edit', $item->fasilitas_id) }}'">
+                                            <button class="btn btn-edit btn-sm" onclick="window.location.href='{{ route('superadmin.fasilitas.edit', $item->fasilitas_id) }}'">
                                                 <i class="fas fa-edit"></i>
                                                 <span>Edit</span>
                                             </button>
-                                            <form action="{{ route('superadmin.destroyfasilitas', $item->fasilitas_id) }}" method="POST" class="delete-form d-inline">
+                                            <form action="{{ route('superadmin.fasilitas.destroy', $item->fasilitas_id) }}" method="POST" class="delete-form d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="btn btn-danger btn-sm btn-show-modal" data-id="{{ $item->fasilitas_id }}">

@@ -30,7 +30,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('fasilitas.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
+                <form action="{{ route('superadmin.fasilitas.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
                     @csrf
 
                     <!-- Nama Fasilitas -->

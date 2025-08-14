@@ -40,7 +40,7 @@
         </div>
         <div class="card">
             <h3>Pendaftar</h3>
-            <p>{{ $pendaftarCount }}</p>
+            <p>{{ $datapendaftarCount }}</p>
             <a href="#">Detail</a>
         </div>
     </div>

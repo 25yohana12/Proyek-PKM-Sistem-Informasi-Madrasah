@@ -13,7 +13,7 @@
                 <p class="page-subtitle">Kelola data prestasi siswa dan sekolah</p>
             </div>
             <div class="header-actions">
-                <a href="{{ route('prestasi.create') }}" class="btn btn-primary">
+                <a href="{{ route('superadmin.prestasi.create') }}" class="btn btn-primary">
                     <i class="fas fa-plus"></i>
                     <span>Tambah Prestasi</span>
                 </a>
@@ -83,15 +83,15 @@
                                     {{ Str::limit($prestasi->deskripsi, 100) }}
                                 </p>
                                 <div class="prestasi-actions">
-                                    <a href="{{ route('prestasi.show', $prestasi->prestasi_id) }}" class="btn btn-info btn-sm">
+                                    <a href="{{ route('superadmin.prestasi.show', $prestasi->prestasi_id) }}" class="btn btn-info btn-sm">
                                         <i class="fas fa-eye"></i>
                                         Detail
                                     </a>
-                                    <a href="{{ route('prestasi.edit', $prestasi->prestasi_id) }}" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('superadmin.prestasi.edit', $prestasi->prestasi_id) }}" class="btn btn-warning btn-sm">
                                         <i class="fas fa-edit"></i>
                                         Edit
                                     </a>
-                                    <form action="{{ route('prestasi.destroy', $prestasi->prestasi_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Hapus prestasi ini?')">
+                                    <form action="{{ route('superadmin.prestasi.destroy', $prestasi->prestasi_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Hapus prestasi ini?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -107,7 +107,7 @@
                             <i class="fas fa-trophy"></i>
                             <h3>Belum Ada Prestasi</h3>
                             <p>Tambahkan prestasi pertama untuk memulai</p>
-                            <a href="{{ route('prestasi.create') }}" class="btn btn-primary">
+                            <a href="{{ route('superadmin.prestasi.create') }}" class="btn btn-primary">
                                 <i class="fas fa-plus"></i>
                                 Tambah Prestasi Pertama
                             </a>

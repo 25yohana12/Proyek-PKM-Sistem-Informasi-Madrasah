@@ -9,6 +9,7 @@ use App\Models\Prestasi;
 use App\Models\Ekstrakulikuler;
 use App\Models\Acara;
 use Illuminate\Http\Request;
+use App\Models\DataPendaftar;
 
 class SuperAdminController extends Controller
 {
@@ -21,11 +22,11 @@ class SuperAdminController extends Controller
         $prestasiCount = Prestasi::count();
         $ekstrakurikulerCount = Ekstrakulikuler::count();
         $acaraCount = Acara::count();
-        $pendaftarCount = Pendaftar::count(); // Jika ada tabel pendaftaran
+        $datapendaftarCount = DataPendaftar::count(); // Jika ada tabel pendaftaran
         
-        return view('dashboard', compact(
+        return view('superadmin.dashboard', compact(
             'guruCount', 'siswaCount', 'fasilitasCount', 
-            'prestasiCount', 'ekstrakurikulerCount', 'acaraCount', 'pendaftarCount'
+            'prestasiCount', 'ekstrakurikulerCount', 'acaraCount', 'datapendaftarCount'
         ));
     }
 }
