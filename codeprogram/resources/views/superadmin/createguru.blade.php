@@ -2,140 +2,142 @@
 
 @section('content')
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Tambah Data Guru</h2>
+    <h2 class="text-center mb-4 fw-bold" style="letter-spacing:1px;">Tambah Data Guru</h2>
     
-    <form action="{{ route('guru.store') }}" method="POST" enctype="multipart/form-data">
+    @if ($errors->any())
+        <div class="alert alert-danger shadow-sm">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li><i class="fas fa-exclamation-circle"></i> {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('guru.store') }}" method="POST" enctype="multipart/form-data" class="modern-form p-4 rounded-4 shadow-lg bg-white">
         @csrf
         
         <div class="mb-3">
-            <label for="namaGuru" class="form-label">Nama Guru</label>
-            <input type="text" class="form-control" id="namaGuru" name="namaGuru" required>
+            <label for="namaGuru" class="form-label fw-semibold">Nama Guru</label>
+            <input type="text" class="form-control @error('namaGuru') is-invalid @enderror" id="namaGuru" name="namaGuru" value="{{ old('namaGuru') }}" required>
+            @error('namaGuru')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
-            <label for="gambar" class="form-label">Gambar</label>
-            <input type="file" class="form-control" id="gambar" name="gambar">
+            <label for="gambar" class="form-label fw-semibold">Foto Guru</label>
+            <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" accept="image/*" onchange="previewImage(event)">
+            @error('gambar')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+            <div class="mt-2">
+                <img id="img-preview" src="#" alt="Preview" style="display:none;max-width:120px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+            </div>
         </div>
 
         <div class="mb-3">
-            <label for="nip" class="form-label">NIP</label>
-            <input type="text" class="form-control" id="nip" name="nip" required>
+            <label for="nip" class="form-label fw-semibold">NIP</label>
+            <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" value="{{ old('nip') }}" required>
+            @error('nip')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
-            <label for="posisi" class="form-label">Posisi</label>
-            <input type="text" class="form-control" id="posisi" name="posisi" required>
+            <label for="posisi" class="form-label fw-semibold">Posisi</label>
+            <input type="text" class="form-control @error('posisi') is-invalid @enderror" id="posisi" name="posisi" value="{{ old('posisi') }}" required>
+            @error('posisi')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
-            <label for="deskripsi" class="form-label">Deskripsi</label>
-            <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
+            <label for="deskripsi" class="form-label fw-semibold">Deskripsi</label>
+            <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi" rows="3" required>{{ old('deskripsi') }}</textarea>
+            @error('deskripsi')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
-        <button type="submit" class="btn btn-success">Simpan</button>
-        <a href="{{ route('data.guru') }}" class="btn btn-secondary">Kembali</a>
+        <div class="d-flex gap-2 mt-4">
+            <button type="submit" class="btn btn-success px-4 py-2 fw-semibold shadow-sm">
+                <i class="fas fa-save"></i> Simpan
+            </button>
+            <a href="{{ route('data.guru') }}" class="btn btn-secondary px-4 py-2 fw-semibold shadow-sm">
+                <i class="fas fa-arrow-left"></i> Kembali
+            </a>
+        </div>
     </form>
 </div>
 
 <style>
-        /* Style untuk seluruh form */
-        form {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-        }
+    .modern-form {
+        max-width: 500px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(109,141,121,0.10);
+    }
+    .modern-form label {
+        color: #2d3748;
+        font-size: 1rem;
+    }
+    .modern-form input, .modern-form textarea {
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        font-size: 1rem;
+        background: #f8fafc;
+        transition: border-color 0.2s;
+    }
+    .modern-form input:focus, .modern-form textarea:focus {
+        border-color: #6D8D79;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(109,141,121,0.08);
+    }
+    .modern-form .invalid-feedback {
+        font-size: 0.95em;
+    }
+    .modern-form .btn {
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+    .modern-form .btn-success {
+        background: linear-gradient(135deg, #6D8D79, #5a7466);
+        border: none;
+    }
+    .modern-form .btn-success:hover {
+        background: linear-gradient(135deg, #5a7466, #6D8D79);
+    }
+    .modern-form .btn-secondary {
+        background: #64748b;
+        border: none;
+    }
+    .modern-form .btn-secondary:hover {
+        background: #475569;
+    }
+    @media (max-width: 600px) {
+        .modern-form { padding: 1rem; }
+    }
+</style>
+@endsection
 
-        /* Styling untuk judul */
-        h1 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
+@section('scripts')
+<script>
+function previewImage(event) {
+    const input = event.target;
+    const preview = document.getElementById('img-preview');
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
         }
-
-        /* Styling untuk setiap input field */
-        .input-field {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        /* Styling untuk label input field */
-        label {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        /* Button submit */
-        button {
-            background-color: #38a169; /* green */
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #2f855a;
-        }
-
-        /* Styling untuk input file */
-        input[type="file"] {
-            padding: 6px;
-            margin-top: 5px;
-        }
-
-        /* Tambahan untuk input hidden */
-        input[type="hidden"] {
-            display: none;
-        }
-
-        /* Styling untuk row button tambah admin */
-        .tambah-admin-btn {
-            background-color: #48bb78;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 14px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .tambah-admin-btn:hover {
-            background-color: #38a169;
-        }
-
-        /* Styling untuk pesan error */
-        .bg-red-500 {
-            background-color: #f56565;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        li {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-    </style>
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = '#';
+        preview.style.display = 'none';
+    }
+}
+</script>
 @endsection
