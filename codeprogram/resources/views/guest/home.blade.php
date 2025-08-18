@@ -32,6 +32,7 @@
         <div class="card">
             <img src="{{ asset('images/extracurricular.jpg') }}" alt="Extracurricular" class="card-image">
             <div class="card-text">
+                <h3>Ekstrakurikuler</h3>
                 <p>Ekstrakurikuler merupakan bagian yang tak terpisahkan dari kegiatan pendidikan yang bertujuan untuk mengembangkan keterampilan dan minat siswa di luar kurikulum utama. Kegiatan ekstrakurikuler di sekolah memberikan kesempatan bagi siswa untuk mengeksplorasi bakat, memperluas wawasan, dan membangun karakter. Melalui berbagai kegiatan, seperti olahraga, seni, dan klub-klub lainnya, siswa dapat belajar bekerja sama, berkompetisi secara sehat, dan mengembangkan kemampuan kepemimpinan.</p>
                 <a href="{{ route('guest.siswa') }}" class="button">Learn More</a>
             </div>
