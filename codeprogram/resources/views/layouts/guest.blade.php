@@ -22,7 +22,7 @@
     @include('components.guest')
 
     <!-- Hero Section -->
-    <section class="position-relative" style="margin-top:56px;"> <!-- offset for fixed navbar -->
+    <section class="position-relative" style="margin-top: 10px;"> <!-- offset for fixed navbar -->
         <img src="{{ asset('images/bg-school.jpg') }}" class="img-fluid w-100" style="height: 420px; object-fit: cover; filter: brightness(70%);" alt="Background Sekolah">
         <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start px-4">
             <div class="d-flex align-items-center">

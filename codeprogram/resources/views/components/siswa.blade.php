@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto">
         <!-- BERANDA -->
-        <li class="nav-item dropdown" style="margin-right: 35px;">
+        <li class="nav-item dropdown" style="margin-right: 35px;"> <!-- Menambahkan jarak antar item -->
           <a class="nav-link dropdown-toggle" href="#" id="berandaDropdown" role="button" data-bs-toggle="dropdown" style="color: black; font-size: 18px;">
             BERANDA
           </a>
@@ -24,7 +24,7 @@
         </li>
 
         <!-- TENTANG -->
-        <li class="nav-item dropdown" style="margin-right: 35px;">
+        <li class="nav-item dropdown" style="margin-right: 35px;"> <!-- Menambahkan jarak antar item -->
           <a class="nav-link dropdown-toggle" href="#" id="tentangDropdown" role="button" data-bs-toggle="dropdown" style="color: black; font-size: 18px;">
             TENTANG
           </a>
@@ -36,7 +36,7 @@
         </li>
 
         <!-- KEGIATAN -->
-        <li class="nav-item dropdown" style="margin-right: 35px;">
+        <li class="nav-item dropdown" style="margin-right: 35px;"> <!-- Menambahkan jarak antar item -->
           <a class="nav-link dropdown-toggle" href="#" id="kegiatanDropdown" role="button" data-bs-toggle="dropdown" style="color: black; font-size: 18px;">
             KEGIATAN
           </a>
@@ -48,7 +48,7 @@
         </li>
 
         <!-- PENDAFTARAN -->
-        <li class="nav-item dropdown" style="margin-right: 35px;">
+        <li class="nav-item dropdown" style="margin-right: 35px;"> <!-- Menambahkan jarak antar item -->
           <a class="nav-link dropdown-toggle" href="#" id="pendaftaranDropdown" role="button" data-bs-toggle="dropdown" style="color: black; font-size: 18px;">
             PENDAFTARAN
           </a>
@@ -59,11 +59,15 @@
           </ul>
         </li>
 
-        <!-- LOGIN BUTTON -->
-        <li class="nav-item" style="margin-right: 35px;">
-          <a class="nav-link" href="{{ url('/login') }}" style="color: black; font-size: 18px;">
-            <button class="btn btn-primary" style="font-size: 18px;">Login</button>
+        <!-- PROFIL -->
+        <li class="nav-item dropdown" style="margin-right: 35px;"> <!-- Menambahkan jarak antar item -->
+          <a class="nav-link dropdown-toggle" href="#" id="profilDropdown" role="button" data-bs-toggle="dropdown" style="color: black; font-size: 18px;">
+            <i class="bi bi-person-circle"></i>
           </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="{{ url('/login') }}" style="color: black; font-size: 18px;">Profil Saya</a></li>
+            <li><a class="dropdown-item" href="{{ url('/logout') }}" style="color: black; font-size: 18px;">Keluar</a></li>
+          </ul>
         </li>
       </ul>
     </div>
