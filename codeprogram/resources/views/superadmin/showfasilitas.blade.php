@@ -42,10 +42,10 @@
                 </div>
             </div>
             <div class="button-group">
-                <a href="{{ route('fasilitas.edit', $fasilitas->fasilitas_id) }}" class="btn-modern btn-edit">
+                <a href="{{ route('superadmin.fasilitas.edit', $fasilitas->fasilitas_id) }}" class="btn-modern btn-edit">
                     <i class="fas fa-edit"></i> Edit Fasilitas
                 </a>
-                <a href="{{ route('fasilitas.index') }}" class="btn-modern btn-back">
+                <a href="{{ route('superadmin.fasilitas.index') }}" class="btn-modern btn-back">
                     <i class="fas fa-arrow-left"></i> Kembali
                 </a>
             </div>

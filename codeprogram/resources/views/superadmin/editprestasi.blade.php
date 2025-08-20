@@ -23,7 +23,7 @@
                 </h2>
             </div>
             <div class="card-body">
-                <form action="{{ route('prestasi.update', $prestasi->prestasi_id) }}" method="POST" enctype="multipart/form-data" class="modern-form">
+                <form action="{{ route('superadmin.prestasi.update', $prestasi->prestasi_id) }}" method="POST" enctype="multipart/form-data" class="modern-form">
                     @csrf
                     @method('PUT')
 
@@ -161,7 +161,7 @@
                             <i class="fas fa-save"></i>
                             <span>Update Prestasi</span>
                         </button>
-                        <a href="{{ route('prestasi.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('superadmin.prestasi.index') }}" class="btn btn-secondary">
                             <i class="fas fa-times"></i>
                             <span>Batal</span>
                         </a>

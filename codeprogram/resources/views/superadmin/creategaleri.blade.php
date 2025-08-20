@@ -23,7 +23,7 @@
 
         <!-- Form Container -->
         <div class="form-container">
-            <form action="{{ route('galeri.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
+            <form action="{{ route('superadmin.galeri.store') }}" method="POST" enctype="multipart/form-data" class="modern-form">
                 @csrf
 
                 <!-- Judul Galeri -->
@@ -93,7 +93,7 @@
                         <i class="fas fa-save"></i>
                         <span>Simpan Galeri</span>
                     </button>
-                    <a href="{{ route('galeri.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('superadmin.galeri.index') }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                         <span>Kembali</span>
                     </a>

@@ -30,7 +30,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('fasilitas.update', $fasilitas->fasilitas_id) }}" method="POST" enctype="multipart/form-data" class="modern-form">
+                <form action="{{ route('superadmin.fasilitas.update', $fasilitas->fasilitas_id) }}" method="POST" enctype="multipart/form-data" class="modern-form">
                     @csrf
                     @method('PUT')
 
@@ -114,7 +114,7 @@
                             <i class="fas fa-save"></i>
                             Simpan Perubahan
                         </button>
-                        <a href="{{ route('fasilitas.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('superadmin.fasilitas.index') }}" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i>
                             Kembali
                         </a>

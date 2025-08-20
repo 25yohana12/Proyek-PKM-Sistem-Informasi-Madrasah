@@ -6,7 +6,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h4 mb-0">Edit Struktur Organisasi</h1>
-        <a href="{{ route('strukturOrganisasi.index') }}" class="btn btn-secondary">‹ Kembali</a>
+        <a href="{{ route('superadmin.strukturOrganisasi.index') }}" class="btn btn-secondary">‹ Kembali</a>
     </div>
 
     <form action="{{ route('strukturOrganisasi.update', $strukturOrganisasi) }}"

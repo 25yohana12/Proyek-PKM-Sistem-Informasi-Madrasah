@@ -4,7 +4,7 @@
 <div class="container py-4">
     <h2>Edit Data Kelas</h2>
 
-    <form action="{{ route('siswa.update', $siswa->siswa_id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('superadmin.siswa.update', $siswa->siswa_id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -46,7 +46,7 @@
         @endif
 
         <button type="submit" class="btn btn-primary">Perbarui</button>
-        <a href="{{ route('siswa.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('superadmin.siswa.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

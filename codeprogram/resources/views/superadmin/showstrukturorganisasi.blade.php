@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container py-4">
-    <a href="{{ route('strukturOrganisasi.index') }}" class="btn btn-secondary mb-3">‹ Kembali</a>
+    <a href="{{ route('superadmin.strukturOrganisasi.index') }}" class="btn btn-secondary mb-3">‹ Kembali</a>
 
     <div class="card shadow-sm">
         <div class="row g-0">
@@ -28,8 +28,8 @@
                         <dd class="col-sm-8">{{ $strukturOrganisasi->updated_at->format('d M Y H:i') }}</dd>
                     </dl>
 
-                    <a href="{{ route('strukturOrganisasi.edit', $strukturOrganisasi) }}" class="btn btn-warning me-2">Edit</a>
-                    <form action="{{ route('strukturOrganisasi.destroy', $strukturOrganisasi) }}"
+                    <a href="{{ route('superadmin.strukturOrganisasi.edit', $strukturOrganisasi) }}" class="btn btn-warning me-2">Edit</a>
+                    <form action="{{ route('superadmin.strukturOrganisasi.destroy', $strukturOrganisasi) }}"
                           method="POST" class="d-inline" onsubmit="return confirm('Hapus data ini?')">
                         @csrf @method('DELETE')
                         <button class="btn btn-danger">Hapus</button>

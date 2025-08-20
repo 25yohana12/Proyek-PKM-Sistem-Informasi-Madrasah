@@ -112,15 +112,15 @@
                 <!-- Action Buttons -->
                 <div class="action-section">
                     <div class="action-buttons">
-                        <a href="{{ route('galeri.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('superadmin.galeri.index') }}" class="btn btn-secondary">
                             <i class="fas fa-list"></i>
                             <span>Semua Galeri</span>
                         </a>
-                        <a href="{{ route('galeri.edit', $galeri->galeri_id) }}" class="btn btn-primary">
+                        <a href="{{ route('superadmin.galeri.edit', $galeri->galeri_id) }}" class="btn btn-primary">
                             <i class="fas fa-edit"></i>
                             <span>Edit Galeri</span>
                         </a>
-                        <form action="{{ route('galeri.destroy', $galeri->galeri_id) }}" 
+                        <form action="{{ route('superadmin.galeri.destroy', $galeri->galeri_id) }}" 
                               method="POST" 
                               class="delete-form"
                               onsubmit="return confirm('Apakah Anda yakin ingin menghapus galeri ini?')">

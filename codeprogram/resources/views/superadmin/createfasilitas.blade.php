@@ -99,7 +99,7 @@
                             <i class="fas fa-save"></i>
                             Simpan Fasilitas
                         </button>
-                        <a href="{{ route('fasilitas.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('superadmin.fasilitas.index') }}" class="btn btn-secondary">
                             <i class="fas fa-arrow-left"></i>
                             Kembali
                         </a>

@@ -13,7 +13,7 @@
                 <p class="page-subtitle">Tambahkan ekstrakurikuler baru untuk pengembangan minat siswa</p>
             </div>
             <div class="breadcrumb">
-                <a href="{{ route('ekstrakulikuler.index') }}" class="breadcrumb-link">
+                <a href="{{ route('superadmin.ekstrakulikuler.index') }}" class="breadcrumb-link">
                     <i class="fas fa-users"></i> Ekstrakurikuler
                 </a>
                 <span class="breadcrumb-separator">/</span>
@@ -93,7 +93,7 @@
                         <i class="fas fa-save"></i>
                         <span>Simpan Ekstrakurikuler</span>
                     </button>
-                    <a href="{{ route('ekstrakulikuler.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('superadmin.ekstrakulikuler.index') }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                         <span>Kembali</span>
                     </a>

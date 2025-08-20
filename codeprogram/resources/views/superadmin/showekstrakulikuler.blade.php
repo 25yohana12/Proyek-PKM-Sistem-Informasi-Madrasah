@@ -100,15 +100,15 @@
             <!-- Tombol Aksi -->
             <div class="action-section">
                 <div class="action-buttons">
-                    <a href="{{ route('ekstrakulikuler.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('superadmin.ekstrakulikuler.index') }}" class="btn btn-secondary">
                         <i class="fas fa-list"></i>
                         <span>Semua Ekstrakurikuler</span>
                     </a>
-                    <a href="{{ route('ekstrakulikuler.edit', $ekstrakulikuler->ekstrakulikuler_id) }}" class="btn btn-primary">
+                    <a href="{{ route('superadmin.ekstrakulikuler.edit', $ekstrakulikuler->ekstrakulikuler_id) }}" class="btn btn-primary">
                         <i class="fas fa-edit"></i>
                         <span>Edit</span>
                     </a>
-                    <form action="{{ route('ekstrakulikuler.destroy', $ekstrakulikuler->ekstrakulikuler_id) }}"
+                    <form action="{{ route('superadmin.ekstrakulikuler.destroy', $ekstrakulikuler->ekstrakulikuler_id) }}"
                           method="POST"
                           class="delete-form"
                           onsubmit="return confirm('Yakin ingin menghapus kegiatan ini?')">

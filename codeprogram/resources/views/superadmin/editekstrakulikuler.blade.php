@@ -13,7 +13,7 @@
                 <p class="page-subtitle">Ubah dan perbarui informasi ekstrakurikuler madrasah</p>
             </div>
             <div class="breadcrumb">
-                <a href="{{ route('ekstrakulikuler.index') }}" class="breadcrumb-link">
+                <a href="{{ route('superadmin.ekstrakulikuler.index') }}" class="breadcrumb-link">
                     <i class="fas fa-users"></i> Ekstrakurikuler
                 </a>
                 <span class="breadcrumb-separator">/</span>
@@ -23,7 +23,7 @@
 
         <!-- Form Container -->
         <div class="form-container">
-            <form action="{{ route('ekstrakulikuler.update', $ekstrakulikuler->ekstrakulikuler_id) }}" method="POST" enctype="multipart/form-data" class="modern-form">
+            <form action="{{ route('superadmin.ekstrakulikuler.update', $ekstrakulikuler->ekstrakulikuler_id) }}" method="POST" enctype="multipart/form-data" class="modern-form">
                 @csrf
                 @method('PUT')
 
@@ -116,7 +116,7 @@
                         <i class="fas fa-save"></i>
                         <span>Simpan Perubahan</span>
                     </button>
-                    <a href="{{ route('ekstrakulikuler.index') }}" class="btn btn-secondary">
+                    <a href="{{ route('superadmin.ekstrakulikuler.index') }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                         <span>Kembali</span>
                     </a>

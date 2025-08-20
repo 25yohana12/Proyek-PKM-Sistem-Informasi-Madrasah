@@ -53,7 +53,7 @@
             PENDAFTARAN
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ url('/pendaftaran/formulir') }}" style="color: black; font-size: 18px;">Formulir</a></li>
+            <li><a class="dropdown-item" href="{{ url('siswa/pendaftaran') }}" style="color: black; font-size: 18px;">Formulir</a></li>
             <li><a class="dropdown-item" href="{{ url('/pendaftaran/jadwal') }}" style="color: black; font-size: 18px;">Jadwal</a></li>
             <li><a class="dropdown-item" href="{{ url('/pendaftaran/syarat') }}" style="color: black; font-size: 18px;">Syarat</a></li>
           </ul>

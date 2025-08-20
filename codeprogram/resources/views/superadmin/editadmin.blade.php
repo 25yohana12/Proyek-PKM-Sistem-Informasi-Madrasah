@@ -4,7 +4,7 @@
     <div class="bg-white p-6 rounded-lg shadow-lg">
         <h1 class="text-2xl font-semibold mb-4">Edit Admin</h1>
 
-        <form action="{{ route('admin.update', $admin->admin_id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('superadmin.admin.update', $admin->admin_id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

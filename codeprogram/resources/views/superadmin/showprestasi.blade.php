@@ -13,11 +13,11 @@
                 <p class="page-subtitle">{{ $prestasi->judul }}</p>
             </div>
             <div class="header-actions">
-                <a href="{{ route('prestasi.index') }}" class="btn btn-secondary">
+                <a href="{{ route('superadmin.prestasi.index') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i>
                     <span>Kembali</span>
                 </a>
-                <a href="{{ route('prestasi.edit', $prestasi->prestasi_id) }}" class="btn btn-primary">
+                <a href="{{ route('superadmin.prestasi.edit', $prestasi->prestasi_id) }}" class="btn btn-primary">
                     <i class="fas fa-edit"></i>
                     <span>Edit</span>
                 </a>

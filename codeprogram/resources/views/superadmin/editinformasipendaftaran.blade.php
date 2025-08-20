@@ -23,7 +23,7 @@
                 </h2>
             </div>
             <div class="card-body">
-                <form action="{{ route('informasi.update', $informasi->informasi_id) }}" method="POST" class="modern-form">
+                <form action="{{ route('superadmin.informasi.update', $informasi->informasi_id) }}" method="POST" class="modern-form">
                     @csrf
                     @method('PUT')
 
@@ -136,7 +136,7 @@
                             <i class="fas fa-save"></i>
                             <span>Simpan Perubahan</span>
                         </button>
-                        <a href="{{ route('informasi.index') }}" class="btn btn-secondary">
+                        <a href="{{ route('superadmin.informasi.index') }}" class="btn btn-secondary">
                             <i class="fas fa-times"></i>
                             <span>Batal</span>
                         </a>
