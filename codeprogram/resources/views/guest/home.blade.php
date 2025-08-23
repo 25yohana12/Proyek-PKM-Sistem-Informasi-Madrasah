@@ -137,7 +137,7 @@ section {
 
 /* ======= Tentang Kami ======= */
 .about-us {
-    background: linear-gradient(135deg, #e6f7e6, #ffffff);
+    background: linear-gradient(135deg, #c7f4c7, #ffffff);
     border-radius: 15px;
     padding: 40px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);

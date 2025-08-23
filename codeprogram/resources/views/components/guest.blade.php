@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #E4FFEE; color: black; font-family: 'Arial', sans-serif; font-weight: normal; font-size: 18px;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #60f797; color: black; font-family: 'Arial', sans-serif; font-weight: normal; font-size: 18px;">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}" style="color: black; font-size: 18px;">
       <img src="{{ asset('images/logo.png') }}" alt="Logo" width="30" height="30" class="me-2">
@@ -54,7 +54,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ url('/pendaftaran/formulir') }}" style="color: black; font-size: 18px;">Formulir</a></li>
-            <li><a class="dropdown-item" href="{{ url('/pendaftaran/jadwal') }}" style="color: black; font-size: 18px;">Jadwal</a></li>
+            <li><a class="dropdown-item" href="{{ url('/pengumuman') }}" style="color: black; font-size: 18px;">Jadwal</a></li>
             <li><a class="dropdown-item" href="{{ url('/pendaftaran/syarat') }}" style="color: black; font-size: 18px;">Syarat</a></li>
           </ul>
         </li>

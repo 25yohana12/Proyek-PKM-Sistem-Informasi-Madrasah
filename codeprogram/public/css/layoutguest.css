@@ -21,7 +21,7 @@ h1, h2, h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #00796b;
+    background-color: #44ee7a;
     color: white;
     padding: 30px 0;
     margin-bottom: 30px;
@@ -45,8 +45,6 @@ h1, h2, h3 {
 
 /* Section Styles */
 section {
-    padding: 20px;
-    margin: 20px 0;
     background-color: white;
     border-radius: 8px;
 }

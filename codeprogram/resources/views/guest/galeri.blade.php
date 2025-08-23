@@ -27,7 +27,7 @@
                     @foreach($items as $photo)
                         <div class="relative group overflow-hidden rounded-md shadow hover:shadow-lg transition-shadow duration-300">
                             <img
-                                src="{{ asset('storage/' . $photo->gambar) }}"
+                                src="{{ asset('storage/public/' . $photo->gambar) }}"
                                 alt="{{ $photo->judul }}"
                                 class="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
                             >

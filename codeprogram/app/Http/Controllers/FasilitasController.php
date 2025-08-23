@@ -49,7 +49,7 @@ class FasilitasController extends Controller
             'gambar' => json_encode($imagePaths),
         ]);
 
-        return redirect()->route('fasilitas.index')->with('success', 'Fasilitas berhasil ditambahkan!');
+        return redirect()->route('superadmin.fasilitas.index')->with('success', 'Fasilitas berhasil ditambahkan!');
     }
 
     // Menampilkan detail fasilitas tertentu

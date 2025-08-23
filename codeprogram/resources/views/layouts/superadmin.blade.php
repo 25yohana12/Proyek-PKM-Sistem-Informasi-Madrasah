@@ -119,7 +119,6 @@
             margin-left: 280px;
             min-height: 100vh;
             background: transparent;
-            padding: 20px;
         }
 
         /* Override any conflicting styles */
