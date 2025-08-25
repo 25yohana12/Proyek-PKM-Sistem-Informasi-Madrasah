@@ -61,7 +61,7 @@ class StrukturOrganisasiController extends Controller
 
         StrukturOrganisasi::create($validated);
 
-        return redirect()->route('strukturOrganisasi.index')
+        return redirect()->route('superadmin.strukturorganisasi.index')
                          ->with('success', 'Data berhasil ditambahkan.');
     }
 
@@ -108,7 +108,7 @@ class StrukturOrganisasiController extends Controller
 
         $strukturOrganisasi->update($validated);
 
-        return redirect()->route('strukturOrganisasi.index')
+        return redirect()->route('superadmin.strukturorganisasi.index')
                          ->with('success', 'Data berhasil diperbarui.');
     }
 

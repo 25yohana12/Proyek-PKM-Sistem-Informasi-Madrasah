@@ -129,7 +129,7 @@ h2::after {
 /* ======= Section Umum ======= */
 section {
     background:#fdfdfd;
-    background: linear-gradient(135deg, #e6f7e6, #ffffff);
+    background: #b6fab6;
     padding: 50px 20px;
     margin: 0 auto 40px;
     max-width: 12000px;
@@ -137,7 +137,7 @@ section {
 
 /* ======= Tentang Kami ======= */
 .about-us {
-    background: linear-gradient(135deg, #c7f4c7, #ffffff);
+    background:#b6fab6;
     border-radius: 15px;
     padding: 40px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -183,7 +183,7 @@ section {
 }
 
 .facilities{
-    background: linear-gradient(135deg, #e6f7e6, #ffffff);
+    background: #b6fab6;
     border-radius: 15px;
     padding: 40px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -198,6 +198,7 @@ section {
 }
 
 .location{
+    background: #b6fab6;
     border-radius: 15px;
     padding: 40px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #60f797; color: black; font-family: 'Arial', sans-serif; font-weight: normal; font-size: 18px;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #48b470; color: black; font-family: 'Arial', sans-serif; font-weight: normal; font-size: 18px;">
   <div class="container-fluid">
     <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}" style="color: black; font-size: 18px;">
       <img src="{{ asset('images/logo.png') }}" alt="Logo" width="30" height="30" class="me-2">
@@ -60,9 +60,9 @@
         </li>
 
         <!-- LOGIN BUTTON -->
-        <li class="nav-item" style="margin-right: 35px;">
+        <li class="nav-item" style="color: black;>
           <a class="nav-link" href="{{ url('/login') }}" style="color: black; font-size: 18px;">
-            <button class="btn btn-primary" style="font-size: 18px;">Login</button>
+            <button class="btn btn-primary" style="font-size: 18px; background-color: #34C759; color: black;">Login</button>
           </a>
         </li>
       </ul>
