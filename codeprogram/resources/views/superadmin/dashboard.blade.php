@@ -1,198 +1,267 @@
 @extends('layouts.superadmin')
 
+@section('title', 'Dashboard')
+
 @section('content')
-<div class="container">
-    <div class="header">
-        <h1>MIN TOBA SAMOSIR</h1>
-        <p>Madrash, Tempat Belajar, Tempat</p>
-    </div>
-
-    <div class="dashboard-cards">
-        <div class="card">
-            <h3>Guru</h3>
-            <p>{{ $guruCount }}</p>
-            <a href="{{ route('superadmin.guru.index') }}" class="btn">Detail</a>
-        </div>
-        <div class="card">
-            <h3>Siswa</h3>
-            <p>{{ $siswaCount }}</p>
-            <a href="{{ route('superadmin.siswa.index') }}" class="btn">Detail</a>
-        </div>
-        <div class="card">
-            <h3>Fasilitas</h3>
-            <p>{{ $fasilitasCount }}</p>
-            <a href="{{ route('superadmin.fasilitas.index') }}" class="btn">Detail</a>
-        </div>
-        <div class="card">
-            <h3>Prestasi</h3>
-            <p>{{ $prestasiCount }}</p>
-            <a href="{{ route('superadmin.prestasi.index') }}" class="btn">Detail</a>
-        </div>
-        <div class="card">
-            <h3>Ekstrakurikuler</h3>
-            <p>{{ $ekstrakurikulerCount }}</p>
-            <a href="{{ route('superadmin.ekstrakurikuler.index') }}" class="btn">Detail</a>
-        </div>
-        <div class="card">
-            <h3>Acara</h3>
-            <p>{{ $acaraCount }}</p>
-            <a href="{{ route('superadmin.acara.index') }}" class="btn">Detail</a>
-        </div>
-        <div class="card">
-            <h3>Pendaftar</h3>
-            <p>{{ $datapendaftarCount }}</p>
-            <a href="#" class="btn">Detail</a>
+<div class="page-container">
+    <!-- Header Section (match gaya Prestasi) -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1 class="page-title">
+                <span class="emoji">📊</span> DASHBOARD MIN TOBA SAMOSIR
+            </h1>
+            <p class="page-subtitle">Pantau data guru, siswa, fasilitas, prestasi, dan aktivitas sekolah</p>
         </div>
     </div>
 
-    <div class="what-can-be-done">
-        <h3>Apa yang Bisa Dilakukan?</h3>
-        <ul>
-            <li>Dashboard: Pantau data & aktivitas sistem.</li>
-            <li>Akun Admin: Tambah/edit admin lainnya.</li>
-            <li>Data Guru & Kelas: Kelola civitas & struktur akademik.</li>
-            <li>Struktur Organisasi: Edit hierarki sekolah.</li>
-            <li>Publikasi: Unggah perayaan, galeri, dan prestasi.</li>
-            <li>Profil Sekolah: Ubah visi, misi, sejarah.</li>
-            <li>Kontak: Perbarui info alamat & telepon.</li>
-            <li>Ekstrakurikuler & Fasilitas: Atur ekskul dan sarana sekolah.</li>
-            <li>Pendaftaran: Kelola info PPDB & Verifikasi akhir pendaftar.</li>
-        </ul>
+    <!-- Cards Section -->
+    <div class="content-card">
+        <div class="card-header">
+            <h2 class="card-title">
+                <i class="fas fa-gauge-high"></i>
+                Ringkasan Data
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="dashboard-grid">
+                <a href="{{ route('superadmin.guru.index') }}" class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chalkboard-user"></i></div>
+                    <div class="stat-label">Guru</div>
+                    <div class="stat-value">{{ $guruCount }}</div>
+                </a>
+
+                <a href="{{ route('superadmin.siswa.index') }}" class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                    <div class="stat-label">Siswa</div>
+                    <div class="stat-value">{{ $siswaCount }}</div>
+                </a>
+
+                <a href="{{ route('superadmin.fasilitas.index') }}" class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-building"></i></div>
+                    <div class="stat-label">Fasilitas</div>
+                    <div class="stat-value">{{ $fasilitasCount }}</div>
+                </a>
+
+                <a href="{{ route('superadmin.prestasi.index') }}" class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="stat-label">Prestasi</div>
+                    <div class="stat-value">{{ $prestasiCount }}</div>
+                </a>
+
+                <a href="{{ route('superadmin.ekstrakurikuler.index') }}" class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-volleyball"></i></div>
+                    <div class="stat-label">Ekstrakurikuler</div>
+                    <div class="stat-value">{{ $ekstrakurikulerCount }}</div>
+                </a>
+
+                <a href="{{ route('superadmin.acara.index') }}" class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="stat-label">Acara</div>
+                    <div class="stat-value">{{ $acaraCount }}</div>
+                </a>
+
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-file-signature"></i></div>
+                    <div class="stat-label">Pendaftar</div>
+                    <div class="stat-value">{{ $datapendaftarCount }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Apa yang Bisa Dilakukan -->
+    <div class="content-card" style="margin-top:1.5rem;">
+        <div class="card-header">
+            <h2 class="card-title">
+                <i class="fas fa-list-check"></i>
+                Apa yang Bisa Dilakukan?
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="what-can-be-done">
+                <h3>Apa yang Bisa Dilakukan?</h3>
+                <ul>
+                    <li>Dashboard: Pantau data & aktivitas sistem.</li>
+                    <li>Akun Admin: Tambah/edit admin lainnya.</li>
+                    <li>Data Guru & Kelas: Kelola civitas & struktur akademik.</li>
+                    <li>Struktur Organisasi: Edit hierarki sekolah.</li>
+                    <li>Publikasi: Unggah perayaan, galeri, dan prestasi.</li>
+                    <li>Profil Sekolah: Ubah visi, misi, sejarah.</li>
+                    <li>Kontak: Perbarui info alamat & telepon.</li>
+                    <li>Ekstrakurikuler & Fasilitas: Atur ekskul dan sarana sekolah.</li>
+                    <li>Pendaftaran: Kelola info PPDB & verifikasi pendaftar.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
 
 @section('styles')
 <style>
-    /* Container */
-    .container {
-        padding: 20px;
-        background-color: #f9f9f9;
-        max-width: 1200px;
-        margin: 0 auto;
+    /* Samakan emoji style dengan halaman Prestasi */
+    .page-title .emoji {
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        color: initial !important;
     }
 
-    /* Header */
-    .header {
+    /* ===== BACKGROUND HALAMAN (match Prestasi) ===== */
+    .page-container {
+        padding: 2rem;
+        background: linear-gradient(135deg, #6D8D79 0%, #5a7466 100%);
+        min-height: 100vh;
+    }
+
+    /* ===== HEADER KACA/PUTIH (match Prestasi) ===== */
+    .page-header {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 0 !important;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #2d3748;
+        margin: 0 0 0.5rem 0;
+        background: linear-gradient(135deg, #6D8D79, #5a7466);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: flex; align-items: center; gap: .5rem;
+    }
+
+    .page-subtitle {
+        color: #64748b;
+        font-size: 1.1rem;
+        margin: 0;
+        font-weight: 500;
+    }
+
+    /* ===== KARTU KONTEN (match Prestasi) ===== */
+    .content-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .card-header {
+        padding: 2rem;
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .card-title {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-        padding: 20px 0;
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        background-color: #6D8D79;
-        border-bottom: 2px solid #6D8D79;
-        margin-bottom: 20px;
+        gap: 0.75rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin: 0;
     }
+    .card-title i { color: #6D8D79; }
 
-    .header h1 {
-        font-size: 3rem;
-        color: #2c3e50;
-        margin-bottom: 10px;
-    }
+    .card-body { padding: 2rem; }
 
-    .header p {
-        font-size: 1.25rem;
-        color: #7f8c8d;
-    }
-
-    /* Dashboard Cards */
-    .dashboard-cards {
+    /* ===== GRID STAT CARDS (Dashboard) ===== */
+    .dashboard-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-        margin-bottom: 40px;
+        gap: 1.25rem;
+        padding: 0 10px; /* sedikit jarak kiri-kanan */
     }
 
-    .card {
-        background-color: #fff;
+    .stat-card {
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 1.25rem 1.25rem 1.1rem;
+        text-decoration: none;
+        transition: transform .25s ease, box-shadow .25s ease;
+        box-shadow: 0 8px 30px rgba(0,0,0,.06);
+        color: inherit;
+    }
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(0,0,0,.12);
+    }
+
+    .stat-icon {
+        width: 44px; height: 44px;
+        display: grid; place-items: center;
         border-radius: 12px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        padding: 30px 20px;
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid #ddd;
+        background: linear-gradient(135deg, #6D8D79, #5a7466);
+        color: #fff;
+        margin-bottom: .75rem;
+        font-size: 1.1rem;
+        box-shadow: 0 6px 16px rgba(109,141,121,.3);
     }
 
-    .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    .stat-label {
+        font-size: .95rem;
+        color: #64748b;
+        font-weight: 600;
     }
 
-    .card h3 {
+    .stat-value {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #2d3748;
+        line-height: 1;
+        margin-top: .25rem;
+    }
+
+    /* ===== "Apa yang Bisa Dilakukan?" gaya sama dengan request kamu ===== */
+    .what-can-be-done h3 {
         font-size: 1.5rem;
         color: #2c3e50;
-        margin-bottom: 10px;
-    }
-
-    .card p {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #3498db;
-        margin-bottom: 15px;
-    }
-
-    .card a {
-        text-decoration: none;
-        background-color: #2ecc71;
-        color: #fff;
-        padding: 12px 25px;
-        border-radius: 8px;
-        transition: background-color 0.3s ease;
-        font-weight: bold;
-    }
-
-    .card a:hover {
-        background-color: #27ae60;
-    }
-
-    /* What Can Be Done Section */
-    .what-can-be-done {
-        background-color: #ecf0f1;
-        padding: 20px;
-        border-radius: 12px;
-        margin-top: 40px;
-    }
-
-    .what-can-be-done h3 {
-        font-size: 2rem;
-        color: #2c3e50;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
+        text-align: center; /* judul tengah */
     }
 
     .what-can-be-done ul {
         list-style: none;
         padding: 0;
+        margin: 0;
+        width: 100%;
+        column-count: 2;    /* 2 kolom desktop */
+        column-gap: 40px;
+        text-align: left;   /* daftar rata kiri */
     }
 
     .what-can-be-done li {
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: #34495e;
-        margin-bottom: 10px;
+        margin: 0 0 10px 0;
+        break-inside: avoid;
+        -webkit-column-break-inside: avoid;
+        -moz-column-break-inside: avoid;
     }
 
-    /* Media Queries */
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+        .stat-value { font-size: 1.75rem; }
+    }
+
     @media (max-width: 768px) {
-        .card {
-            padding: 20px 15px;
-        }
+        .page-header { flex-direction: column; text-align: center; }
+        .dashboard-grid { grid-template-columns: 1fr 1fr; }
+        .what-can-be-done ul { column-count: 1; } /* 1 kolom di HP */
+    }
 
-        .header h1 {
-            font-size: 2.5rem;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-        }
-
-        .what-can-be-done h3 {
-            font-size: 1.5rem;
-        }
-
-        .what-can-be-done li {
-            font-size: 1rem;
-        }
+    @media (max-width: 540px) {
+        .dashboard-grid { grid-template-columns: 1fr; }
     }
 </style>
 @endsection
