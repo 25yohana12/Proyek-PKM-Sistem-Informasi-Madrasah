@@ -27,6 +27,7 @@ Route::get('/perayaan', [AcaraController::class, 'guest'])->name('guest.acara');
 Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('guest.pengumuman');
 Route::get('/prestasi', [PrestasiController::class, 'guest'])->name('guest.prestasi');
 Route::get('/fasilitas', [FasilitasController::class, 'guest'])->name('guest.fasilitas');
+Route::get('/ekstrakurikuler', [EkstrakulikulerController::class, 'guest'])->name('guest.ekstrakulikuler');
 Route::get('/galeri', [GaleriController::class, 'guest'])->name('guest.galeri');
 Route::get('/strukturorganisasi', [StrukturOrganisasiController::class, 'guest'])->name('guest.strukturorganisasi');
 Route::get('/pendaftaran', [InformasiPendaftaranController::class, 'guest'])->name('guest.pendaftaran');

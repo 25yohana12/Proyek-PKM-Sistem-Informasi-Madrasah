@@ -64,7 +64,7 @@ class PrestasiController extends Controller
             'gambar' => json_encode($gambarPaths), // Menyimpan path gambar sebagai JSON
         ]);
 
-        return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil ditambahkan!');
+        return redirect()->route('superadmin.prestasi.index')->with('success', 'Prestasi berhasil ditambahkan!');
     }
 
     /**
@@ -153,7 +153,7 @@ class PrestasiController extends Controller
             'gambar' => json_encode(array_values($currentImages)) // Re-index array
         ]);
 
-        return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil diperbarui!');
+        return redirect()->route('superadmin.prestasi.index')->with('success', 'Prestasi berhasil diperbarui!');
     }
 
     /**
@@ -179,7 +179,7 @@ class PrestasiController extends Controller
         // Hapus data prestasi
         $prestasi->delete();
 
-        return redirect()->route('prestasi.index')->with('success', 'Prestasi berhasil dihapus!');
+        return redirect()->route('superadmin.prestasi.index')->with('success', 'Prestasi berhasil dihapus!');
     }
 
     /**
