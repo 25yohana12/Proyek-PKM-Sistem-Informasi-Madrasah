@@ -1,204 +1,211 @@
 @extends('layouts.superadmin') 
+@section('title', 'Data Guru')
 
 @section('content')
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Data Guru</h2>
-    
-    <a href="{{ route('superadmin.guru.create') }}" class="btn btn-primary mb-3">Tambah Data</a>
-    
-    <div class="row">
-        @foreach ($gurus as $guru)
-        <div class="col-md-4 mb-4">
-            <div class="card" style="width: 18rem;">
-                <img src="{{ asset('storage/'.$guru->gambar) }}" class="card-img-top" alt="{{ $guru->namaGuru }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $guru->namaGuru }}</h5>
-                    <p class="card-text"><strong>NIP:</strong> {{ $guru->nip }}</p>
-                    <p class="card-text"><strong>Posisi:</strong> {{ $guru->posisi }}</p>
-                    <p class="card-text"><strong>Deskripsi:</strong> {{ $guru->deskripsi }}</p>
-                    
-                </div>
-                <div class="card-footer">
-                    <a href="{{ route('superadmin.guru.edit', $guru->guru_id) }}" class="btn btn-success">Edit</a>
-                    <form action="{{ route('superadmin.guru.destroy', $guru->guru_id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </div>
+<div class="page-container">
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1 class="page-title">
+                <span class="emoji">👩‍🏫</span> Data Guru
+            </h1>
+            <p class="page-subtitle">Daftar guru beserta informasi detail</p>
         </div>
-        @endforeach
+        <a href="{{ route('superadmin.guru.create') }}" class="btn btn-primary">
+            + Tambah Data
+        </a>
+    </div>
+
+    <!-- Success alert -->
+    @if (session('success'))
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Table Card -->
+    <div class="content-card">
+        <div class="card-body table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nama</th>
+                        <th>NIP</th>
+                        <th>Posisi</th>
+                        <th>Deskripsi</th>
+                        <th>Foto</th>
+                        <th class="text-right">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($gurus as $i => $guru)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $guru->namaGuru }}</td>
+                            <td>{{ $guru->nip }}</td>
+                            <td>{{ $guru->posisi }}</td>
+                            <td>{{ $guru->deskripsi }}</td>
+                            <td style="width:90px">
+                                <img src="{{ asset('storage/'.$guru->gambar) }}" class="table-img">
+                            </td>
+                            <td class="text-right">
+                                <a href="{{ route('superadmin.guru.edit', $guru->guru_id) }}" 
+                                   class="btn btn-sm btn-warning">Edit</a>
+                                <form action="{{ route('superadmin.guru.destroy', $guru->guru_id) }}" 
+                                      method="POST" class="inline-form" 
+                                      onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                    @csrf @method('DELETE')
+                                    <button class="btn btn-sm btn-danger">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="7" class="text-center py-4">Belum ada data guru.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+@endsection
 
+@section('styles')
 <style>
-    /* General container for layout */
-.container {
-    max-width: 1200px;
-    margin: auto;
-}
+    /* Page background */
+    .page-container {
+        padding: 2rem;
+        background: linear-gradient(135deg, #6D8D79 0%, #5a7466 100%);
+        min-height: 100vh;
+    }
 
-/* Heading Style */
-h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #2c6e49;
-}
+    /* Header */
+    .page-header {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
 
-/* Button Style */
-.btn-primary {
-    background-color: #2c6e49;
-    border-color: #2c6e49;
-}
+    .page-title {
+        font-size: 1.75rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(135deg, #6D8D79, #5a7466);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-.btn-primary:hover {
-    background-color: #255d3c;
-    border-color: #255d3c;
-}
+    .page-subtitle {
+        font-size: 0.95rem;
+        color: #64748b;
+        margin-top: 0.25rem;
+    }
 
-.btn-success {
-    background-color: #4CAF50;
-    border-color: #4CAF50;
-}
+    /* Card */
+    .content-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        padding: 1.5rem;
+    }
 
-.btn-danger {
-    background-color: #f44336;
-    border-color: #f44336;
-}
+    .table-responsive {
+        overflow-x: auto;
+    }
 
+    /* Table */
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-/* General Button Styling */
-.btn {
-    font-size: 1rem;            /* Same font size for both buttons */
-    padding: 10px 20px;         /* Same padding for both buttons */
-    border-radius: 8px;         /* Same rounded corners */
-    display: inline-block;      /* Make sure buttons align properly */
-    width: auto;                /* Ensure width adapts to content */
-}
+    .custom-table th, 
+    .custom-table td {
+        padding: 0.9rem 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        text-align: left;
+    }
 
-/* Edit Button Styling */
-.btn-success {
-    background-color: #4CAF50; /* Green background for Edit */
-    border-color: #4CAF50;
-    width: 70px;   /* Lebar 200px */
-    height: 50px;  /* Panjang (tinggi) 150px */
-}
+    .custom-table th {
+        background: #f9fafb;
+        font-weight: 600;
+        color: #374151;
+    }
 
-/* Delete Button Styling */
-.btn-danger {
-    background-color: #f44336; /* Red background for Delete */
-    border-color: #f44336;
-    width: 80px;   /* Lebar 200px */
-    height: 50px;  /* Panjang (tinggi) 150px */
-}
+    .custom-table tr:hover {
+        background: #f9fafc;
+    }
 
-/* Card Footer for buttons */
-.card-footer {
-    background-color: #A5D6A7;
-    display: flex;
-    justify-content: flex-start;  /* Align buttons to the left */
-    padding: 10px 20px;
-    border-radius: 0 0 12px 12px; /* Rounded bottom corners */
-}
+    .text-right {
+        text-align: right;
+    }
 
-/* Optional: To make buttons even more consistent */
-.form button {
-    margin: 5px; /* Add space between buttons */
-}
+    /* Table image */
+    .table-img {
+        max-height: 70px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
 
+    /* Buttons */
+    .btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-/* Card Layout */
-.card {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #A5D6A7;
-    width: 30rem; /* Fixed width */
-    height: 30rem; /* Fixed height (you can adjust this based on your content) */
-    display: flex;
-    flex-direction: column; /* Make content stack vertically */
-    justify-content: space-between; /* Space out the content, putting the buttons at the bottom */
-    margin-top: 20px; /* Add some space between cards */
-}
+    .btn-primary {
+        background: linear-gradient(135deg, #6D8D79, #5a7466);
+        color: white;
+        box-shadow: 0 4px 15px rgba(109,141,121,0.3);
+    }
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(109,141,121,0.4);
+    }
 
-.card-body {
-    background-color: #A5D6A7;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: left; /* Align text to the left */
-    flex-grow: 1; /* Allow the body content to take up remaining space */
-}
+    .btn-warning {
+        background: #f59e0b;
+        color: white;
+    }
 
-/* Title Styling */
-.card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #2c6e49;
-}
+    .btn-danger {
+        background: #ef4444;
+        color: white;
+    }
 
-/* Text Styling */
-.card-text {
-    font-size: 1rem;
-    color: #333;
-}
+    .btn-sm {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.85rem;
+        border-radius: 8px;
+    }
 
-/* Image Styling */
-.card-img-top {
-    width: 90%; /* Set width to 90% of the card */
-    height: 200px; /* Fixed height for images */
-    border-radius: 8px;
-    object-fit: cover;
-    aspect-ratio: 4 / 3; /* Set the aspect ratio to 4:3 */
-    
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-}
+    .inline-form {
+        display: inline;
+    }
 
-/* Add margin between cards */
-.row {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
-}
+    /* Alerts */
+    .alert {
+        margin-bottom: 1.5rem;
+        padding: 1rem 1.25rem;
+        border-radius: 12px;
+        font-size: 0.95rem;
+    }
 
-/* Styling for Card Body */
-.guru-body {
-    padding: 15px;
-}
-
-/* Adjust text content alignment */
-.guru-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #2c6e49;
-    margin-bottom: 15px;
-}
-
-.guru-card .card-body p {
-    margin-bottom: 10px;
-    font-size: 1rem;
-}
-
-/* Edit and Delete Buttons Styling */
-.d-inline-block {
-    display: inline-block;
-    margin-top: 10px;
-    align-self: flex-start; /* Align buttons to the left */
-}
-
-form button {
-    margin: 5px;
-}
-
-/* Align buttons to the bottom left */
-.card-body .d-inline-block {
-    margin-top: auto; /* Push buttons to the bottom */
-}
-
+    .alert-success {
+        background: linear-gradient(135deg, #16a34a, #15803d);
+        color: white;
+    }
 </style>
-
-
 @endsection

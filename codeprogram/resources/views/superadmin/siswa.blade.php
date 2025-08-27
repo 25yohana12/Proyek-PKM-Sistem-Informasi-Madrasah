@@ -8,7 +8,7 @@
     <div class="page-header">
         <div class="header-content">
             <h1 class="page-title">
-                <span class="emoji">🏫</span> Data Kelas
+                <span class="emoji">🏫</span> Data Siswa
             </h1>
             <p class="page-subtitle">Informasi kelas, wali kelas, dan jumlah murid</p>
         </div>
