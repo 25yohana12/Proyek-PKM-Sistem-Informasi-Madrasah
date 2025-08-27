@@ -1,154 +1,199 @@
 @extends('layouts.superadmin')
 
+@section('title', 'Tambah Admin')
+
 @section('content')
-    <div class="bg-white p-6 rounded-lg shadow-lg">
-        <h1 class="text-2xl font-semibold mb-4">Tambah Admin</h1>
-
-        <form action="{{ route('superadmin.admin.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-4">
-                <label for="namaAdmin" class="block text-sm font-medium text-gray-700">Nama Admin</label>
-                <input type="text" id="namaAdmin" name="namaAdmin" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
-            </div>
-
-            <div class="mb-4">
-                <label for="nip" class="block text-sm font-medium text-gray-700">NIP</label>
-                <input type="text" id="nip" name="nip" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
-            </div>
-
-            <div class="mb-4">
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" id="email" name="email" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
-            </div>
-
-            <div class="mb-4">
-                <label for="sandi" class="block text-sm font-medium text-gray-700">Kata Sandi</label>
-                <input type="password" id="sandi" name="sandi" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
-            </div>
-
-            <div class="mb-4">
-                <label for="profil" class="block text-sm font-medium text-gray-700">Profil Admin</label>
-                <input type="file" id="profil" name="profil" class="mt-1 block w-full p-2 border border-gray-300 rounded" required>
-            </div>
-
-            <!-- Hidden input untuk role_id, default ke 2 -->
-            <input type="hidden" name="role_id" value="2"> <!-- Set role_id secara default ke 2 -->
-
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Simpan</button>
-        </form>
-
-        @if($errors->any())
-            <div class="bg-red-500 text-white p-2 mb-4 rounded">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
+<div class="page-container">
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h1 class="page-title">
+                <span class="emoji">➕</span> Tambah Admin
+            </h1>
+            <p class="page-subtitle">Lengkapi data admin baru untuk sistem pendaftaran</p>
+        </div>
     </div>
 
-    <!-- Tambahkan CSS di bawah kode Blade -->
-    <style>
-        /* Style untuk seluruh form */
-        form {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-        }
+    <!-- Form Card -->
+    <div class="content-card">
+        <div class="card-body">
+            <form action="{{ route('superadmin.admin.store') }}" method="POST" enctype="multipart/form-data" class="form-container">
+                @csrf
+                <div class="form-group">
+                    <label for="namaAdmin">Nama Admin</label>
+                    <input type="text" id="namaAdmin" name="namaAdmin" value="{{ old('namaAdmin') }}" required>
+                </div>
 
-        /* Styling untuk judul */
-        h1 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
-        }
+                <div class="form-group">
+                    <label for="nip">NIP</label>
+                    <input type="text" id="nip" name="nip" value="{{ old('nip') }}" required>
+                </div>
 
-        /* Styling untuk setiap input field */
-        .input-field {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-        }
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+                </div>
 
-        /* Styling untuk label input field */
-        label {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 8px;
-            display: block;
-        }
+                <div class="form-group">
+                    <label for="sandi">Kata Sandi</label>
+                    <input type="password" id="sandi" name="sandi" required>
+                </div>
 
-        /* Button submit */
-        button {
-            background-color: #38a169; /* green */
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-            transition: background-color 0.3s ease;
-        }
+                <div class="form-group">
+                    <label for="profil">Profil Admin</label>
+                    <input type="file" id="profil" name="profil" required>
+                </div>
 
-        button:hover {
-            background-color: #2f855a;
-        }
+                <!-- Hidden input role_id -->
+                <input type="hidden" name="role_id" value="2">
 
-        /* Styling untuk input file */
-        input[type="file"] {
-            padding: 6px;
-            margin-top: 5px;
-        }
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Simpan
+                    </button>
+                </div>
+            </form>
 
-        /* Tambahan untuk input hidden */
-        input[type="hidden"] {
-            display: none;
-        }
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-circle"></i> Terdapat kesalahan:
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>- {{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
+    </div>
+</div>
+@endsection
 
-        /* Styling untuk row button tambah admin */
-        .tambah-admin-btn {
-            background-color: #48bb78;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 14px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
+@section('styles')
+<style>
+    /* Page container */
+    .page-container {
+        padding: 2rem;
+        background: linear-gradient(135deg, #6D8D79 0%, #5a7466 100%);
+        min-height: 100vh;
+    }
 
-        .tambah-admin-btn:hover {
-            background-color: #38a169;
-        }
+    /* Header */
+    .page-header {
+        margin-bottom: 2rem;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        backdrop-filter: blur(10px);
+    }
 
-        /* Styling untuk pesan error */
-        .bg-red-500 {
-            background-color: #f56565;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
+    .page-title {
+        font-size: 2rem;
+        font-weight: 800;
+        margin: 0 0 0.5rem;
+        background: linear-gradient(135deg, #6D8D79, #5a7466);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
+    .page-subtitle {
+        font-size: 1rem;
+        color: #64748b;
+        margin: 0;
+    }
 
-        li {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-    </style>
+    /* Card */
+    .content-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        padding: 2rem;
+        margin: auto;
+    }
+
+    .card-body {
+        width: 100%;
+    }
+
+    /* Form */
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #374151;
+    }
+
+    input {
+        padding: 0.75rem 1rem;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        transition: all 0.3s;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #6D8D79;
+        box-shadow: 0 0 0 3px rgba(109,141,121,0.2);
+    }
+
+    input[type="file"] {
+        padding: 0.5rem;
+    }
+
+    /* Button */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #6D8D79, #5a7466);
+        color: white;
+        box-shadow: 0 4px 15px rgba(109,141,121,0.3);
+        justify-content: center;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(109,141,121,0.4);
+    }
+
+    /* Errors */
+    .alert {
+        margin-top: 1.5rem;
+        padding: 1rem 1.25rem;
+        border-radius: 12px;
+        font-size: 0.95rem;
+    }
+
+    .alert-danger {
+        background: linear-gradient(135deg, #ef4444, #991b1b);
+        color: white;
+    }
+
+    .alert-danger ul {
+        margin: 0.5rem 0 0;
+        padding-left: 1.25rem;
+    }
+</style>
 @endsection
