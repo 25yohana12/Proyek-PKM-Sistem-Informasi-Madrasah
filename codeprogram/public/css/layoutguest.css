@@ -56,7 +56,6 @@ section {
 
 /* Principal Section */
 .principal {
-    display: flex;
     justify-content: space-around;
     align-items: center;
     text-align: center;
@@ -65,9 +64,6 @@ section {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-}
-.principal-text {
-    max-width: 60%;
 }
 
 /* Extracurricular Section */

@@ -39,7 +39,6 @@
                            placeholder="Masukkan nama ekstrakurikuler..." 
                            value="{{ old('namaekstrakulikuler') }}" 
                            required>
-                    <div class="form-hint">Berikan nama yang menarik untuk ekstrakurikuler ini</div>
                 </div>
 
                 <!-- Deskripsi Ekstrakurikuler -->
@@ -54,7 +53,6 @@
                               rows="4" 
                               placeholder="Deskripsikan ekstrakurikuler ini..."
                               required>{{ old('deskripsi') }}</textarea>
-                    <div class="form-hint">Jelaskan tentang manfaat dan aktivitas dalam ekstrakurikuler ini</div>
                 </div>
 
                 <!-- Upload Foto -->

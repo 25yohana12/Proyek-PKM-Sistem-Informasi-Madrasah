@@ -145,4 +145,25 @@ class StrukturOrganisasiController extends Controller
 
     return view('guest.strukturorganisasi', compact('items'));
 }
+
+    public function siswa()
+{
+    // urutan kustom
+    $order = [
+        'Kepala Sekolah',
+        'Wakil Kepala Sekolah',
+        'Guru Ketertiban',
+        'Guru Mata Pelajaran',
+        'Guru Wali Kelas',
+        'Kebersihan',
+        'Satpam',
+        'Staf Lainnya',
+    ];
+
+    $items = StrukturOrganisasi::orderByRaw(
+                "FIELD(jabatan, '".implode("','", $order)."')"
+             )->get();
+
+    return view('siswa.strukturorganisasi', compact('items'));
+}
 }

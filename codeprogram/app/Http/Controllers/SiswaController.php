@@ -49,7 +49,7 @@ class SiswaController extends Controller
 
         $siswa->delete();
 
-        return redirect()->route('siswa.index')->with('success', 'Data kelas berhasil dihapus.');
+        return redirect()->route('superadmin.siswa.index')->with('success', 'Data kelas berhasil dihapus.');
     }
 
     /**
@@ -79,7 +79,7 @@ class SiswaController extends Controller
 
     Siswa::create($data);
 
-    return redirect()->route('siswa.index')->with('success', 'Data kelas berhasil ditambahkan.');
+    return redirect()->route('superadmin.siswa.index')->with('success', 'Data kelas berhasil ditambahkan.');
 }
 
     /**
@@ -115,7 +115,7 @@ class SiswaController extends Controller
 
     $siswa->update($data);
 
-    return redirect()->route('siswa.index')->with('success', 'Data kelas berhasil diperbarui.');
+    return redirect()->route('superadmin.siswa.index')->with('success', 'Data kelas berhasil diperbarui.');
 }
 
     public function guest()
@@ -125,5 +125,14 @@ class SiswaController extends Controller
 
         // Kirim ke view siswa.blade.php
         return view('guest.siswa', compact('siswas'));
+    }
+
+        public function siswa()
+    {
+        // Ambil semua data siswa, urutkan misalnya berdasarkan kelas
+        $siswas = Siswa::orderBy('kelas')->get();
+
+        // Kirim ke view siswa.blade.php
+        return view('siswa.siswa', compact('siswas'));
     }
 }

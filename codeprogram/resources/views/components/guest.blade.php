@@ -1,78 +1,80 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #48b470; color: black; font-family: 'Arial', sans-serif; font-weight: normal; font-size: 18px;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#48b470; font-family:'Arial',sans-serif; font-size:18px;">
   <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}" style="color: black; font-size: 18px;">
+
+    {{-- Brand --}}
+    <a class="navbar-brand d-flex align-items-center" href="{{ route('guest.home') }}" style="color:#000;">
       <img src="{{ asset('images/logo.png') }}" alt="Logo" width="30" height="30" class="me-2">
       MIN TOBA SAMOSIR
     </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+    {{-- Toggler --}}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    {{-- Menu --}}
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-auto">
-        <!-- BERANDA -->
-        <li class="nav-item dropdown" style="margin-right: 35px;">
-          <a class="nav-link dropdown-toggle" href="#" id="berandaDropdown" role="button" data-bs-toggle="dropdown" style="color: black; font-size: 18px;">
-            BERANDA
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        {{-- BERANDA (bukan dropdown) --}}
+        <li class="nav-item me-lg-3">
+          <a class="nav-link" href="{{ route('guest.home') }}" style="color:#000;">Beranda</a>
+        </li>
+
+        {{-- PROFIL --}}
+        <li class="nav-item dropdown me-lg-3">
+          <a class="nav-link dropdown-toggle" href="#" id="profilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#000;">
+            Profil
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ url('/') }}" style="color: black; font-size: 18px;">Home</a></li>
-            <li><a class="dropdown-item" href="{{ url('/galeri') }}" style="color: black; font-size: 18px;">Galeri</a></li>
-            <li><a class="dropdown-item" href="{{ url('/strukturorganisasi') }}" style="color: black; font-size: 18px;">Struktur Organisasi</a></li>
+          <ul class="dropdown-menu" aria-labelledby="profilDropdown">
+            <li><a class="dropdown-item" href="{{ url('/ProfilSekolah') }}">Profil Sekolah</a></li>
+            <li><a class="dropdown-item" href="{{ route('guest.strukturorganisasi') }}">Struktur Organisasi</a></li>
+            <li><a class="dropdown-item" href="{{ route('guest.fasilitas') }}">Fasilitas</a></li>
           </ul>
         </li>
 
-        <!-- TENTANG -->
-        <li class="nav-item dropdown" style="margin-right: 35px;">
-          <a class="nav-link dropdown-toggle" href="#" id="tentangDropdown" role="button" data-bs-toggle="dropdown" style="color: black; font-size: 18px;">
-            TENTANG
+        {{-- WARGA SEKOLAH --}}
+        <li class="nav-item dropdown me-lg-3">
+          <a class="nav-link dropdown-toggle" href="#" id="wargaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#000;">
+            Warga Sekolah
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ url('/ProfilSekolah') }}" style="color: black; font-size: 18px;">Profil Sekolah</a></li>
-            <li><a class="dropdown-item" href="{{ url('/guru') }}" style="color: black; font-size: 18px;">Data Guru</a></li>
-            <li><a class="dropdown-item" href="{{ route('guest.siswa') }}" style="color: black; font-size: 18px;">Data Siswa</a></li>
+          <ul class="dropdown-menu" aria-labelledby="wargaDropdown">
+            <li><a class="dropdown-item" href="{{ route('guest.guru') }}">Data Guru</a></li>
+            <li><a class="dropdown-item" href="{{ route('guest.siswa') }}">Data Siswa</a></li>
           </ul>
         </li>
 
-        <!-- KEGIATAN -->
-        <li class="nav-item dropdown" style="margin-right: 35px;">
-          <a class="nav-link dropdown-toggle" href="#" id="kegiatanDropdown" role="button" data-bs-toggle="dropdown" style="color: black; font-size: 18px;">
-            KEGIATAN
+        {{-- KEGIATAN --}}
+        <li class="nav-item dropdown me-lg-3">
+          <a class="nav-link dropdown-toggle" href="#" id="kegiatanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#000;">
+            Kegiatan
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('guest.acara') }}" style="color: black; font-size: 18px;">Perayaan & Event</a></li>
-            <li><a class="dropdown-item" href="{{ route('guest.prestasi') }}" style="color: black; font-size: 18px;">Prestasi</a></li>
-            <li><a class="dropdown-item" href="{{ route('guest.fasilitas') }}" style="color: black; font-size: 18px;">Fasilitas</a></li>
+          <ul class="dropdown-menu" aria-labelledby="kegiatanDropdown">
+            <li><a class="dropdown-item" href="{{ route('guest.acara') }}">Perayaan & Event</a></li>
+            <li><a class="dropdown-item" href="{{ route('guest.prestasi') }}">Prestasi</a></li>
           </ul>
         </li>
 
-        <!-- PENDAFTARAN -->
-        <li class="nav-item dropdown" style="margin-right: 35px;">
-          <a class="nav-link dropdown-toggle" href="#" id="pendaftaranDropdown" role="button" data-bs-toggle="dropdown" style="color: black; font-size: 18px;">
-            PENDAFTARAN
+        {{-- PPDB / PENDAFTARAN --}}
+        <li class="nav-item dropdown me-lg-3">
+          <a class="nav-link dropdown-toggle" href="#" id="ppdbDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#000;">
+            PPDB
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ url('/pendaftaran/formulir') }}" style="color: black; font-size: 18px;">Formulir</a></li>
-            <li><a class="dropdown-item" href="{{ url('/pengumuman') }}" style="color: black; font-size: 18px;">Jadwal</a></li>
-            <li><a class="dropdown-item" href="{{ url('/pendaftaran/syarat') }}" style="color: black; font-size: 18px;">Syarat</a></li>
+          <ul class="dropdown-menu" aria-labelledby="ppdbDropdown">
+            <li><a class="dropdown-item" href="{{ route('siswa.register_awal') }}">Formulir</a></li>
+            <li><a class="dropdown-item" href="{{ route('guest.pengumuman') }}">Jadwal</a></li>
+            <li><a class="dropdown-item" href="{{ route('siswa.store_awal') }}">Syarat</a></li>
           </ul>
         </li>
 
-        <!-- LOGIN BUTTON -->
-        <li class="nav-item" style="color: black;>
-          <a class="nav-link" href="{{ url('/login') }}" style="color: black; font-size: 18px;">
-            <button class="btn btn-primary" style="font-size: 18px; background-color: #34C759; color: black;">Login</button>
+        {{-- LOGIN --}}
+        <li class="nav-item">
+          <a class="btn btn-primary" href="{{ route('login') }}" style="font-size:16px; background-color:#34C759; color:#000; border:0;">
+            Login
           </a>
         </li>
+
       </ul>
     </div>
   </div>
 </nav>
-
-<style>
-  /* Menghilangkan ikon segitiga kebawah (dropdown arrow) tanpa menghilangkan dropdown */
-  .nav-item.dropdown .nav-link::after {
-    display: none !important;
-  }
-</style>

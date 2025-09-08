@@ -76,7 +76,7 @@ class AcaraController extends Controller
 
             $acara->save();
 
-            return redirect()->route('acara.index')->with('success', 'Acara berhasil disimpan!');
+            return redirect()->route('superadmin.acara.index')->with('success', 'Acara berhasil disimpan!');
             
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -106,7 +106,18 @@ class AcaraController extends Controller
         // Validasi input
         $request->validate([
             'judul' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
+            'deskripsi'    => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    // Hitung kata (abaikan HTML)
+                    $clean  = trim(preg_replace('/\s+/u', ' ', strip_tags($value) ?? ''));
+                    $words  = $clean === '' ? 0 : count(preg_split('/\s+/u', $clean, -1, PREG_SPLIT_NO_EMPTY));
+                    if ($words >= 250) { // < 250 kata
+                        $fail("Deskripsi maksimal 249 kata. Saat ini: {$words} kata.");
+                    }
+                },
+            ],
             'tanggalAcara' => 'required|date',
             'gambar' => 'nullable|array', // Gambar opsional
             'gambar.*' => 'mimes:jpeg,jpg,png,gif|max:2048', // Validasi format gambar dan ukuran
@@ -134,7 +145,7 @@ class AcaraController extends Controller
 
             $acara->save();
 
-            return redirect()->route('acara.index')->with('success', 'Acara berhasil diperbarui!');
+            return redirect()->route('superadmin.acara.index')->with('success', 'Acara berhasil diperbarui!');
             
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -172,7 +183,7 @@ class AcaraController extends Controller
             // Menghapus data acara dari database
             $acara->delete();
 
-            return redirect()->route('acara.index')->with('success', 'Acara berhasil dihapus!');
+            return redirect()->route('superadmin.acara.index')->with('success', 'Acara berhasil dihapus!');
             
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -185,5 +196,13 @@ class AcaraController extends Controller
         $acaras = Acara::orderByDesc('tanggalAcara')->get();
 
         return view('guest.acara', compact('acaras'));
+    }
+
+            public function siswa()
+    {
+        // Ambil semua data acara, terbaru di atas
+        $acaras = Acara::orderByDesc('tanggalAcara')->get();
+
+        return view('siswa.acara', compact('acaras'));
     }
 }

@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label for="nama" class="form-label">
                             <i class="fas fa-user"></i>
-                            Nama Prestasi
+                            Nama Peserta
                         </label>
                         <input type="text" 
                                id="nama" 

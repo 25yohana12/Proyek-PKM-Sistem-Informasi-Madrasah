@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {return view('guest.home');})->name('guest.home');
 Route::get('/ProfilSekolah', function () { return view('guest.profilsekolah'); });
 Route::get('/guru', [GuruController::class, 'guest'])->name('guest.guru');
-Route::get('/siswa', [SiswaController::class, 'guest'])->name('guest.siswa');
+Route::get('/kelas', [SiswaController::class, 'guest'])->name('guest.siswa');
 Route::get('/perayaan', [AcaraController::class, 'guest'])->name('guest.acara');
 Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('guest.pengumuman');
 Route::get('/prestasi', [PrestasiController::class, 'guest'])->name('guest.prestasi');
@@ -30,20 +30,27 @@ Route::get('/fasilitas', [FasilitasController::class, 'guest'])->name('guest.fas
 Route::get('/ekstrakurikuler', [EkstrakulikulerController::class, 'guest'])->name('guest.ekstrakulikuler');
 Route::get('/galeri', [GaleriController::class, 'guest'])->name('guest.galeri');
 Route::get('/strukturorganisasi', [StrukturOrganisasiController::class, 'guest'])->name('guest.strukturorganisasi');
-Route::get('/pendaftaran', [InformasiPendaftaranController::class, 'guest'])->name('guest.pendaftaran');
 Route::get('/registrasi', [PendaftaranController::class, 'registerAwal'])->name('siswa.register_awal');
 Route::post('/registrasi', [PendaftaranController::class, 'storeAwal'])->name('siswa.store_awal');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Siswa Routes
-Route::prefix('siswa')->name('siswa.')->group(function () {
+Route::prefix('pendaftar')->name('siswa.')->group(function () {
     Route::get('/home', function () {return view('siswa.home');})->name('home');
     Route::get('/pendaftaran', [PendaftaranController::class, 'create'])->name('create.pendaftaran');
     Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('store.pendaftaran');
+    Route::get('/guru', [GuruController::class, 'siswa'])->name('siswa.guru');
+    Route::get('/kelas', [SiswaController::class, 'siswa'])->name('siswa.siswa');
+    Route::get('/perayaan', [AcaraController::class, 'siswa'])->name('siswa.acara');
+    Route::get('/pengumuman', [PengumumanController::class, 'siswa'])->name('siswa.pengumuman');
+    Route::get('/prestasi', [PrestasiController::class, 'siswa'])->name('siswa.prestasi');
+    Route::get('/fasilitas', [FasilitasController::class, 'siswa'])->name('siswa.fasilitas');
+    Route::get('/ekstrakurikuler', [EkstrakulikulerController::class, 'siswa'])->name('siswa.ekstrakulikuler');
+    Route::get('/galeri', [GaleriController::class, 'siswa'])->name('siswa.galeri');
+    Route::get('/strukturorganisasi', [StrukturOrganisasiController::class, 'siswa'])->name('siswa.strukturorganisasi');
     Route::get('/pendaftaran/success', [PendaftaranController::class, 'success'])->name('success.pendaftaran');
-    
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 // Super Admin Routes

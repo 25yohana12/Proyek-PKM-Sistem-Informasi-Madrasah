@@ -17,5 +17,15 @@ class PengumumanController extends Controller
     return view('guest.Pengumuman', compact('informasi'));
 }
 
+    public function siswa()
+{
+    // Ambil data dari model InformasiPendaftaran (atau model lain sesuai kebutuhan)
+    $informasi = \App\Models\InformasiPendaftaran::latest()->first();
+    // Jika pakai model Pengumuman, sesuaikan:
+    // $informasi = \App\Models\Pengumuman::latest()->first();
+
+    return view('siswa.Pengumuman', compact('informasi'));
+}
+
     // Tambahkan method lain (create, store, edit, update, destroy) jika ingin CRUD
 }

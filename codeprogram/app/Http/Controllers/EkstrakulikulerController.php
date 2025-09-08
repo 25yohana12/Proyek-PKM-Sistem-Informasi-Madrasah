@@ -149,4 +149,12 @@ public function store(Request $request)
 
         return view('guest.ekstrakulikuler', compact('ekstrakulikulers'));
     }
+
+            public function siswa()
+    {
+        // Retrieve all extracurricular activities
+        $ekstrakulikulers = Ekstrakulikuler::all();
+
+        return view('siswa.ekstrakulikuler', compact('ekstrakulikulers'));
+    }
 }

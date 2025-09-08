@@ -1,16 +1,16 @@
 <!-- resources/views/guest/home.blade.php -->
-@extends('layouts.guest')
+@extends('layouts.siswa')
 
 @section('content')
 <section class="about-us">
     <h2>Tentang Kami</h2>
     <p>Bismillahirrahmanirrahim<br>
 
-Assalamu'alaikum warahmatullahi wabarakatuh<br>
-Madrasah Ibtidaiyah Negeri (MIN) adalah satuan pendidikan dasar yang dikelola oleh Kementerian Agama (Kemenag) dan berciri khas agama Islam. MIN setara dengan Sekolah Dasar (SD) dan ditempuh dalam waktu 6 tahun, mulai dari kelas 1 sampai kelas 6.<br>
-Kurikulum MIN sama dengan SD, namun dengan porsi pelajaran agama Islam yang lebih banyak. Selain pelajaran umum seperti matematika, bahasa Indonesia, dan IPA, di MIN juga terdapat pelajaran-pelajaran seperti: Alquran Hadits, Aqidah Akhlaq, Fiqih, Sejarah Kebudayaan Islam, Bahasa Arab. Lulusan MIN dapat melanjutkan pendidikan ke madrasah tsanawiyah (MTs) atau Sekolah Menengah Pertama.<br>
+    Assalamu'alaikum warahmatullahi wabarakatuh<br>
+    Madrasah Ibtidaiyah Negeri (MIN) adalah satuan pendidikan dasar yang dikelola oleh Kementerian Agama (Kemenag) dan berciri khas agama Islam. MIN setara dengan Sekolah Dasar (SD) dan ditempuh dalam waktu 6 tahun, mulai dari kelas 1 sampai kelas 6.<br>
+    Kurikulum MIN sama dengan SD, namun dengan porsi pelajaran agama Islam yang lebih banyak. Selain pelajaran umum seperti matematika, bahasa Indonesia, dan IPA, di MIN juga terdapat pelajaran-pelajaran seperti: Alquran Hadits, Aqidah Akhlaq, Fiqih, Sejarah Kebudayaan Islam, Bahasa Arab. Lulusan MIN dapat melanjutkan pendidikan ke madrasah tsanawiyah (MTs) atau Sekolah Menengah Pertama.<br>
 
-MIN 6 Bandar Lampung dibawah naungan kementerian Agama Kota Bandar Lampung yang terletak di Jalan Kimaja No 50 Wayhalim andar Lampung dengan Visi Misi Unggul dalam Prestasi Berakhlak mulia dan Peduli Lingkungan.</p>
+    MIN 6 Bandar Lampung dibawah naungan kementerian Agama Kota Bandar Lampung yang terletak di Jalan Kimaja No 50 Wayhalim Bandar Lampung dengan Visi Misi Unggul dalam Prestasi Berakhlak mulia dan Peduli Lingkungan.</p>
 </section>
 
 <section class="principal">
@@ -18,11 +18,10 @@ MIN 6 Bandar Lampung dibawah naungan kementerian Agama Kota Bandar Lampung yang 
     <div class="principal-content">
         <img src="{{ asset('images/kepalasekolah.jpg') }}" alt="Principal" class="principal-img">
         <div class="principal-text">
-            <p>Nama Kepala Madrsah : <strong>DHj. Syukriani, S.Pd.I., M.Pd</strong><br>Pendidikan Terakhir : S2 – Pendidikan Agama Islam, Magister Pendidikan (M.Pd) di UIN Ar-Raniry Banda Aceh. <br>Moto : <strong>“ Berkolaborasi Membangun Generasi Emas Berilmu, Beriman, dan Berdaya Saing Untuk Mewujudkan Madrasah Bermutu, Maju, dan Mendunia.“</strong></p>
+            <p>Nama Kepala Madrasah : <strong>DHj. Syukriani, S.Pd.I., M.Pd</strong><br>Pendidikan Terakhir : S2 – Pendidikan Agama Islam, Magister Pendidikan (M.Pd) di UIN Ar-Raniry Banda Aceh. <br>Moto : <strong>“ Berkolaborasi Membangun Generasi Emas Berilmu, Beriman, dan Berdaya Saing Untuk Mewujudkan Madrasah Bermutu, Maju, dan Mendunia.“</strong></p>
             <p>Assalamu'alaikum warahmatullahi wabarakatuh
-Madrasah Ibtidaiyah Negeri (MIN) adalah satuan pendidikan dasar yang dikelola oleh Kementerian Agama (Kemenag) dan berciri khas agama Islam. MIN setara dengan Sekolah Dasar (SD) dan ditempuh dalam waktu 6 tahun, mulai dari kelas 1 sampai kelas 6.
-Kurikulum MIN sama dengan SD, namun dengan porsi pelajaran agama Islam yang lebih banyak. Selain pelajaran umum seperti matematika, bahasa Indonesia, dan IPA, di MIN juga terdapat pelajaran-pelajaran seperti: Alquran Hadits, Aqidah Akhlaq, Fiqih, Sejarah Kebudayaan Islam, Bahasa Arab. Lulusan MIN dapat melanjutkan pendidikan ke madrasah tsanawiyah (MTs) atau Sekolah Menengah Pertama.</p>
-
+            Madrasah Ibtidaiyah Negeri (MIN) adalah satuan pendidikan dasar yang dikelola oleh Kementerian Agama (Kemenag) dan berciri khas agama Islam. MIN setara dengan Sekolah Dasar (SD) dan ditempuh dalam waktu 6 tahun, mulai dari kelas 1 sampai kelas 6.
+            Kurikulum MIN sama dengan SD, namun dengan porsi pelajaran agama Islam yang lebih banyak. Selain pelajaran umum seperti matematika, bahasa Indonesia, dan IPA, di MIN juga terdapat pelajaran-pelajaran seperti: Alquran Hadits, Aqidah Akhlaq, Fiqih, Sejarah Kebudayaan Islam, Bahasa Arab. Lulusan MIN dapat melanjutkan pendidikan ke madrasah tsanawiyah (MTs) atau Sekolah Menengah Pertama.</p>
         </div>
     </div>
 </section>
@@ -33,12 +32,13 @@ Kurikulum MIN sama dengan SD, namun dengan porsi pelajaran agama Islam yang lebi
         <div class="card">
             <img src="{{ asset('images/extracurricular.jpg') }}" alt="Extracurricular" class="card-image">
             <div class="card-text">
-                <p>Ekstrakurikuler merupakan bagian yang tak terpisahkan dari kegiatan pendidikan yang bertujuan untuk mengembangkan keterampilan dan minat siswa di luar kurikulum utama. Kegiatan ekstrakurikuler di sekolah memberikan kesempatan bagi siswa untuk mengeksplorasi bakat, memperluas wawasan, dan membangun karakter. Melalui berbagai kegiatan, seperti olahraga, seni, dan klub-klub lainnya, siswa dapat belajar bekerja sama, berkompetisi secara sehat, dan mengembangkan kemampuan kepemimpinan</p>
+                <h3>Ekstrakurikuler</h3>
+                <p>Ekstrakurikuler merupakan bagian yang tak terpisahkan dari kegiatan pendidikan yang bertujuan untuk mengembangkan keterampilan dan minat siswa di luar kurikulum utama. Kegiatan ekstrakurikuler di sekolah memberikan kesempatan bagi siswa untuk mengeksplorasi bakat, memperluas wawasan, dan membangun karakter. Melalui berbagai kegiatan, seperti olahraga, seni, dan klub-klub lainnya, siswa dapat belajar bekerja sama, berkompetisi secara sehat, dan mengembangkan kemampuan kepemimpinan.</p>
                 <a href="{{ route('guest.siswa') }}" class="button">Learn More</a>
             </div>
         </div>
         <div class="card">
-            <img src="{{ asset('images/ektrakurikuler.jpg') }}" alt="Achievement" class="card-image">
+            <img src="{{ asset('images/achievement.jpg') }}" alt="Achievement" class="card-image">
             <div class="card-text">
                 <h3>Achievements</h3>
                 <p>Prestasi adalah hasil yang dicapai melalui usaha, dedikasi, dan kerja keras. Dalam konteks pendidikan, prestasi tidak hanya diukur dari nilai akademik, tetapi juga dari berbagai bidang lainnya, seperti olahraga, seni, dan kegiatan sosial. Prestasi yang diraih oleh siswa menjadi bukti dari potensi yang dimiliki, serta mencerminkan kemampuan untuk berkompetisi, berinovasi, dan berkolaborasi. Penghargaan terhadap prestasi siswa tidak hanya memberikan kebanggaan bagi individu, tetapi juga memotivasi rekan-rekan lainnya untuk terus berusaha memberikan yang terbaik.</p>
@@ -87,4 +87,193 @@ Kurikulum MIN sama dengan SD, namun dengan porsi pelajaran agama Islam yang lebi
         <a href="tel:{{ $sekolah->telepon }}">{{ $sekolah->telepon }}</a>
     </p>
 </section>
+@endsection
+
+@section('styles')
+<style>
+:root {
+    --primary: #28a745;
+    --primary-dark: #218838;
+    --secondary: #006400;
+    --bg-light: #f8fff8;
+    --text-dark: #333;
+    --text-gray: #555;
+}
+
+/* ======= Global Style ======= */
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #fdfdfd;
+    color: var(--text-dark);
+}
+
+h2 {
+    font-size: 2.2rem;
+    color: var(--secondary);
+    text-align: center;
+    margin: 0 0 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+}
+h2::after {
+    content: "";
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary);
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* ======= Section Umum ======= */
+section {
+    background:#fdfdfd;
+    background: #b6fab6;
+    padding: 50px 20px;
+    margin: 0 auto 40px;
+    max-width: 12000px;
+}
+
+/* ======= Tentang Kami ======= */
+.about-us {
+    background:#b6fab6;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    max-width: 1200px;
+    
+}
+.about-us p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-gray);
+}
+
+/* ======= Kepala Sekolah ======= */
+.principal {
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    max-width: 1200px;
+}
+.principal-content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.principal-img {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+.principal-img:hover {
+    transform: scale(1.05);
+}
+.principal-text {
+    flex: 1;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-gray);
+    text-align: justify;
+}
+
+.facilities{
+    background: #b6fab6;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    max-width: 1200px;
+}
+
+.extracurricular{
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    max-width: 1200px;
+}
+
+.location{
+    background: #b6fab6;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    max-width: 1200px;
+}
+/* ======= Card Layout ======= */
+.card-container {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 10px;
+}
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+.card-text {
+    padding: 20px;
+    color: var(--text-gray);
+}
+.card-text h3 {
+    margin-bottom: 10px;
+    color: var(--secondary);
+}
+
+/* ======= Tombol ======= */
+.button {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+.button:hover {
+    background-color: var(--primary-dark);
+}
+
+/* ======= Lokasi ======= */
+.location iframe {
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+.location p {
+    font-size: 1.05rem;
+    margin-top: 20px;
+    text-align: center;
+}
+.location a {
+    color: var(--primary);
+}
+.location a:hover {
+    text-decoration: underline;
+}
+
+/* ======= Responsif ======= */
+@media (max-width: 768px) {
+    .principal-content {
+        text-align: center;
+    }
+    .principal-img {
+        margin: 0 auto;
+    }
+}
+</style>
 @endsection

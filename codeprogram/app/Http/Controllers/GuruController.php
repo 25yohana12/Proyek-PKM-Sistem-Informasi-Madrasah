@@ -58,7 +58,7 @@ public function store(Request $request)
         'deskripsi' => $request->deskripsi,
     ]);
 
-    return redirect()->route('data.guru')->with('success', 'Data guru berhasil ditambahkan!');
+    return redirect()->route('superadmin.guru.store')->with('success', 'Data guru berhasil ditambahkan!');
 }
 
     // Menampilkan form untuk mengedit data guru
@@ -107,7 +107,7 @@ public function update(Request $request, $guru_id)
         'deskripsi' => $request->deskripsi,
     ]);
 
-    return redirect()->route('data.guru')->with('success', 'Data guru berhasil diperbarui!');
+    return redirect()->route('superadmin.data.guru')->with('success', 'Data guru berhasil diperbarui!');
 }
 
     // Menghapus data guru berdasarkan ID
@@ -115,7 +115,7 @@ public function update(Request $request, $guru_id)
     {
         $guru = Guru::findOrFail($id);
         $guru->delete();
-        return redirect()->route('data.guru')->with('success', 'Data guru berhasil dihapus!');
+        return redirect()->route('superadmin.data.guru')->with('success', 'Data guru berhasil dihapus!');
     }
 
         public function guest()
@@ -125,5 +125,14 @@ public function update(Request $request, $guru_id)
 
         // Return view dengan data guru
         return view('guest.guru', compact('gurus'));
+    }
+
+            public function siswa()
+    {
+        // Ambil data guru dari database
+        $gurus = Guru::all();
+
+        // Return view dengan data guru
+        return view('siswa.guru', compact('gurus'));
     }
 }

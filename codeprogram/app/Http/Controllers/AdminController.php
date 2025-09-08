@@ -73,7 +73,7 @@ public function store(Request $request)
         'sandi' => bcrypt($request->sandi), // Enkripsi password
     ]);
 
-    return redirect()->route('admin.index'); // Redirect setelah berhasil
+    return redirect()->route('superadmin.admin.index'); // Redirect setelah berhasil
 }
 
     // Mengupdate data admin
@@ -108,7 +108,7 @@ public function update(Request $request, $id)
         'email' => $request->email,
     ]);
 
-    return redirect()->route('admin.index');
+    return redirect()->route('superadmin.admin.index');
 }
 
     // Menghapus data admin
@@ -123,7 +123,7 @@ public function update(Request $request, $id)
 
         $admin->delete();
 
-        return redirect()->route('admin.index'); // Redirect ke halaman admin setelah berhasil
+        return redirect()->route('superadmin.admin.index'); // Redirect ke halaman admin setelah berhasil
     }
 }
 

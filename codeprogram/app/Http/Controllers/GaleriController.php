@@ -181,7 +181,7 @@ class GaleriController extends Controller
 
             $galeri->save();
 
-            return redirect()->route('galeri.index')->with('success', 'Galeri berhasil diperbarui!');
+            return redirect()->route('superadmin.galeri.index')->with('success', 'Galeri berhasil diperbarui!');
             
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -208,7 +208,7 @@ class GaleriController extends Controller
             // Menghapus data galeri dari database
             $galeri->delete();
 
-            return redirect()->route('galeri.index')->with('success', 'Galeri berhasil dihapus!');
+            return redirect()->route('superadmin.galeri.index')->with('success', 'Galeri berhasil dihapus!');
             
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -222,5 +222,14 @@ class GaleriController extends Controller
 
         // Kirim ke view resources/views/galeri/index.blade.php
         return view('guest.galeri', compact('galeri'));
+    }
+
+            public function siswa()
+    {
+        // Ambil semua foto, urut terbaru (ganti ->paginate() jika mau paging)
+        $galeri = Galeri::latest()->get();
+
+        // Kirim ke view resources/views/galeri/index.blade.php
+        return view('siswa.galeri', compact('galeri'));
     }
 }

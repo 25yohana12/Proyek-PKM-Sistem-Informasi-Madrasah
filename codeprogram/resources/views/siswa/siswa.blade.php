@@ -1,9 +1,9 @@
-@extends('layouts.guests')
+@extends('layouts.siswa')
 
-@section('title', 'Data Kelas | MIN Toba Samosir')
+@section('title', 'Data Siswa | MIN Toba Samosir')
 
 @section('content')
-  <h2 class="text-center fw-bold my-4 text-success">DATA KELAS</h2>
+  <h2 class="text-center fw-bold my-4 text-success">SISWA</h2>
 
   <div class="students-wrap">
     <div class="students-grid">

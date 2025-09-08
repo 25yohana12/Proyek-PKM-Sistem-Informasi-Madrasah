@@ -1,4 +1,4 @@
-@extends('layouts.guests')
+@extends('layouts.siswa')
 
 @section('title', 'Detail Acara | MIN Toba Samosir')
 

@@ -244,4 +244,13 @@ class PrestasiController extends Controller
         // Kirim ke Blade: resources/views/prestasi/index.blade.php
         return view('guest.prestasi', compact('prestasi'));
     }
+
+            public function siswa()
+    {
+        // Ambil semua prestasi (urut terbaru). Ganti →paginate(6) jika mau paging
+        $prestasi = Prestasi::latest()->get();
+
+        // Kirim ke Blade: resources/views/prestasi/index.blade.php
+        return view('siswa.prestasi', compact('prestasi'));
+    }
 }

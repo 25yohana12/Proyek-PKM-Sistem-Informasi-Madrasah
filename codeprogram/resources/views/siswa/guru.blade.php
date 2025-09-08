@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('layouts.siswa')
 
 @section('content')
   <div class="guru-wrapper">
@@ -45,7 +45,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap:18px;               
     margin-top:20px;
-    align-items: stretch;
+    align-items:start;
   }
 
   .guru-card{
@@ -55,10 +55,7 @@
     box-shadow:0 4px 12px rgba(0,0,0,.08);
     max-width:260px;        
     width:100%;
-    margin:0 auto;
-    display: flex;           /* ✅ isi card jadi fleksibel */
-    flex-direction: column;  /* susun ke bawah */
-    height: 100%;            /* isi penuh tinggi grid */          
+    margin:0 auto;          
   }
 
   .img-wrap{
@@ -68,7 +65,6 @@
     border-radius:16px;
     overflow:hidden;        
     background:#fff;
-    flex-shrink: 0;
   }
 
   .guru-img{
@@ -86,10 +82,6 @@
     line-height:1.55;
     color:#000;
     text-align:left;
-    flex-grow: 1;            /* ✅ isi ruang tersisa */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
   }
   .guru-text p{ margin:6px 0; }
 

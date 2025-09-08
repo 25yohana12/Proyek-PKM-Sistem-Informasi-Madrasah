@@ -105,7 +105,7 @@ class FasilitasController extends Controller
             'gambar' => json_encode($oldImages),
         ]);
 
-        return redirect()->route('fasilitas.index')->with('success', 'Fasilitas berhasil diperbarui!');
+        return redirect()->route('superadmin.fasilitas.index')->with('success', 'Fasilitas berhasil diperbarui!');
     }
 
     // Menghapus fasilitas tertentu
@@ -117,7 +117,7 @@ class FasilitasController extends Controller
             Storage::disk('public')->delete($img);
         }
         $fasilitas->delete();
-        return redirect()->route('fasilitas.index')->with('success', 'Fasilitas berhasil dihapus!');
+        return redirect()->route('superadmin.fasilitas.index')->with('success', 'Fasilitas berhasil dihapus!');
     }
 
             public function guest()
@@ -127,5 +127,14 @@ class FasilitasController extends Controller
 
         // Kirim ke Blade resources/views/fasilitas/index.blade.php
         return view('guest.fasilitas', compact('fasilitas'));
+    }
+
+                public function siswa()
+    {
+        // Ambil data (ganti ->paginate(6) jika butuh pagination)
+        $fasilitas = Fasilitas::latest()->get();
+
+        // Kirim ke Blade resources/views/fasilitas/index.blade.php
+        return view('siswa.fasilitas', compact('fasilitas'));
     }
 }

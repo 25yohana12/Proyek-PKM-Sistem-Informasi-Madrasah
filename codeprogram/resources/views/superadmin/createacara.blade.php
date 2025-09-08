@@ -62,19 +62,26 @@
 
                     <!-- Deskripsi Acara -->
                     <div class="form-group">
-                        <label for="deskripsi" class="form-label">
-                            <i class="fas fa-align-left"></i>
-                            Deskripsi Acara
-                        </label>
-                        <textarea id="deskripsi" 
-                                  name="deskripsi" 
-                                  class="form-control @error('deskripsi') is-invalid @enderror" 
-                                  rows="4" 
-                                  placeholder="Masukkan deskripsi acara..."
-                                  required>{{ old('deskripsi') }}</textarea>
-                        @error('deskripsi')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                    <label for="deskripsi" class="form-label">
+                        <i class="fas fa-align-left"></i>
+                        Deskripsi Acara
+                    </label>
+
+                    <textarea id="deskripsi"
+                                name="deskripsi"
+                                class="form-control @error('deskripsi') is-invalid @enderror"
+                                rows="4"
+                                placeholder="Masukkan deskripsi acara..."
+                                required>{{ old('deskripsi') }}</textarea>
+
+                    <div class="d-flex justify-content-between mt-1" style="font-size:.875rem;">
+                        <small id="deskripsiCounter">0 / 249 kata</small>
+                        <small id="deskripsiHint" style="color:#64748b;">Batas <strong>&lt; 250</strong> kata</small>
+                    </div>
+
+                    @error('deskripsi')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                     </div>
 
                     <!-- Tanggal Acara -->
@@ -160,6 +167,46 @@
             </div>
         </div>
     </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const textarea = document.getElementById('deskripsi');
+  const counter  = document.getElementById('deskripsiCounter');
+  const hint     = document.getElementById('deskripsiHint');
+  const LIMIT    = 249; // < 250 kata
+
+  function countWords(text) {
+    const clean = (text || '')
+      .replace(/<[^>]*>/g, '')      // buang HTML bila ada
+      .trim()
+      .replace(/\s+/g, ' ');
+    if (!clean) return 0;
+    return clean.split(' ').filter(Boolean).length;
+  }
+
+  function updateState() {
+    const words = countWords(textarea.value);
+    counter.textContent = `${words} / ${LIMIT} kata`;
+
+    // reset validasi
+    textarea.setCustomValidity('');
+    textarea.classList.remove('is-invalid');
+    hint.style.color = '#64748b';
+
+    if (words >= 250) {
+      const msg = `Deskripsi maksimal 249 kata. Saat ini: ${words} kata.`;
+      textarea.setCustomValidity(msg);   // blokir submit
+      textarea.classList.add('is-invalid');
+      hint.style.color = '#ef4444';      // beri peringatan merah
+      // munculkan popup validasi saat ini juga (opsional):
+      // textarea.reportValidity();
+    }
+  }
+
+  updateState();
+  textarea.addEventListener('input', updateState);
+});
+</script>
 @endsection
 
 @section('styles')
