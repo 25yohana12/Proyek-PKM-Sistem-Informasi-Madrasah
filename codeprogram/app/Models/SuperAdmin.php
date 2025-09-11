@@ -2,44 +2,52 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class SuperAdmin extends Model
+class SuperAdmin extends Authenticatable
 {
-    // Tentukan nama tabel yang sesuai
-    protected $table = 'superAdmin';  // Nama tabel yang Anda sebutkan
+    use HasFactory, Notifiable;
 
-    // Kolom yang disembunyikan saat mengubah model ke array atau JSON
-    protected $hidden = [
-        'sandi', // Menyembunyikan kolom sandi
+    // Nama tabel di database
+    protected $table = 'superAdmin';  // sesuaikan dengan nama tabelmu
+    protected $primaryKey = 'superAdmin_id'; // primary key
+
+    // Kolom yang bisa diisi (fillable)
+    protected $fillable = [
+        'nama', 
+        'email', 
+        'sandi', 
+        'profil',
+        'role_id'
     ];
 
-    // Relasi dengan tabel Role (banyak ke satu)
+    // Kolom yang disembunyikan saat ke array/JSON
+    protected $hidden = [
+        'sandi', 
+        'remember_token'
+    ];
+
+    // Otomatis hash password saat disimpan
+    public function setSandiAttribute($value)
+    {
+        $this->attributes['sandi'] = bcrypt($value);
+    }
+
+    // Memberi tahu Laravel kolom password untuk Auth
+    public function getAuthPassword()
+    {
+        return $this->sandi;
+    }
+
+    // Relasi ke role
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id', 'role_id');
     }
 
-    // Menyembunyikan password yang terenkripsi saat menampilkan model
-    public function getSandiAttribute($value)
-    {
-        try {
-            return decrypt($value); // Dekripsi password
-        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
-            // Log error atau kembalikan nilai default jika dekripsi gagal
-            \Log::error('Gagal mendekripsi password: ' . $e->getMessage());
-            return null; // Atau nilai default yang diinginkan
-        }
-    }
-
-    // Menambahkan password enkripsi sebelum menyimpannya
-    public function setSandiAttribute($value)
-    {
-        // Pastikan bahwa password yang diterima dienkripsi sebelum disimpan
-        $this->attributes['sandi'] = encrypt($value); // Enkripsi password
-    }
-
-    // Relasi dengan model Guru
+    // Relasi ke guru
     public function gurus()
     {
         return $this->hasMany(Guru::class, 'superAdmin_id', 'superAdmin_id');

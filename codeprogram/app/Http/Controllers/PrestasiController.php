@@ -10,19 +10,15 @@ class PrestasiController extends Controller
 {
     /**
      * Menampilkan daftar prestasi.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $prestasis = Prestasi::orderBy('created_at', 'desc')->get(); // Menampilkan semua prestasi, terbaru dulu
+        $prestasis = Prestasi::orderBy('created_at', 'desc')->get();
         return view('superadmin.prestasi', compact('prestasis'));
     }
 
     /**
-     * Menampilkan form untuk menambah prestasi.
-     *
-     * @return \Illuminate\Http\Response
+     * Menampilkan form tambah prestasi.
      */
     public function create()
     {
@@ -30,10 +26,7 @@ class PrestasiController extends Controller
     }
 
     /**
-     * Menyimpan prestasi baru ke database.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Simpan prestasi baru.
      */
     public function store(Request $request)
     {
@@ -42,7 +35,8 @@ class PrestasiController extends Controller
             'penghargaan' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'gambar.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar
+            'jenis_prestasi' => 'required|in:akademik,non-akademik',
+            'gambar.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Simpan gambar
@@ -54,24 +48,23 @@ class PrestasiController extends Controller
             }
         }
 
-        // Menyimpan prestasi
+        // Simpan prestasi
         Prestasi::create([
-            'superAdmin_id' => auth()->user()->id ?? 1, // Gunakan ID user yang login atau default 1
+            'superAdmin_id' => auth()->user()->id ?? 1,
             'nama' => $validated['nama'],
             'penghargaan' => $validated['penghargaan'],
             'judul' => $validated['judul'],
             'deskripsi' => $validated['deskripsi'],
-            'gambar' => json_encode($gambarPaths), // Menyimpan path gambar sebagai JSON
+            'jenis_prestasi' => $validated['jenis_prestasi'],
+            'gambar' => json_encode($gambarPaths),
         ]);
 
-        return redirect()->route('superadmin.prestasi.index')->with('success', 'Prestasi berhasil ditambahkan!');
+        return redirect()->route('superadmin.prestasi.index')
+                         ->with('success', 'Prestasi berhasil ditambahkan!');
     }
 
     /**
-     * Menampilkan detail prestasi.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Tampilkan detail prestasi.
      */
     public function show($id)
     {
@@ -80,10 +73,7 @@ class PrestasiController extends Controller
     }
 
     /**
-     * Menampilkan form untuk mengedit prestasi.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Form edit prestasi.
      */
     public function edit($id)
     {
@@ -92,11 +82,7 @@ class PrestasiController extends Controller
     }
 
     /**
-     * Memperbarui data prestasi.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update prestasi.
      */
     public function update(Request $request, $id)
     {
@@ -105,42 +91,39 @@ class PrestasiController extends Controller
             'penghargaan' => 'required|string|max:255',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
+            'jenis_prestasi' => 'required|in:akademik,non-akademik',
             'gambar.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'deleted_images' => 'nullable|string' // Input untuk gambar yang akan dihapus
+            'deleted_images' => 'nullable|string',
         ]);
 
         $prestasi = Prestasi::findOrFail($id);
 
-        // Update data prestasi
+        // Update data inti
         $prestasi->update([
             'nama' => $validated['nama'],
             'penghargaan' => $validated['penghargaan'],
             'judul' => $validated['judul'],
-            'deskripsi' => $validated['deskripsi']
+            'deskripsi' => $validated['deskripsi'],
+            'jenis_prestasi' => $validated['jenis_prestasi'],
         ]);
 
-        // Handle penghapusan gambar lama
+        // Kelola gambar
         $currentImages = json_decode($prestasi->gambar, true) ?? [];
-        
+
+        // Hapus gambar lama jika diminta
         if ($request->has('deleted_images') && !empty($request->deleted_images)) {
             $deletedImages = json_decode($request->deleted_images, true);
-            
             if (is_array($deletedImages)) {
                 foreach ($deletedImages as $deletedImage) {
-                    // Hapus file dari storage
                     if (Storage::disk('public')->exists($deletedImage)) {
                         Storage::disk('public')->delete($deletedImage);
                     }
-                    
-                    // Hapus dari array gambar current
-                    $currentImages = array_filter($currentImages, function($image) use ($deletedImage) {
-                        return $image !== $deletedImage;
-                    });
+                    $currentImages = array_filter($currentImages, fn($img) => $img !== $deletedImage);
                 }
             }
         }
 
-        // Handle upload gambar baru
+        // Tambah gambar baru
         if ($request->hasFile('gambar')) {
             foreach ($request->file('gambar') as $gambar) {
                 $path = $gambar->store('prestasi_images', 'public');
@@ -148,25 +131,22 @@ class PrestasiController extends Controller
             }
         }
 
-        // Update gambar di database
+        // Simpan update gambar
         $prestasi->update([
-            'gambar' => json_encode(array_values($currentImages)) // Re-index array
+            'gambar' => json_encode(array_values($currentImages))
         ]);
 
-        return redirect()->route('superadmin.prestasi.index')->with('success', 'Prestasi berhasil diperbarui!');
+        return redirect()->route('superadmin.prestasi.index')
+                         ->with('success', 'Prestasi berhasil diperbarui!');
     }
 
     /**
-     * Menghapus prestasi dari database.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Hapus prestasi.
      */
     public function destroy($id)
     {
         $prestasi = Prestasi::findOrFail($id);
 
-        // Hapus semua gambar terkait
         $gambarPaths = json_decode($prestasi->gambar, true);
         if (is_array($gambarPaths)) {
             foreach ($gambarPaths as $image) {
@@ -176,18 +156,13 @@ class PrestasiController extends Controller
             }
         }
 
-        // Hapus data prestasi
         $prestasi->delete();
-
-        return redirect()->route('superadmin.prestasi.index')->with('success', 'Prestasi berhasil dihapus!');
+        return redirect()->route('superadmin.prestasi.index')
+                         ->with('success', 'Prestasi berhasil dihapus!');
     }
 
     /**
-     * Method untuk hapus gambar individual via AJAX (opsional)
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * Hapus gambar individual via AJAX.
      */
     public function deleteImage(Request $request, $id)
     {
@@ -195,62 +170,51 @@ class PrestasiController extends Controller
         $imagePath = $request->input('image_path');
 
         $currentImages = json_decode($prestasi->gambar, true) ?? [];
-        
-        // Hapus gambar dari storage
+
         if (Storage::disk('public')->exists($imagePath)) {
             Storage::disk('public')->delete($imagePath);
         }
 
-        // Hapus dari array
-        $currentImages = array_filter($currentImages, function($image) use ($imagePath) {
-            return $image !== $imagePath;
-        });
+        $currentImages = array_filter($currentImages, fn($img) => $img !== $imagePath);
 
-        // Update database
         $prestasi->update([
             'gambar' => json_encode(array_values($currentImages))
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Gambar berhasil dihapus'
-        ]);
+        return response()->json(['success' => true, 'message' => 'Gambar berhasil dihapus']);
     }
 
     /**
-     * Method untuk search prestasi (opsional)
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Cari prestasi.
      */
     public function search(Request $request)
     {
         $query = $request->get('q');
-        
         $prestasis = Prestasi::where('judul', 'LIKE', "%{$query}%")
                             ->orWhere('nama', 'LIKE', "%{$query}%")
                             ->orWhere('penghargaan', 'LIKE', "%{$query}%")
+                            ->orWhere('jenis_prestasi', 'LIKE', "%{$query}%")
                             ->orderBy('created_at', 'desc')
                             ->get();
 
         return view('superadmin.prestasi', compact('prestasis', 'query'));
     }
 
-        public function guest()
+    /**
+     * Guest view prestasi.
+     */
+    public function guest()
     {
-        // Ambil semua prestasi (urut terbaru). Ganti →paginate(6) jika mau paging
         $prestasi = Prestasi::latest()->get();
-
-        // Kirim ke Blade: resources/views/prestasi/index.blade.php
         return view('guest.prestasi', compact('prestasi'));
     }
 
-            public function siswa()
+    /**
+     * Siswa view prestasi.
+     */
+    public function siswa()
     {
-        // Ambil semua prestasi (urut terbaru). Ganti →paginate(6) jika mau paging
         $prestasi = Prestasi::latest()->get();
-
-        // Kirim ke Blade: resources/views/prestasi/index.blade.php
         return view('siswa.prestasi', compact('prestasi'));
     }
 }

@@ -6,13 +6,12 @@ use App\Models\StrukturOrganisasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use App\Models\Guru;
 
 class StrukturOrganisasiController extends Controller
 {
     /**
-     * Satu‑satunya sumber kebenaran daftar enum "jabatan".
-     * Pastikan migration ENUM, validasi, dan <select> di view
-     * semuanya mengambil data dari properti ini.
+     * Satu-satunya sumber kebenaran daftar enum "jabatan".
      */
     private array $opsiJabatan = [
         'Kepala Sekolah',
@@ -26,6 +25,14 @@ class StrukturOrganisasiController extends Controller
         'Satpam',
     ];
 
+    /**
+     * Opsi enum untuk jenis (Guru/Staff).
+     */
+    private array $opsiJenis = [
+        'Guru',
+        'Staff',
+    ];
+
     /* ───────────────────────── INDEX ───────────────────────── */
     public function index()
     {
@@ -36,34 +43,41 @@ class StrukturOrganisasiController extends Controller
     }
 
     /* ───────────────────────── CREATE ──────────────────────── */
-    public function create()
-    {
-        return view('superadmin.createstrukturorganisasi', [
-            'opsiJabatan' => $this->opsiJabatan,
-        ]);
-    }
+use App\Models\Guru; // tambahkan ini di atas
 
-    /* ───────────────────────── STORE ───────────────────────── */
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'superAdmin_id' => ['nullable', 'exists:superAdmin,superAdmin_id'],
-            'namaGuru'      => ['required', 'string', 'max:255'],
-            'nip'           => ['required', 'string', 'max:50',
-                                'unique:strukturOrganisasi,nip'],
-            'jabatan'       => ['required', Rule::in($this->opsiJabatan)],
-            'gambar'        => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
-        ]);
+public function create()
+{
+    return view('superadmin.createstrukturorganisasi', [
+        'opsiJabatan' => $this->opsiJabatan,
+        'opsiJenis'   => $this->opsiJenis,
+        'daftarGuru'  => Guru::all(), // ambil nama guru untuk datalist
+    ]);
+}
 
-        $validated['gambar'] = $request->file('gambar')
-                                       ->store('struktur_organisasi', 'public');
-        $validated['superAdmin_id'] = $validated['superAdmin_id'] ?? 1;
+/* ───────────────────────── STORE ───────────────────────── */
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'superAdmin_id'       => ['nullable', 'exists:superAdmin,superAdmin_id'],
+        'namaGuru'            => ['required', 'string', 'max:255'],
+        'nip'                 => ['required', 'string', 'max:50',
+                                   'unique:strukturOrganisasi,nip'],
+        'jabatan'             => ['required', Rule::in($this->opsiJabatan)],
+        'jenis'               => ['required', Rule::in($this->opsiJenis)],
+        'pendidikan_terakhir' => ['nullable', 'string', 'max:100'],
+        'tanggal_lahir'       => ['nullable', 'date'],
+        'gambar'              => ['required', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+    ]);
 
-        StrukturOrganisasi::create($validated);
+    $validated['gambar'] = $request->file('gambar')
+                                   ->store('struktur_organisasi', 'public');
+    $validated['superAdmin_id'] = $validated['superAdmin_id'] ?? 1;
 
-        return redirect()->route('superadmin.strukturorganisasi.index')
-                         ->with('success', 'Data berhasil ditambahkan.');
-    }
+    StrukturOrganisasi::create($validated);
+
+    return redirect()->route('superadmin.strukturorganisasi.index')
+                     ->with('success', 'Data berhasil ditambahkan.');
+}
 
     /* ───────────────────────── SHOW ───────────────────────── */
     public function show(StrukturOrganisasi $strukturOrganisasi)
@@ -77,6 +91,7 @@ class StrukturOrganisasiController extends Controller
         return view('superadmin.editstrukturorganisasi', [
             'strukturOrganisasi' => $strukturOrganisasi,
             'opsiJabatan'        => $this->opsiJabatan,
+            'opsiJenis'          => $this->opsiJenis,
         ]);
     }
 
@@ -84,13 +99,16 @@ class StrukturOrganisasiController extends Controller
     public function update(Request $request, StrukturOrganisasi $strukturOrganisasi)
     {
         $validated = $request->validate([
-            'superAdmin_id' => ['nullable', 'exists:superAdmin,superAdmin_id'],
-            'namaGuru'      => ['required', 'string', 'max:255'],
-            'nip'           => ['required', 'string', 'max:50',
-                                Rule::unique('strukturOrganisasi', 'nip')
-                                    ->ignore($strukturOrganisasi->jabatan_id, 'jabatan_id')],
-            'jabatan'       => ['required', Rule::in($this->opsiJabatan)],
-            'gambar'        => ['sometimes', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'superAdmin_id'       => ['nullable', 'exists:superAdmin,superAdmin_id'],
+            'namaGuru'            => ['required', 'string', 'max:255'],
+            'nip'                 => ['required', 'string', 'max:50',
+                                       Rule::unique('strukturOrganisasi', 'nip')
+                                           ->ignore($strukturOrganisasi->jabatan_id, 'jabatan_id')],
+            'jabatan'             => ['required', Rule::in($this->opsiJabatan)],
+            'jenis'               => ['required', Rule::in($this->opsiJenis)],
+            'pendidikan_terakhir' => ['nullable', 'string', 'max:100'],
+            'tanggal_lahir'       => ['nullable', 'date'],
+            'gambar'              => ['sometimes', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);
 
         // ganti gambar jika ada file baru
@@ -125,45 +143,45 @@ class StrukturOrganisasiController extends Controller
         return back()->with('success', 'Data berhasil dihapus.');
     }
 
+    /* ───────────────────────── GUEST VIEW ─────────────────── */
     public function guest()
-{
-    // urutan kustom
-    $order = [
-        'Kepala Sekolah',
-        'Wakil Kepala Sekolah',
-        'Guru Ketertiban',
-        'Guru Mata Pelajaran',
-        'Guru Wali Kelas',
-        'Kebersihan',
-        'Satpam',
-        'Staf Lainnya',
-    ];
+    {
+        $order = [
+            'Kepala Sekolah',
+            'Wakil Kepala Sekolah',
+            'Guru Ketertiban',
+            'Guru Mata Pelajaran',
+            'Guru Wali Kelas',
+            'Kebersihan',
+            'Satpam',
+            'Staf Lainnya',
+        ];
 
-    $items = StrukturOrganisasi::orderByRaw(
-                "FIELD(jabatan, '".implode("','", $order)."')"
-             )->get();
+        $items = StrukturOrganisasi::orderByRaw(
+            "FIELD(jabatan, '".implode("','", $order)."')"
+        )->get();
 
-    return view('guest.strukturorganisasi', compact('items'));
-}
+        return view('guest.strukturorganisasi', compact('items'));
+    }
 
+    /* ───────────────────────── SISWA VIEW ─────────────────── */
     public function siswa()
-{
-    // urutan kustom
-    $order = [
-        'Kepala Sekolah',
-        'Wakil Kepala Sekolah',
-        'Guru Ketertiban',
-        'Guru Mata Pelajaran',
-        'Guru Wali Kelas',
-        'Kebersihan',
-        'Satpam',
-        'Staf Lainnya',
-    ];
+    {
+        $order = [
+            'Kepala Sekolah',
+            'Wakil Kepala Sekolah',
+            'Guru Ketertiban',
+            'Guru Mata Pelajaran',
+            'Guru Wali Kelas',
+            'Kebersihan',
+            'Satpam',
+            'Staf Lainnya',
+        ];
 
-    $items = StrukturOrganisasi::orderByRaw(
-                "FIELD(jabatan, '".implode("','", $order)."')"
-             )->get();
+        $items = StrukturOrganisasi::orderByRaw(
+            "FIELD(jabatan, '".implode("','", $order)."')"
+        )->get();
 
-    return view('siswa.strukturorganisasi', compact('items'));
-}
+        return view('siswa.strukturorganisasi', compact('items'));
+    }
 }

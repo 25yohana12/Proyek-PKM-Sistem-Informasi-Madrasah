@@ -3,34 +3,36 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
     use HasFactory;
 
-    // Tentukan nama tabel jika tidak mengikuti konvensi Laravel
     protected $table = 'admin';
-    
     protected $primaryKey = 'admin_id';
 
-    // Tentukan kolom yang dapat diisi (fillable) untuk menghindari mass-assignment vulnerability
     protected $fillable = ['role_id', 'namaAdmin', 'nip', 'profil', 'email', 'sandi'];
 
-    // Tentukan relasi dengan model Role (jika ada)
-    public function role()
-    {
-        return $this->belongsTo(Role::class, 'role_id'); // Relasi ke tabel role
-    }
+    protected $hidden = ['sandi', 'remember_token'];
 
-    // Jika menggunakan hashing password
     public function setSandiAttribute($value)
     {
-        $this->attributes['sandi'] = bcrypt($value); // Menggunakan bcrypt untuk password
+        $this->attributes['sandi'] = bcrypt($value);
+    }
+
+    public function getAuthPassword()
+{
+    return $this->sandi;
+}
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     public function superAdmin()
-{
-    return $this->belongsTo(SuperAdmin::class, 'superAdmin_id');
-}
+    {
+        return $this->belongsTo(SuperAdmin::class, 'superAdmin_id');
+    }
 }

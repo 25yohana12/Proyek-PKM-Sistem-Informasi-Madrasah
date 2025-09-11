@@ -115,7 +115,21 @@ h1,h2,h3,p{margin:0} body{color:var(--ink)}
   .logo{max-width:260px;aspect-ratio:1/1}
 }
 </style>
-
+  <div class="position-relative">
+    <img src="{{ asset('images/bg-school.jpg') }}" class="img-fluid w-100"
+         style="height: 600px; margin-bottom: 30px; object-fit: cover; filter: brightness(70%);"
+         alt="Background Sekolah">
+    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start px-4">
+      <div class="d-flex align-items-center">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" width="100" class="me-3">
+        <div>
+          <h1 class="text-white fw-bold mb-0" style="font-size: 3rem;">MIN TOBA SAMOSIR</h1>
+          <p class="text-white fst-italic mb-0">Madrasah, Tempat Belajar, Tempat Beramal</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 <div class="page stack">
 
   {{-- PROFIL SEKOLAH --}}

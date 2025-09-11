@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\EkstrakulikulerController;
@@ -13,7 +14,8 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\InformasiPendaftaranController;
-use App\Http\Controllers\PendaftaranController; 
+use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\Superadmin\PegawaiController; 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,8 +38,9 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 // Siswa Routes
-Route::prefix('pendaftar')->name('siswa.')->group(function () {
+Route::prefix('pendaftar')->name('siswa.')->middleware('auth:pendaftar')->group(function () {
     Route::get('/home', function () {return view('siswa.home');})->name('home');
+    Route::get('/ProfilSekolah', function () { return view('siswa.profilsekolah');})->name('profilsekolah');
     Route::get('/pendaftaran', [PendaftaranController::class, 'create'])->name('create.pendaftaran');
     Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('store.pendaftaran');
     Route::get('/guru', [GuruController::class, 'siswa'])->name('siswa.guru');
@@ -53,6 +56,25 @@ Route::prefix('pendaftar')->name('siswa.')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminRoleController::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [AdminRoleController::class, 'dashboard'])->name('home');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/guru', [AdminRoleController::class, 'guru'])->name('guru');
+    Route::get('/siswa', [AdminRoleController::class, 'siswa'])->name('siswa');
+    Route::get('/fasilitas', [AdminRoleController::class, 'fasilitas'])->name('fasilitas');
+    Route::get('/prestasi', [AdminRoleController::class, 'prestasi'])->name('prestasi');
+    Route::get('/ekstrakulikuler', [AdminRoleController::class, 'extrakulikuler'])->name('ekstrakulikuler');
+    Route::get('/acara', [AdminRoleController::class, 'acara'])->name('acara');
+    Route::get('/admin', [AdminRoleController::class, 'admin'])->name('admin');
+    Route::get('/informasipendaftaran', [AdminRoleController::class, 'informasipendaftaran'])->name('informasipendaftaran');
+    Route::get('/pendaftaran', [AdminRoleController::class, 'pendaftaran'])->name('pendaftaran');
+    Route::get('/sekolah', [AdminRoleController::class, 'sekolah'])->name('sekolah');
+    Route::get('/strukturorganisasi', [AdminRoleController::class, 'strukturorganisasi'])->name('strukturorganisasi');
+});
+
+
 // Super Admin Routes
 Route::prefix('superadmin')->name('superadmin.')->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('dashboard');
@@ -65,6 +87,17 @@ Route::prefix('superadmin')->name('superadmin.')->group(function () {
         Route::get('{id}/edit', [GuruController::class, 'edit'])->name('edit');
         Route::put('{id}', [GuruController::class, 'update'])->name('update');
         Route::delete('{id}', [GuruController::class, 'destroy'])->name('destroy');
+    });
+
+        // Guru Routes
+    Route::prefix('pegawai')->name('pegawai.')->group(function () {
+        Route::get('/', [PegawaiController::class, 'index'])->name('index');       // list guru
+        Route::get('/create', [PegawaiController::class, 'create'])->name('create'); // form tambah
+        Route::post('/', [PegawaiController::class, 'store'])->name('store');        // simpan
+        Route::get('{id}', [PegawaiController::class, 'show'])->name('show');        // detail guru
+        Route::get('{id}/edit', [PegawaiController::class, 'edit'])->name('edit');   // form edit
+        Route::put('{id}', [PegawaiController::class, 'update'])->name('update');    // update
+        Route::delete('{id}', [PegawaiController::class, 'destroy'])->name('destroy'); // hapus
     });
 
     // Galeri Routes

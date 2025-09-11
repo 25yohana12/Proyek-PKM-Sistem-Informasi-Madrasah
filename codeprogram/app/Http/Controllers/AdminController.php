@@ -6,6 +6,7 @@ use App\Models\Admin;
 use \App\Models\Role;
 use \App\Models\SuperAdmin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -48,67 +49,36 @@ public function edit($id)
     return view('superadmin.editadmin', compact('admin', 'roles'));
 }
 
-    // Menyimpan data admin baru
 public function store(Request $request)
 {
-    // Validasi data lainnya
     $request->validate([
+        'role_id' => 'required|exists:role,role_id',
         'namaAdmin' => 'required|string|max:255',
-        'nip' => 'required|string|max:50',
-        'profil' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
-        'email' => 'required|email|unique:admin,email',
-        'sandi' => 'required|string|min:8',
+        'nip' => 'required|string|unique:admin,nip',
+        'email' => 'required|string|email|unique:admin,email',
+        'sandi' => 'required|string|min:6',
+        'profil' => 'nullable|file|mimes:jpg,jpeg,png|max:2048', // validasi file
+        'superAdmin_id' => 'nullable|exists:super_admins,id'
     ]);
 
-    // Menyimpan gambar di folder public/images dan mendapatkan path
-    $profilPath = $request->file('profil')->store('images', 'public'); // Menyimpan gambar di public/images
-
-    // Menyimpan data admin tanpa perlu menyebutkan superAdmin_id karena sudah ada nilai default 1
-    Admin::create([
-        'role_id' => 2,  // Default role_id = 2
-        'namaAdmin' => $request->namaAdmin,
-        'nip' => $request->nip,
-        'profil' => $profilPath, // Menyimpan path gambar
-        'email' => $request->email,
-        'sandi' => bcrypt($request->sandi), // Enkripsi password
-    ]);
-
-    return redirect()->route('superadmin.admin.index'); // Redirect setelah berhasil
-}
-
-    // Mengupdate data admin
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'namaAdmin' => 'required|string|max:255',
-        'nip' => 'required|string|max:50',
-        'profil' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'email' => 'required|email|unique:admin,email,' . $id . ',admin_id', // Validasi email, kecuali untuk admin yang sedang diupdate
-    ]);
-
-    // Cari admin berdasarkan ID
-    $admin = Admin::findOrFail($id);
-
-    // Jika ada gambar profil yang diunggah
+    // Handle upload file jika ada
+    $profilPath = null;
     if ($request->hasFile('profil')) {
-        // Hapus gambar lama jika ada
-        if ($admin->profil) {
-            Storage::delete('public/' . $admin->profil);
-        }
-
-        // Simpan gambar baru dan dapatkan path
-        $profilPath = $request->file('profil')->store('images', 'public');
-        $admin->profil = $profilPath;
+        $profilPath = $request->file('profil')->store('admin_profiles', 'public');
     }
 
-    // Update data admin tanpa mengubah role_id dan kata sandi
-    $admin->update([
+    // Buat admin baru
+    $admin = Admin::create([
+        'role_id' => $request->role_id,
         'namaAdmin' => $request->namaAdmin,
         'nip' => $request->nip,
         'email' => $request->email,
+        'sandi' => $request->sandi, // otomatis di-hash oleh model
+        'profil' => $profilPath,
+        'superAdmin_id' => $request->superAdmin_id ?? null,
     ]);
 
-    return redirect()->route('superadmin.admin.index');
+    return redirect()->route('superadmin.admin.index')->with('success', 'Admin berhasil dibuat');
 }
 
     // Menghapus data admin

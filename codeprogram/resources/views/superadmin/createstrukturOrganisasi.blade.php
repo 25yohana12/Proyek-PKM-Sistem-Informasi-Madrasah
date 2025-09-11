@@ -7,7 +7,7 @@
     <div class="page-header">
         <div>
             <h1 class="page-title">Tambah Struktur Organisasi</h1>
-            <p class="page-subtitle">Isi data guru dan jabatan untuk struktur organisasi sekolah</p>
+            <p class="page-subtitle">Isi data guru/staff dan jabatan untuk struktur organisasi sekolah</p>
         </div>
         <a href="{{ route('superadmin.strukturorganisasi.index') }}" class="btn btn-secondary">‹ Kembali</a>
     </div>
@@ -21,8 +21,15 @@
         {{-- NAMA --}}
         <div class="form-group">
             <label>Nama Guru <span class="text-danger">*</span></label>
-            <input name="namaGuru" value="{{ old('namaGuru') }}"
-                   class="form-control @error('namaGuru') is-invalid @enderror" required>
+            <input name="namaGuru" id="namaGuru"
+                   value="{{ old('namaGuru') }}"
+                   class="form-control @error('namaGuru') is-invalid @enderror"
+                   list="daftarGuru" required>
+            <datalist id="daftarGuru">
+                @foreach($daftarGuru as $g)
+                    <option value="{{ $g->namaGuru }}">
+                @endforeach
+            </datalist>
             @error('namaGuru')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
 

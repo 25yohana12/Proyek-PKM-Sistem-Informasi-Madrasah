@@ -11,9 +11,13 @@ class GuruController extends Controller
     // Menampilkan semua data guru
 public function index()
 {
-    $gurus = Guru::paginate(10);  // Ambil 10 data per halaman
+    $gurus = Guru::whereNotNull('nip')   // hanya yang nip tidak NULL
+                 ->where('nip', '!=', '') // dan bukan string kosong
+                 ->paginate(10);
+
     return view('superadmin.guru', compact('gurus'));
 }
+
 
     // Menampilkan data guru berdasarkan ID
     public function show($id)

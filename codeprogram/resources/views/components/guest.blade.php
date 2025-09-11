@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#48b470; font-family:'Arial',sans-serif; font-size:18px;">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#a8dfb0; font-family:'Arial',sans-serif; font-size:18px;">
   <div class="container-fluid">
 
     {{-- Brand --}}
@@ -63,7 +63,6 @@
           <ul class="dropdown-menu" aria-labelledby="ppdbDropdown">
             <li><a class="dropdown-item" href="{{ route('siswa.register_awal') }}">Formulir</a></li>
             <li><a class="dropdown-item" href="{{ route('guest.pengumuman') }}">Jadwal</a></li>
-            <li><a class="dropdown-item" href="{{ route('siswa.store_awal') }}">Syarat</a></li>
           </ul>
         </li>
 

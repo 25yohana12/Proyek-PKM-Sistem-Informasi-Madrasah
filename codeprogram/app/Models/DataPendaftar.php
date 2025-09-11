@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class DataPendaftar extends Model
+class DataPendaftar extends Authenticatable
 {
     use HasFactory;
 
@@ -89,4 +91,9 @@ class DataPendaftar extends Model
     // {
     //     return $this->belongsTo(SuperAdmin::class);
     // }
+
+    public function getAuthPassword()
+{
+    return $this->sandi; // Laravel akan mengecek hash dari kolom ini
+}
 }

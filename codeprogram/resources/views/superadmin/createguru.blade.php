@@ -58,7 +58,7 @@
 
                 <!-- Posisi -->
                 <div class="mb-3">
-                    <label for="posisi" class="form-label fw-semibold">Posisi</label>
+                    <label for="posisi" class="form-label fw-semibold">Jabatan</label>
                     <input type="text" class="form-control @error('posisi') is-invalid @enderror" 
                            id="posisi" name="posisi" value="{{ old('posisi') }}" required>
                     @error('posisi')

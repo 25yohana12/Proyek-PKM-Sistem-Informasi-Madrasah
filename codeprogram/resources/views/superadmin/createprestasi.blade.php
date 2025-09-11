@@ -68,6 +68,25 @@
                         @enderror
                     </div>
 
+                    <!-- Jenis Prestasi -->
+                    <div class="form-group">
+                        <label for="jenis_prestasi" class="form-label">
+                            <i class="fas fa-list"></i>
+                            Jenis Prestasi
+                        </label>
+                        <select id="jenis_prestasi" 
+                                name="jenis_prestasi" 
+                                class="form-control @error('jenis_prestasi') is-invalid @enderror" 
+                                required>
+                            <option value="">-- Pilih Jenis Prestasi --</option>
+                            <option value="akademik" {{ old('jenis_prestasi') == 'akademik' ? 'selected' : '' }}>Akademik</option>
+                            <option value="non-akademik" {{ old('jenis_prestasi') == 'non-akademik' ? 'selected' : '' }}>Non-Akademik</option>
+                        </select>
+                        @error('jenis_prestasi')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <!-- Penghargaan -->
                     <div class="form-group">
                         <label for="penghargaan" class="form-label">

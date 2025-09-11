@@ -55,7 +55,7 @@
   @endif
 
   <div class="form-card">
-    <form action="{{ route('siswa.store_awal') }}" method="POST" enctype="multipart/form-data" class="row g-3">
+    <form action="{{ route('siswa.store.pendaftaran') }}" method="POST" enctype="multipart/form-data" class="row g-3">
       @csrf
 
       {{-- default dari DB (opsional) --}}
@@ -66,28 +66,22 @@
       {{-- ===================== DATA PRIBADI ===================== --}}
       <div class="col-12"><div class="section-title">Data Pribadi</div></div>
 
-      <div class="col-md-6">
-        <label class="form-label">Nama Lengkap <span class="req">*</span></label>
-        <input type="text" name="namaPendaftar" class="form-control @error('namaPendaftar') is-invalid @enderror"
-               value="{{ old('namaPendaftar') }}" required aria-required="true" placeholder="Nama sesuai dokumen">
-        @error('namaPendaftar') <div class="invalid-feedback">{{ $message }}</div> @enderror
-      </div>
+  <!-- Nama -->
+  <div class="col-md-6">
+    <label class="form-label">Nama Lengkap <span class="req">*</span></label>
+    <input type="text" name="namaPendaftar"
+           class="form-control @error('namaPendaftar') is-invalid @enderror"
+           value="{{ old('namaPendaftar', $user->namaPendaftar ?? '') }}">
+    @error('namaPendaftar')
+      <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
 
-      <div class="col-md-6">
-        <label class="form-label">Email <span class="req">*</span></label>
-        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-               value="{{ old('email') }}" autocomplete="email" required aria-required="true" placeholder="nama@email.com">
-        @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
-      </div>
-
-      <div class="col-md-6">
-        <label class="form-label">Kata Sandi <span class="req">*</span></label>
-        <input type="password" name="sandi" class="form-control @error('sandi') is-invalid @enderror"
-               required aria-required="true" placeholder="Min. 8 karakter">
-        @error('sandi') <div class="invalid-feedback">{{ $message }}</div> @enderror
-        <div class="help-hint">Simpan baik-baik. Akan di-hash saat disimpan.</div>
-      </div>
-
+                <!-- Email (hanya tampil, tidak ikut dikirim) -->
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" value="{{ $user->email ?? '' }}" readonly>
+                </div>
       <div class="col-md-6">
         <label class="form-label">NISN <span class="req">*</span></label>
         <input type="text" name="nisn" class="form-control @error('nisn') is-invalid @enderror"
@@ -107,7 +101,7 @@
 
       <div class="col-md-6">
         <label class="form-label">NIK <span class="req">*</span></label>
-        <input type="text" name="nik" class="form-control @error('nik') is-invalid @enderror"
+        <input type="text" name="nik" maxlength="16" class="form-control @error('nik') is-invalid @enderror"
                value="{{ old('nik') }}" inputmode="numeric" placeholder="16 digit (opsional)">
         @error('nik') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
@@ -158,11 +152,11 @@
         <select name="agama" class="form-select @error('agama') is-invalid @enderror">
           <option value="" disabled {{ old('agama') ? '' : 'selected' }}>-- Pilih --</option>
           <option value="Islam" {{ old('agama')=='Islam'?'selected':'' }}>Islam</option>
-          <option value="kristen" {{ old('agama')=='Islam'?'selected':'' }}>Kristen</option>
-          <option value="Katolik" {{ old('agama')=='Islam'?'selected':'' }}>Katolik</option>
-          <option value="Hindu" {{ old('agama')=='Islam'?'selected':'' }}>Hindu</option>
-          <option value="Buddha" {{ old('agama')=='Islam'?'selected':'' }}>Buddha</option>
-          <option value="Konghucu" {{ old('agama')=='Islam'?'selected':'' }}>Konghucu</option>
+          <option value="Kristen" {{ old('agama')=='Kristen'?'selected':'' }}>Kristen</option>
+          <option value="Katolik" {{ old('agama')=='Katolik'?'selected':'' }}>Katolik</option>
+          <option value="Hindu" {{ old('agama')=='Hindu'?'selected':'' }}>Hindu</option>
+          <option value="Buddha" {{ old('agama')=='Buddha'?'selected':'' }}>Buddha</option>
+          <option value="Konghucu" {{ old('agama')=='Konghucu'?'selected':'' }}>Konghucu</option>
         </select>
         @error('agama') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
@@ -266,7 +260,7 @@
 
       <div class="col-md-4">
         <label class="form-label">No. Kartu Keluarga <span class="req">*</span></label>
-        <input type="text" name="noKartuKeluarga" class="form-control @error('noKartuKeluarga') is-invalid @enderror"
+        <input type="text" name="noKartuKeluarga" maxlength="16" class="form-control @error('noKartuKeluarga') is-invalid @enderror"
                value="{{ old('noKartuKeluarga') }}" inputmode="numeric">
         @error('noKartuKeluarga') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
@@ -315,7 +309,7 @@
       </div>
       <div class="col-md-3">
         <label class="form-label">NIK Ayah <span class="req">*</span></label>
-        <input type="text" name="nikAyah" class="form-control" value="{{ old('nikAyah') }}" inputmode="numeric">
+        <input type="text" name="nikAyah" maxlength="16" class="form-control" value="{{ old('nikAyah') }}" inputmode="numeric">
       </div>
       <div class="col-md-4">
         <label class="form-label">Tempat Lahir Ayah <span class="req">*</span></label>
@@ -365,7 +359,7 @@
       </div>
       <div class="col-md-3">
         <label class="form-label">NIK Ibu <span class="req">*</span></label>
-        <input type="text" name="nikIbu" class="form-control" value="{{ old('nikIbu') }}" inputmode="numeric">
+        <input type="text" name="nikIbu" maxlength="16" class="form-control" value="{{ old('nikIbu') }}" inputmode="numeric">
       </div>
       <div class="col-md-4">
         <label class="form-label">Tempat Lahir Ibu <span class="req">*</span></label>
@@ -414,7 +408,7 @@
       </div>
       <div class="col-md-3">
         <label class="form-label">NIK Wali</label>
-        <input type="text" name="nikWali" class="form-control" value="{{ old('nikWali') }}" inputmode="numeric">
+        <input type="text" name="nikWali" maxlength="16" class="form-control" value="{{ old('nikWali') }}" inputmode="numeric">
       </div>
       <div class="col-md-4">
         <label class="form-label">Tempat Lahir Wali</label>

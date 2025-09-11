@@ -24,7 +24,7 @@ class StrukturOrganisasi extends Model
     public    $incrementing = true;
 
     /**
-     * Kolom yang boleh di‑mass‑assign.
+     * Kolom yang boleh di-mass-assign.
      */
     protected $fillable = [
         'superAdmin_id',
@@ -32,6 +32,9 @@ class StrukturOrganisasi extends Model
         'nip',
         'jabatan',
         'gambar',
+        'jenis',                 // Guru / Staff
+        'pendidikan_terakhir',   // Pendidikan terakhir
+        'tanggal_lahir',         // Tanggal lahir
     ];
 
     /**

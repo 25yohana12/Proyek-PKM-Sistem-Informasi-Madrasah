@@ -69,6 +69,11 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('superadmin.pegawai.index') }}" class="{{ request()->routeIs('superadmin.pegawai.*') ? 'active' : '' }}">
+                <i class="fas fa-chalkboard-teacher"></i> Data Pegawai
+            </a>
+        </li>
+        <li>
             <a href="{{ route('superadmin.siswa.index') }}" class="{{ request()->routeIs('superadmin.siswa.*') ? 'active' : '' }}">
                 <i class="fas fa-door-open"></i> Data Siswa
             </a>

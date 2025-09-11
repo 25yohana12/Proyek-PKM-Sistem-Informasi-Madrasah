@@ -19,24 +19,6 @@
         </div>
     </div>
 
-    <!-- Statistik -->
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th class="text-center" style="width: 200px; font-size: 18px;">Jumlah Siswa</th>
-                <th class="text-center" style="width: 200px; font-size: 18px;">Jumlah Siswi</th>
-                <th class="text-center" style="width: 200px; font-size: 18px;">Jumlah Murid</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-center fw-bold" style="font-size: 20px;">30</td>
-                <td class="text-center fw-bold" style="font-size: 20px;">25</td>
-                <td class="text-center fw-bold" style="font-size: 20px;">55</td>
-            </tr>
-        </tbody>
-    </table>
-
     <!-- Daftar Kelas -->
     <div class="content-card">
         <div class="card-header">

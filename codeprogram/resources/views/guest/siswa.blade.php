@@ -20,7 +20,10 @@
 
           <div class="info">
             <p class="label">WALI KELAS : <span class="value">{{ $siswa->namaWali ?? '-' }}</span></p>
-            <p class="label">Jumlah Siswa : <span class="value">{{ $siswa->jumlahSiswa ?? $siswa->jumlahMurid ?? '0' }}</span></p>
+            <p class="acara-description"><strong>Wali Kelas :</strong> {{ $item->namaWali ?? '-' }}</p>
+            <p class="acara-description"><strong>Jumlah Murid :</strong> {{ $item->jumlahMurid ?? 0 }}</p>
+            <p class="acara-description"><strong>Jumlah Siswa :</strong> {{ $item->jumlahSiswa ?? 0 }}</p>
+            <p class="acara-description"><strong>Jumlah Siswi :</strong> {{ $item->jumlahSiswi ?? 0 }}</p>
           </div>
         </article>
       @empty
