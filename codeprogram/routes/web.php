@@ -18,6 +18,7 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\Superadmin\PegawaiController; 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotifikasiController;
 
 
 // Public Routes
@@ -72,6 +73,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/pendaftaran', [AdminRoleController::class, 'pendaftaran'])->name('pendaftaran');
     Route::get('/sekolah', [AdminRoleController::class, 'sekolah'])->name('sekolah');
     Route::get('/strukturorganisasi', [AdminRoleController::class, 'strukturorganisasi'])->name('strukturorganisasi');
+    Route::get('/notifikasi', [NotifikasiController::class, 'adminIndex'])->name('notifikasi.index');
+    Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
 });
 
 
@@ -210,4 +213,5 @@ Route::prefix('superadmin')->name('superadmin.')->group(function () {
         Route::put('{id}', [AdminController::class, 'update'])->name('update');
         Route::delete('{id}', [AdminController::class, 'destroy'])->name('destroy');
     });
+
 });

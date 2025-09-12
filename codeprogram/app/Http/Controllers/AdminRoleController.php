@@ -10,6 +10,7 @@ use App\Models\Ekstrakulikuler;
 use App\Models\Acara;
 use Illuminate\Http\Request;
 use App\Models\DataPendaftar;
+use App\Models\Notifikasi;
 
 class AdminRoleController extends Controller
 {
@@ -23,10 +24,12 @@ class AdminRoleController extends Controller
         $ekstrakurikulerCount = Ekstrakulikuler::count();
         $acaraCount = Acara::count();
         $datapendaftarCount = DataPendaftar::count(); // Jika ada tabel pendaftaran
+        $notifCount = Notifikasi::where('read', false)->count();
+        $notifikasis = Notifikasi::orderBy('created_at', 'desc')->take(10)->get();
         
         return view('admin.dashboard', compact(
             'guruCount', 'siswaCount', 'fasilitasCount', 
-            'prestasiCount', 'ekstrakurikulerCount', 'acaraCount', 'datapendaftarCount'
+            'prestasiCount', 'ekstrakurikulerCount', 'acaraCount', 'datapendaftarCount', 'notifCount', 'notifikasis'
         ));
     }
 

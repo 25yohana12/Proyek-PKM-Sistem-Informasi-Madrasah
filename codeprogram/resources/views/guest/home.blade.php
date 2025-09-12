@@ -96,10 +96,14 @@
         $sekolah = \App\Models\Sekolah::first();  // Mengambil data sekolah pertama
     @endphp
     
-    <p>Contact us at: 
-        <a href="mailto:{{ $sekolah->email }}">{{ $sekolah->email }}</a> | 
-        <a href="tel:{{ $sekolah->telepon }}">{{ $sekolah->telepon }}</a>
-    </p>
+        @if($sekolah)
+        <p>Contact us at: 
+            <a href="mailto:{{ $sekolah->email }}">{{ $sekolah->email }}</a> | 
+            <a href="tel:{{ $sekolah->telepon }}">{{ $sekolah->telepon }}</a>
+        </p>
+    @else
+        <p>Contact info belum tersedia.</p>
+    @endif
 </section>
 @endsection
 

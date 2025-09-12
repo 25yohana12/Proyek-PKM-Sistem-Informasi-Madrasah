@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="page-container">
-    <!-- Header Section (match gaya Prestasi) -->
+    <!-- Header Section -->
     <div class="page-header">
         <div class="header-content">
             <h1 class="page-title">
@@ -29,37 +29,31 @@
                     <div class="stat-label">Guru</div>
                     <div class="stat-value">{{ $guruCount }}</div>
                 </a>
-
                 <a href="{{ route('superadmin.siswa.index') }}" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
                     <div class="stat-label">Siswa</div>
                     <div class="stat-value">{{ $siswaCount }}</div>
                 </a>
-
                 <a href="{{ route('superadmin.fasilitas.index') }}" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-building"></i></div>
                     <div class="stat-label">Fasilitas</div>
                     <div class="stat-value">{{ $fasilitasCount }}</div>
                 </a>
-
                 <a href="{{ route('superadmin.prestasi.index') }}" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-trophy"></i></div>
                     <div class="stat-label">Prestasi</div>
                     <div class="stat-value">{{ $prestasiCount }}</div>
                 </a>
-
                 <a href="{{ route('superadmin.ekstrakurikuler.index') }}" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-volleyball"></i></div>
                     <div class="stat-label">Ekstrakurikuler</div>
                     <div class="stat-value">{{ $ekstrakurikulerCount }}</div>
                 </a>
-
                 <a href="{{ route('superadmin.acara.index') }}" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
                     <div class="stat-label">Acara</div>
                     <div class="stat-value">{{ $acaraCount }}</div>
                 </a>
-
                 <div class="stat-card">
                     <div class="stat-icon"><i class="fas fa-file-signature"></i></div>
                     <div class="stat-label">Pendaftar</div>
@@ -99,21 +93,95 @@
 
 @section('styles')
 <style>
-    /* Samakan emoji style dengan halaman Prestasi */
     .page-title .emoji {
         background: none !important;
         -webkit-text-fill-color: initial !important;
         color: initial !important;
     }
-
-    /* ===== BACKGROUND HALAMAN (match Prestasi) ===== */
+    .btn-notif {
+        background: linear-gradient(135deg, #6D8D79, #5a7466);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        position: relative;
+        box-shadow: 0 4px 16px rgba(109,141,121,0.15);
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+    .btn-notif:hover {
+        background: linear-gradient(135deg, #5a7466, #6D8D79);
+        box-shadow: 0 8px 24px rgba(109,141,121,0.25);
+    }
+    .notif-badge {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: #ef4444;
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(239,68,68,0.12);
+    }
+    .notif-widget {
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 4px 18px rgba(109,141,121,0.09);
+        padding: 18px 24px;
+        margin-bottom: 24px;
+        max-width: 420px;
+    }
+    .notif-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .notif-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .notif-item {
+        padding: 8px 0;
+        border-bottom: 1px solid #f1f5f9;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.98rem;
+    }
+    .notif-unread .notif-msg {
+        font-weight: 600;
+        color: #38a169;
+    }
+    .notif-read .notif-msg {
+        color: #64748b;
+    }
+    .notif-time {
+        font-size: 0.85rem;
+        color: #a0aec0;
+        margin-left: 12px;
+    }
+    .notif-empty {
+        text-align: center;
+        color: #64748b;
+        padding: 16px 0;
+        font-size: 0.98rem;
+    }
     .page-container {
         padding: 2rem;
         background: linear-gradient(135deg, #6D8D79 0%, #5a7466 100%);
         min-height: 100vh;
     }
-
-    /* ===== HEADER KACA/PUTIH (match Prestasi) ===== */
     .page-header {
         display: flex;
         justify-content: flex-start;
@@ -125,7 +193,6 @@
         backdrop-filter: blur(10px);
         border-radius: 0 !important;
     }
-
     .page-title {
         font-size: 2.5rem;
         font-weight: 800;
@@ -137,28 +204,23 @@
         background-clip: text;
         display: flex; align-items: center; gap: .5rem;
     }
-
     .page-subtitle {
         color: #64748b;
         font-size: 1.1rem;
         margin: 0;
         font-weight: 500;
     }
-
-    /* ===== KARTU KONTEN (match Prestasi) ===== */
     .content-card {
         background: white;
         border-radius: 20px;
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
         overflow: hidden;
     }
-
     .card-header {
         padding: 2rem;
         background: linear-gradient(135deg, #f8fafc, #f1f5f9);
         border-bottom: 1px solid #e2e8f0;
     }
-
     .card-title {
         display: flex;
         align-items: center;
@@ -169,17 +231,13 @@
         margin: 0;
     }
     .card-title i { color: #6D8D79; }
-
     .card-body { padding: 2rem; }
-
-    /* ===== GRID STAT CARDS (Dashboard) ===== */
     .dashboard-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1.25rem;
-        padding: 0 10px; /* sedikit jarak kiri-kanan */
+        padding: 0 10px;
     }
-
     .stat-card {
         display: flex;
         flex-direction: column;
@@ -196,7 +254,6 @@
         transform: translateY(-4px);
         box-shadow: 0 16px 36px rgba(0,0,0,.12);
     }
-
     .stat-icon {
         width: 44px; height: 44px;
         display: grid; place-items: center;
@@ -207,13 +264,11 @@
         font-size: 1.1rem;
         box-shadow: 0 6px 16px rgba(109,141,121,.3);
     }
-
     .stat-label {
         font-size: .95rem;
         color: #64748b;
         font-weight: 600;
     }
-
     .stat-value {
         font-size: 2rem;
         font-weight: 800;
@@ -221,25 +276,21 @@
         line-height: 1;
         margin-top: .25rem;
     }
-
-    /* ===== "Apa yang Bisa Dilakukan?" gaya sama dengan request kamu ===== */
     .what-can-be-done h3 {
         font-size: 1.5rem;
         color: #2c3e50;
         margin-bottom: 16px;
-        text-align: center; /* judul tengah */
+        text-align: center;
     }
-
     .what-can-be-done ul {
         list-style: none;
         padding: 0;
         margin: 0;
         width: 100%;
-        column-count: 2;    /* 2 kolom desktop */
+        column-count: 2;
         column-gap: 40px;
-        text-align: left;   /* daftar rata kiri */
+        text-align: left;
     }
-
     .what-can-be-done li {
         font-size: 1rem;
         color: #34495e;
@@ -248,18 +299,14 @@
         -webkit-column-break-inside: avoid;
         -moz-column-break-inside: avoid;
     }
-
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
         .stat-value { font-size: 1.75rem; }
     }
-
     @media (max-width: 768px) {
         .page-header { flex-direction: column; text-align: center; }
         .dashboard-grid { grid-template-columns: 1fr 1fr; }
-        .what-can-be-done ul { column-count: 1; } /* 1 kolom di HP */
+        .what-can-be-done ul { column-count: 1; }
     }
-
     @media (max-width: 540px) {
         .dashboard-grid { grid-template-columns: 1fr; }
     }
