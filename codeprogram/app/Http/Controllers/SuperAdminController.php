@@ -26,7 +26,7 @@ class SuperAdminController extends Controller
         
         return view('superadmin.dashboard', compact(
             'guruCount', 'siswaCount', 'fasilitasCount', 
-            'prestasiCount', 'ekstrakurikulerCount', 'acaraCount', 'datapendaftarCount'
+            'prestasiCount', 'ekstrakurikulerCount', 'acaraCount', 'datapendaftarCount',
         ));
     }
 }

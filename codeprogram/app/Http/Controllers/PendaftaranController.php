@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use App\Models\Notifikasi;
 
 class PendaftaranController extends Controller
 {
@@ -88,8 +89,7 @@ class PendaftaranController extends Controller
             'nikAyah'          => 'nullable|string|max:50',
             'tempatLahirAyah'  => 'nullable|string|max:100',
             'tanggalLahirAyah' => 'nullable|date',
-            'pendidikanAyah'   => 'nullable|in:SD,SMP,SMA,D1,D2,D3,D4/S1,S2,S3,Tidak Sekolah',
-            'pekerjaanAyah'    => 'nullable|string|max:255',
+            'pendidikanAyah' => 'nullable|in:SD,SMP,SMA,D1,D2,D3,D4/S1,S2,S3,Tidak Sekolah',            'pekerjaanAyah'    => 'nullable|string|max:255',
             'pendapatanAyah'   => 'nullable|in:500.000 - 1.000.000,1.000.000 - 2.000.000,2.000.000 - 3.000.000,3.000.000 - 5.000.000,Lebih Dari 5.000.000,Tidak Ada',
 
             // Ibu
@@ -150,11 +150,19 @@ class PendaftaranController extends Controller
 
         $pendaftar->save();
 
-        return redirect()->route('siswa.success.pendaftaran');
+    Notifikasi::create([
+        'judul' => 'Pendaftaran Baru',
+        'pesan' => 'Siswa baru mendaftar: ' . $pendaftar->namaPendaftar,
+        'read' => false,
+        'data_id' => $pendaftar->pendaftar_id
+    ]);
+
+    return redirect()->route('siswa.success.pendaftaran');
     }
 
     public function success()
     {
         return view('siswa.pendaftaran_success');
     }
+    
 }

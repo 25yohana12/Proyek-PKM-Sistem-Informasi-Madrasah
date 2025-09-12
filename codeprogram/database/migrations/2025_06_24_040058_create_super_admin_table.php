@@ -13,17 +13,20 @@ class CreateSuperAdminTable extends Migration
      */
     public function up()
     {
-        Schema::create('superAdmin', function (Blueprint $table) {
-            $table->id('superAdmin_id'); // Kolom ID untuk superAdmin
-            $table->unsignedBigInteger('role_id'); // Menggunakan unsignedBigInteger untuk role_id
-            $table->string('namaSuperAdmin', 255); // Nama Super Admin
-            $table->string('email', 255)->unique(); // Email yang harus unik
-            $table->string('sandi', 255); // Sandi (password)
-            $table->timestamps(); // created_at dan updated_at
+        // Cek dulu apakah tabel sudah ada, agar tidak error jika sudah ada
+        if (!Schema::hasTable('superAdmin')) {
+            Schema::create('superAdmin', function (Blueprint $table) {
+                $table->id('superAdmin_id'); // Kolom ID untuk superAdmin
+                $table->unsignedBigInteger('role_id'); // Menggunakan unsignedBigInteger untuk role_id
+                $table->string('namaSuperAdmin', 255); // Nama Super Admin
+                $table->string('email', 255)->unique(); // Email yang harus unik
+                $table->string('sandi', 255); // Sandi (password)
+                $table->timestamps(); // created_at dan updated_at
 
-            // Mendefinisikan relasi foreign key ke tabel 'role'
-            $table->foreign('role_id')->references('role_id')->on('role')->onDelete('cascade'); // Relasi ke tabel role
-        });
+                // Mendefinisikan relasi foreign key ke tabel 'role'
+                $table->foreign('role_id')->references('role_id')->on('role')->onDelete('cascade'); // Relasi ke tabel role
+            });
+        }
     }
 
     /**
@@ -33,6 +36,7 @@ class CreateSuperAdminTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('super_admin');
+        // Pastikan nama tabel sama dengan yang di up()
+        Schema::dropIfExists('superAdmin');
     }
 }

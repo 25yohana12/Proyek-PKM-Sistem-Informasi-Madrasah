@@ -52,8 +52,7 @@ return new class extends Migration
             $table->string('nikAyah', 20)->nullable();
             $table->string('tempatLahirAyah', 100)->nullable();
             $table->date('tanggalLahirAyah')->nullable();
-            $table->enum('pendidikanAyah', ['SD','SMP','SMA','D1','D2','D3','D4/S1','S2','S3', 'Tidak Sekolah'])->nullable();
-            $table->string('pekerjaanAyah', 255)->nullable();
+            $table->enum('pendidikanAyah', ['SD','SMP','SMA','D1','D2','D3','D4/S1','S2','S3','Tidak Sekolah'])->nullable();    
             $table->enum('pendapatanAyah', ['500.000 - 1.000.000','1.000.000 - 2.000.000','2.000.000 - 3.000.000','3.000.000 - 5.000.000','Lebih Dari 5.000.000', 'Tidak Ada'])->nullable();
 
             // Ibu
@@ -62,8 +61,7 @@ return new class extends Migration
             $table->string('nikIbu', 20)->nullable();
             $table->string('tempatLahirIbu', 100)->nullable();
             $table->date('tanggalLahirIbu')->nullable();
-            $table->enum('pendidikanIbu', ['SD','SMP','SMA','D1','D2','D3','D4/S1','S2','S3'])->nullable();
-            $table->string('pekerjaanIbu', 255)->nullable();
+            $table->enum('pendidikanIbu', ['SD','SMP','SMA','D1','D2','D3','D4/S1','S2','S3','Tidak Sekolah'])->nullable();            $table->string('pekerjaanIbu', 255)->nullable();
             $table->enum('pendapatanIbu', ['500.000 - 1.000.000','1.000.000 - 2.000.000','2.000.000 - 3.000.000','3.000.000 - 5.000.000','Lebih Dari 5.000.000', 'Tidak Ada'])->nullable();
 
             // Wali (opsional)
@@ -72,8 +70,7 @@ return new class extends Migration
             $table->string('nikWali', 20)->nullable();
             $table->string('tempatLahirWali', 100)->nullable();
             $table->date('tanggalLahirWali')->nullable();
-            $table->enum('pendidikanWali', ['SD','SMP','SMA','D1','D2','D3','D4/S1','S2','S3'])->nullable();
-            $table->string('pekerjaanWali', 255)->nullable();
+            $table->enum('pendidikanWali', ['SD','SMP','SMA','D1','D2','D3','D4/S1','S2','S3','Tidak Sekolah'])->nullable();            $table->string('pekerjaanWali', 255)->nullable();
             $table->enum('pendapatanWali', ['500.000 - 1.000.000','1.000.000 - 2.000.000','2.000.000 - 3.000.000','3.000.000 - 5.000.000','Lebih Dari 5.000.000', 'Tidak Ada'])->nullable();
 
             // --- Alamat & Transport ------------------------------------------
