@@ -65,7 +65,32 @@
             <li><a class="dropdown-item" href="{{ route('siswa.siswa.pengumuman') }}">Jadwal</a></li>
           </ul>
         </li>
-
+        <!-- Popup Notifikasi -->
+            <div id="notifPopup" class="notif-popup" style="display:none;">
+                <div class="notif-popup-header">
+                    <strong>Notifikasi Terbaru</strong>
+                </div>
+                <ul class="notif-popup-list" id="notifList">
+                    @foreach($notifikasis->take(5) as $notif)
+                        <li class="notif-popup-item {{ $notif->read ? 'notif-read' : 'notif-unread' }}">
+                            <a href="{{ route('admin.notifikasi.show', $notif->id) }}" class="notif-link" data-id="{{ $notif->id }}">
+                                <span class="notif-msg">{{ $notif->pesan }}</span>
+                                <span class="notif-time">{{ $notif->created_at->format('d M H:i') }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                    @if($notifikasis->count() == 0)
+                        <li class="notif-popup-empty">
+                            <i class="fas fa-info-circle"></i> Belum ada notifikasi baru.
+                        </li>
+                    @endif
+                </ul>
+                @if($notifikasis->count() > 5)
+                    <div class="notif-popup-footer text-center py-2">
+                        <a href="{{ route('admin.notifikasi.index') }}" class="btn btn-notif-more">Lihat Selengkapnya</a>
+                    </div>
+                @endif
+            </div>
         <li class="nav-item me-lg-3">
           <a class="nav-link" href="{{ route('siswa.logout') }}" style="color:#000;">LogOut</a>
         </li>

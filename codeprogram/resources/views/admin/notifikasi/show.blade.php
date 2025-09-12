@@ -1,6 +1,168 @@
 @extends('layouts.superadmin')
 
 @section('content')
+<style>
+    /* Custom styling for action buttons */
+    .action-buttons {
+        margin-top: 25px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .btn-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        min-width: 130px;
+        justify-content: center;
+    }
+    
+    .btn-back {
+        background-color: #6c757d;
+        color: white;
+        border: 2px solid #6c757d;
+    }
+    
+    .btn-back:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+    
+    .btn-approve {
+        background-color: #28a745;
+        color: white;
+        border: 2px solid #28a745;
+    }
+    
+    .btn-approve:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+        color: white;
+    }
+    
+    .btn-reject {
+        background-color: #dc3545;
+        color: white;
+        border: 2px solid #dc3545;
+    }
+    
+    .btn-reject:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+        color: white;
+    }
+    
+    .btn-comment {
+        background-color: #ffc107;
+        color: #212529;
+        border: 2px solid #ffc107;
+    }
+    
+    .btn-comment:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+        color: #212529;
+    }
+    
+    /* Modal styling */
+    .modal-header {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-bottom: 2px solid #dee2e6;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .modal-title {
+        color: #495057;
+        font-weight: 700;
+        font-size: 18px;
+    }
+    
+    .modal-content {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    .form-control:focus {
+        border-color: #ffc107;
+        box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+    }
+    
+    .modal-footer {
+        border-top: 2px solid #dee2e6;
+        padding: 20px;
+    }
+    
+    /* Icon styling */
+    .btn-action i {
+        font-size: 16px;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .action-buttons {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .btn-action {
+            margin-bottom: 8px;
+            min-width: auto;
+        }
+    }
+    
+    /* Success/Error alert styling */
+    .alert-custom {
+        border-radius: 8px;
+        border: none;
+        font-weight: 500;
+    }
+    
+    /* Table enhancements */
+    .table-bordered th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        color: #495057;
+        width: 200px;
+        border-color: #dee2e6;
+    }
+    
+    .table-bordered td {
+        vertical-align: middle;
+        border-color: #dee2e6;
+    }
+    
+    .table-bordered img {
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .table-bordered img:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+</style>
 <div class="container py-4">
     <h2 class="mb-4">Detail Pendaftar</h2>
     @if($pendaftar)
@@ -91,24 +253,128 @@
             <tr><th>Kendaraan</th><td>{{ $pendaftar->kendaraan }}</td></tr>
             <tr><th>Waktu Perjalanan</th><td>{{ $pendaftar->waktuPerjalanan }}</td></tr>
         </table>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="#" class="btn-action btn-back" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
+            </a>
+            
+            <button type="button" class="btn-action btn-approve" onclick="showApproveConfirm()">
+                <i class="fas fa-check-circle"></i> Terima
+            </button>
+            
+            <button type="button" class="btn-action btn-reject" onclick="showRejectConfirm()">
+                <i class="fas fa-times-circle"></i> Tolak
+            </button>
+            
+            <button type="button" class="btn-action btn-comment" data-bs-toggle="modal" data-bs-target="#komentarModal">
+                <i class="fas fa-comment-dots"></i> Komentar
+            </button>
+        </div>
+        
+        <!-- Modal Komentar -->
+        <div class="modal fade" id="komentarModal" tabindex="-1" aria-labelledby="komentarModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="komentarModalLabel">
+                            <i class="fas fa-comment-alt me-2"></i>Kirim Komentar ke Pendaftar
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="komentar" class="form-label fw-bold">
+                                Komentar untuk: <span class="text-primary">{{ $pendaftar->namaPendaftar }}</span>
+                            </label>
+                            <textarea class="form-control" id="komentar" name="komentar" rows="5" 
+                                placeholder="Tuliskan komentar atau catatan untuk pendaftar...&#10;&#10;Contoh:&#10;- Mohon lengkapi dokumen yang masih kurang&#10;- Perlu perbaikan pada data orangtua&#10;- Silakan hubungi admin untuk informasi lebih lanjut"></textarea>
+                        </div>
+                        <div class="alert alert-info alert-custom">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Informasi:</strong> Komentar ini akan dikirim melalui email ke: 
+                            <strong>{{ $pendaftar->email }}</strong>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times"></i> Batal
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="sendComment()">
+                            <i class="fas fa-paper-plane"></i> Kirim Komentar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     @else
-        <div class="alert alert-warning">Data pendaftar tidak ditemukan.</div>
+        <div class="alert alert-warning alert-custom">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            Data pendaftar tidak ditemukan.
+        </div>
+        <div class="action-buttons">
+            <a href="#" class="btn-action btn-back" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
+            </a>
+        </div>
     @endif
 </div>
-<div class="container py-4">
-    <h2 class="mb-4">Detail Pendaftar</h2>
-    @if($pendaftar)
-        <table class="table table-bordered">
-            <!-- ...semua baris data pendaftar seperti sebelumnya... -->
-        </table>
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mt-3">
-            &larr; Kembali ke Dashboard
-        </a>
-    @else
-        <div class="alert alert-warning">Data pendaftar tidak ditemukan.</div>
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mt-3">
-            &larr; Kembali ke Dashboard
-        </a>
-    @endif
-</div>
+
+<script>
+    // Frontend-only functions (no backend calls)
+    function goBack() {
+        // Simulate going back to dashboard
+        alert('Kembali ke Dashboard (Frontend Only)');
+        // window.history.back(); // Uncomment this for actual back functionality
+    }
+    
+    function showApproveConfirm() {
+        if (confirm('Apakah Anda yakin ingin MENERIMA pendaftar ini?\n\nPendaftar: {{ $pendaftar->namaPendaftar ?? "Nama Pendaftar" }}')) {
+            alert('✅ Pendaftar DITERIMA!\n(Frontend Only - Backend belum diimplementasi)');
+            // Here you would normally make an AJAX call or form submission
+        }
+    }
+    
+    function showRejectConfirm() {
+        if (confirm('Apakah Anda yakin ingin MENOLAK pendaftar ini?\n\nPendaftar: {{ $pendaftar->namaPendaftar ?? "Nama Pendaftar" }}')) {
+            alert('❌ Pendaftar DITOLAK!\n(Frontend Only - Backend belum diimplementasi)');
+            // Here you would normally make an AJAX call or form submission
+        }
+    }
+    
+    function sendComment() {
+        const comment = document.getElementById('komentar').value.trim();
+        
+        if (comment === '') {
+            alert('Mohon isi komentar terlebih dahulu!');
+            return;
+        }
+        
+        if (confirm('Kirim komentar ini ke {{ $pendaftar->email ?? "email@pendaftar.com" }}?\n\nKomentar:\n' + comment)) {
+            alert('💬 Komentar berhasil dikirim!\n(Frontend Only - Backend belum diimplementasi)');
+            
+            // Close modal and reset form
+            const modal = bootstrap.Modal.getInstance(document.getElementById('komentarModal'));
+            modal.hide();
+            document.getElementById('komentar').value = '';
+        }
+    }
+    
+    // Add some visual feedback for button interactions
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.btn-action');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Add a ripple effect
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    });
+</script>
+
 @endsection
