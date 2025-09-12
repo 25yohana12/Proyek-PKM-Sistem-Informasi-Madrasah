@@ -39,7 +39,7 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 // Siswa Routes
-Route::prefix('pendaftar')->name('siswa.')->middleware('auth:pendaftar')->group(function () {
+Route::prefix('MIN')->name('siswa.')->middleware('auth:pendaftar')->group(function () {
     Route::get('/home', function () {return view('siswa.home');})->name('home');
     Route::get('/ProfilSekolah', function () { return view('siswa.profilsekolah');})->name('profilsekolah');
     Route::get('/pendaftaran', [PendaftaranController::class, 'create'])->name('create.pendaftaran');

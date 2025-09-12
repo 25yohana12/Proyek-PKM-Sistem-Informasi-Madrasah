@@ -84,8 +84,8 @@
                 </div>
       <div class="col-md-6">
         <label class="form-label">NISN <span class="req">*</span></label>
-        <input type="text" name="nisn" class="form-control @error('nisn') is-invalid @enderror"
-               value="{{ old('nisn') }}" inputmode="numeric" placeholder="Opsional">
+        <input type="number" name="nisn" class="form-control @error('nisn') is-invalid @enderror"
+               value="{{ old('nisn') }}" inputmode="numeric">
         @error('nisn') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
@@ -101,8 +101,8 @@
 
       <div class="col-md-6">
         <label class="form-label">NIK <span class="req">*</span></label>
-        <input type="text" name="nik" maxlength="16" class="form-control @error('nik') is-invalid @enderror"
-               value="{{ old('nik') }}" inputmode="numeric" placeholder="16 digit (opsional)">
+        <input type="number" name="nik" maxlength="16" class="form-control @error('nik') is-invalid @enderror"
+               value="{{ old('nik') }}" inputmode="numeric" placeholder="16 digit">
         @error('nik') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
@@ -273,13 +273,13 @@
       </div>
 
       <div class="col-md-4">
-        <label class="form-label">Foto Kartu Keluarga (jpg/png/pdf) <span class="req">*</span></label>
+        <label class="form-label">Kartu Keluarga (jpg/png/pdf) <span class="req">*</span></label>
         <input type="file" name="fotoKartuKeluarga" class="form-control @error('fotoKartuKeluarga') is-invalid @enderror" accept=".jpg,.jpeg,.png,.pdf">
         @error('fotoKartuKeluarga') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
       <div class="col-md-4">
-        <label class="form-label">Foto Akte Lahir (jpg/png/pdf) <span class="req">*</span></label>
+        <label class="form-label">Akte Lahir (jpg/png/pdf) <span class="req">*</span></label>
         <input type="file" name="fotoAkteLahir" class="form-control @error('fotoAkteLahir') is-invalid @enderror" accept=".jpg,.jpeg,.png,.pdf">
         @error('fotoAkteLahir') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>

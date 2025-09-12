@@ -29,7 +29,7 @@
   {{-- FOOTER HIJAU SESUAI DESAIN --}}
   <footer style="background-color:#a8dfb0; font-family:'Arial',sans-serif;">
     <div class="container py-4 text-start">
-        <div class="row align-items-center">
+        <div class="row align-items-center" style="color: #000">
             <!-- Logo + Tagline -->
             <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" width="150" class="me-3">

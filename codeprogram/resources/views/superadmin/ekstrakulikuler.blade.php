@@ -141,10 +141,10 @@
                                             </div>
                                             <h3 class="empty-title">Belum ada ekstrakurikuler</h3>
                                             <p class="empty-subtitle">Klik tombol di atas untuk menambahkan ekstrakulikuler baru</p>
-                                            <button class="btn btn-primary" onclick="window.location.href='{{ route('superadmin.ekstrakurikuler.create') }}'">
+                                            <!-- <button class="btn btn-primary" onclick="window.location.href='{{ route('superadmin.ekstrakurikuler.create') }}'">
                                                 <i class="fas fa-plus"></i>
                                                 Tambah Ekstrakurikuler
-                                            </button>
+                                            </button> -->
                                         </div>
                                     </td>
                                 </tr>
