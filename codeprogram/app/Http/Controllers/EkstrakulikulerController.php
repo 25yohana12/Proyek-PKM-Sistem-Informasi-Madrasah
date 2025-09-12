@@ -68,7 +68,7 @@ public function store(Request $request)
         'gambar' => json_encode($imagePaths), // Store image paths in JSON format
     ]);
 
-    return redirect()->route('superadmin.ekstrakulikuler.index')->with('success', 'Ekstrakurikuler created successfully!');
+    return redirect()->route('superadmin.ekstrakurikuler.index')->with('success', 'Ekstrakurikuler created successfully!');
 }
 
     /**
@@ -115,7 +115,7 @@ public function store(Request $request)
             'gambar' => json_encode($imagePaths), // Store updated image paths in JSON format
         ]);
 
-        return redirect()->route('superadmin.ekstrakulikuler.index')->with('success', 'Ekstrakurikuler updated successfully!');
+        return redirect()->route('superadmin.ekstrakurikuler.index')->with('success', 'Ekstrakurikuler updated successfully!');
     }
 
     /**
@@ -139,7 +139,7 @@ public function store(Request $request)
         // Delete the extracurricular activity record
         $ekstrakulikuler->delete();
 
-        return redirect()->route('superadmin.ekstrakulikuler.index')->with('success', 'Ekstrakurikuler deleted successfully!');
+        return redirect()->route('superadmin.ekstrakurikuler.index')->with('success', 'Ekstrakurikuler deleted successfully!');
     }
 
         public function guest()
