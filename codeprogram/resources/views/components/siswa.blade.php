@@ -67,39 +67,46 @@
         </li>
         
         <!-- Notifikasi -->
-        <li class="nav-item me-lg-3 position-relative">
-          <button class="btn btn-notif position-relative" id="notifBtn" title="Notifikasi" type="button">
-            <i class="fas fa-bell"></i>
-            <span class="notif-badge" id="notifBadge">{{ $notifCount ?? 0 }}</span>
-          </button>
-          <!-- Popup Notifikasi -->
-          <div id="notifPopup" class="notif-popup" style="display:none;">
-            <div class="notif-popup-header">
-              <strong>Notifikasi Terbaru</strong>
-            </div>
-            <ul class="notif-popup-list" id="notifList">
-              @if(isset($notifikasis) && $notifikasis->count() > 0)
-                @foreach($notifikasis->take(5) as $notif)
-                  <li class="notif-popup-item {{ $notif->read ? 'notif-read' : 'notif-unread' }}">
-                    <a href="#" class="notif-link" data-id="{{ $notif->id }}">
-                      <span class="notif-msg">{{ $notif->pesan }}</span>
-                      <span class="notif-time">{{ $notif->created_at->format('d M H:i') }}</span>
-                    </a>
-                  </li>
-                @endforeach
-              @else
-                <li class="notif-popup-empty">
-                  <i class="fas fa-info-circle"></i> Belum ada notifikasi baru.
-                </li>
-              @endif
-            </ul>
-            @if(isset($notifikasis) && $notifikasis->count() > 5)
-              <div class="notif-popup-footer text-center py-2">
-                <a href="#" class="btn btn-notif-more">Lihat Selengkapnya</a>
-              </div>
-            @endif
-          </div>
+<li class="nav-item me-lg-3 position-relative">
+  <button class="btn btn-notif position-relative" id="notifBtn" title="Notifikasi" type="button">
+    <!-- Ikon Bel (SVG) -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+      <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+    </svg>
+    <!-- Badge Notifikasi -->
+    <span class="notif-badge" id="notifBadge">{{ $notifCount ?? 0 }}</span>
+  </button>
+  
+  <!-- Popup Notifikasi -->
+  <div id="notifPopup" class="notif-popup" style="display:none;">
+    <div class="notif-popup-header">
+      <strong>Notifikasi Terbaru</strong>
+    </div>
+    <ul class="notif-popup-list" id="notifList">
+      @if(isset($notifikasis) && $notifikasis->count() > 0)
+        @foreach($notifikasis->take(5) as $notif)
+          <li class="notif-popup-item {{ $notif->read ? 'notif-read' : 'notif-unread' }}">
+            <a href="{{ route('admin.notifikasi.show', $notif->id) }}" class="notif-link" data-id="{{ $notif->id }}">
+              <span class="notif-msg">{{ $notif->pesan }}</span>
+              <span class="notif-time">{{ $notif->created_at->format('d M H:i') }}</span>
+            </a>
+          </li>
+        @endforeach
+      @else
+        <li class="notif-popup-empty">
+          <i class="fas fa-info-circle"></i> Belum ada notifikasi baru.
         </li>
+      @endif
+    </ul>
+    @if(isset($notifikasis) && $notifikasis->count() > 5)
+      <div class="notif-popup-footer text-center py-2">
+        <a href="{{ route('admin.notifikasi.index') }}" class="btn btn-notif-more">Lihat Selengkapnya</a>
+      </div>
+    @endif
+  </div>
+</li>
+
+
         
         <!-- Logout -->
         <li class="nav-item me-lg-3">
