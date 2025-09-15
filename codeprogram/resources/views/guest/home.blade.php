@@ -86,25 +86,48 @@
 
 <section class="location">
     <h2>Lokasi & Kontak</h2>
-    <div class="map-container">
-        <!-- Ganti dengan iframe dari Google Maps -->
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.207156655624!2d99.1580544!3d2.4379086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031ff5c945a4f05%3A0xe7d0ca51722789db!2sMIN%20Toba%20Samosir!5e0!3m2!1sid!2sid!4v1754143344734!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="location-container">
+        <!-- Kolom Map -->
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.207156655624!2d99.1580544!3d2.4379086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3031ff5c945a4f05%3A0xe7d0ca51722789db!2sMIN%20Toba%20Samosir!5e0!3m2!1sid!2sid!4v1754143344734!5m2!1sid!2sid" 
+                width="100%" height="350" style="border:0;" 
+                allowfullscreen="" loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <!-- Kolom Kontak -->
+        <div class="contact-container">
+            @if($sekolah->count() > 0)
+                @foreach($sekolah as $item)
+                    <div class="contact-box">
+                        <h3>{{ $item->namaSekolah }}</h3>
+                        <p><strong>Alamat:</strong> {{ $item->alamat }}</p>
+                        <p><strong>Email:</strong> 
+                            <a href="mailto:{{ $item->email }}">{{ $item->email }}</a>
+                        </p>
+                        <p><strong>Telepon:</strong> 
+                            <a href="tel:{{ $item->telepon }}">{{ $item->telepon }}</a>
+                        </p>
+                        <p><strong>Instagram:</strong> 
+                            <a href="https://instagram.com/{{ $item->instagram }}" target="_blank">
+                                {{ $item->instagram }}
+                            </a>
+                        </p>
+                        <p><strong>Facebook:</strong> 
+                            <a href="https://facebook.com/{{ $item->facebook }}" target="_blank">
+                                {{ $item->facebook }}
+                            </a>
+                        </p>
+                        <hr>
+                    </div>
+                @endforeach
+            @else
+                <p>Data sekolah belum tersedia.</p>
+            @endif
+        </div>
     </div>
-    
-    <!-- Ambil data email dan telepon dari model Sekolah -->
-    @php
-        $sekolah = \App\Models\Sekolah::first();  // Mengambil data sekolah pertama
-    @endphp
-    
-        @if($sekolah)
-        <p>Contact us at: 
-            <a href="mailto:{{ $sekolah->email }}">{{ $sekolah->email }}</a> | 
-            <a href="tel:{{ $sekolah->telepon }}">{{ $sekolah->telepon }}</a>
-        </p>
-    @else
-        <p>Contact info belum tersedia.</p>
-    @endif
 </section>
+
 @endsection
 
 @section('styles')
@@ -268,21 +291,44 @@ section {
 }
 
 /* ======= Lokasi ======= */
-.location iframe {
+.location-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.map-container {
+    flex: 1 1 55%;
+    min-width: 300px;
+}
+
+.contact-container {
+    flex: 1 1 40%;
+    min-width: 280px;
+    background: #fff;
     border-radius: 12px;
+    padding: 25px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
-.location p {
-    font-size: 1.05rem;
-    margin-top: 20px;
-    text-align: center;
+
+.contact-box h3 {
+    margin-bottom: 15px;
+    color: var(--secondary);
 }
-.location a {
+
+.contact-box p {
+    margin: 6px 0;
+    font-size: 1rem;
+    color: var(--text-gray);
+}
+
+.contact-box a {
     color: var(--primary);
+    font-weight: 600;
 }
-.location a:hover {
-    text-decoration: underline;
-}
+
 
 /* ======= Responsif ======= */
 @media (max-width: 768px) {

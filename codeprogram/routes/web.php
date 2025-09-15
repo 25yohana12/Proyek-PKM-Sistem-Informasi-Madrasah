@@ -18,11 +18,12 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\Superadmin\PegawaiController; 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DataPendaftarController;
 use App\Http\Controllers\NotifikasiController;
 
 
 // Public Routes
-Route::get('/', function () {return view('guest.home');})->name('guest.home');
+Route::get('/', [SekolahController::class, 'guest'])->name('guest.home');
 Route::get('/ProfilSekolah', function () { return view('guest.profilsekolah'); });
 Route::get('/guru', [GuruController::class, 'guest'])->name('guest.guru');
 Route::get('/kelas', [SiswaController::class, 'guest'])->name('guest.siswa');
@@ -63,9 +64,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/', [AdminRoleController::class, 'dashboard'])->name('home');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/informasipendaftaran', [AdminRoleController::class, 'informasipendaftaran'])->name('informasipendaftaran');
-    Route::get('/pendaftaran', [AdminRoleController::class, 'pendaftaran'])->name('pendaftaran');
     Route::get('/notifikasi', [NotifikasiController::class, 'adminIndex'])->name('notifikasi.index');
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
+Route::get('/pendaftaran', [DataPendaftarController::class, 'index'])->name('pendaftaran');
+Route::post('/pendaftaran', [DataPendaftarController::class, 'store'])->name('pendaftaran.store');
+Route::put('/pendaftaran/{id}', [DataPendaftarController::class, 'update'])->name('pendaftaran.update');
+Route::delete('/pendaftaran/{id}', [DataPendaftarController::class, 'destroy'])->name('pendaftaran.destroy');
 });
 
 

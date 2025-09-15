@@ -12,7 +12,7 @@ class SekolahController extends Controller
      */
     public function index()
     {
-        $sekolah = Sekolah::first(); // Hanya ambil satu data
+        $sekolah = Sekolah::all(); // Hanya ambil satu data
         return view('superadmin.sekolah', compact('sekolah'));
     }
 
@@ -43,5 +43,14 @@ class SekolahController extends Controller
         $sekolah->update($request->all());
 
         return redirect()->route('superadmin.sekolah.index')->with('success', 'Profil sekolah berhasil diperbarui.');
+    }
+
+        public function guest()
+    {
+        // ambil semua data sekolah (atau pakai ->first() jika cuma satu)
+        $sekolah = Sekolah::all();
+
+        // kirim ke view
+        return view('guest.home', compact('sekolah'));
     }
 }
