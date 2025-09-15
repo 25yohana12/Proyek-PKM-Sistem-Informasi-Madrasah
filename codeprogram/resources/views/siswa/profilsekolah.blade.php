@@ -98,6 +98,9 @@ h1,h2,h3,p{margin:0} body{color:var(--ink)}
 .photo-box{
   background:#fff;border-radius:12px;overflow:hidden;
   box-shadow:var(--shadow-soft);border:1px solid #eef2f7;aspect-ratio:4/3;
+  display: block;
+  max-width: 100%;
+  height: 325px;
 }
 .arrow{
   width:52px;height:52px;border-radius:99px;background:var(--card-2);
@@ -172,7 +175,7 @@ h1,h2,h3,p{margin:0} body{color:var(--ink)}
   <div class="card">
     <div class="sejarah-grid">
       <div class="photo-box">
-        <img src="{{ asset('images/sekolah-1.jpg') }}" alt="Foto lama sekolah">
+        <img src="{{ asset('images/sekolah-1.jpg') }}" class="photo-box" alt="Foto lama sekolah">
       </div>
       <div class="arrow"></div>
       <div class="photo-box">

@@ -58,28 +58,19 @@ Route::prefix('MIN')->name('siswa.')->middleware('auth:pendaftar')->group(functi
 });
 
 // Admin Routes
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard', [AdminRoleController::class, 'dashboard'])->name('dashboard');
     Route::get('/', [AdminRoleController::class, 'dashboard'])->name('home');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/guru', [AdminRoleController::class, 'guru'])->name('guru');
-    Route::get('/siswa', [AdminRoleController::class, 'siswa'])->name('siswa');
-    Route::get('/fasilitas', [AdminRoleController::class, 'fasilitas'])->name('fasilitas');
-    Route::get('/prestasi', [AdminRoleController::class, 'prestasi'])->name('prestasi');
-    Route::get('/ekstrakulikuler', [AdminRoleController::class, 'extrakulikuler'])->name('ekstrakulikuler');
-    Route::get('/acara', [AdminRoleController::class, 'acara'])->name('acara');
-    Route::get('/admin', [AdminRoleController::class, 'admin'])->name('admin');
     Route::get('/informasipendaftaran', [AdminRoleController::class, 'informasipendaftaran'])->name('informasipendaftaran');
     Route::get('/pendaftaran', [AdminRoleController::class, 'pendaftaran'])->name('pendaftaran');
-    Route::get('/sekolah', [AdminRoleController::class, 'sekolah'])->name('sekolah');
-    Route::get('/strukturorganisasi', [AdminRoleController::class, 'strukturorganisasi'])->name('strukturorganisasi');
     Route::get('/notifikasi', [NotifikasiController::class, 'adminIndex'])->name('notifikasi.index');
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
 });
 
 
 // Super Admin Routes
-Route::prefix('superadmin')->name('superadmin.')->group(function () {
+Route::prefix('superadmin')->name('superadmin.')->middleware('auth:superadmin')->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('dashboard');
     
     // Guru Routes

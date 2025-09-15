@@ -1,7 +1,27 @@
 <style>
+    .sidebar {
+        width: 250px;
+        background: #fff;
+        border-right: 1px solid #ddd;
+        min-height: 100vh;
+        padding: 15px;
+    }
+
+    .sidebar h2 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #2c3e50;
+    }
+
     .sidebar ul {
         list-style-type: none;
         padding: 0;
+        margin: 0;
+    }
+
+    .sidebar ul li {
+        margin-bottom: 5px;
     }
 
     .sidebar ul li a {
@@ -9,31 +29,54 @@
         padding: 10px 15px;
         color: #333;
         text-decoration: none;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .sidebar ul li a:hover {
+        background: #f5f5f5;
+        color: #007bff;
     }
 
     .sidebar ul li a.active {
-        background-color: #f0f0f0;
-        font-weight: bold;
+        background: #e9f5ff;
+        color: #007bff;
+        font-weight: 600;
     }
 
     .dropdown-toggle::after {
-        content: "";
+        content: "\f107"; /* FontAwesome caret-down */
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        float: right;
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown.show + .dropdown-toggle::after {
+        transform: rotate(-180deg);
     }
 
     .dropdown {
         display: none;
-        padding-left: 20px;
-        border-left: 2px solid #ddd;
-        margin-left: 10px;
+        padding-left: 15px;
+        border-left: 2px solid #eee;
+        margin-left: 5px;
     }
 
     .dropdown.show {
         display: block;
+        animation: fadeIn 0.3s ease-in-out;
     }
 
     .dropdown li a {
-        padding: 8px 20px;
+        padding: 8px 15px;
         font-size: 14px;
+        border-radius: 4px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 </style>
 
@@ -48,83 +91,9 @@
                 </a>
             </li>
 
-            <!-- 2. Akun Admin -->
-            <li>
-                <a href="{{ route('admin.admin') }}" class="{{ request()->routeIs('admin.admin') ? 'active' : '' }}">
-                    <i class="fas fa-users"></i> Akun Admin
-                </a>
-            </li>
-
-            <!-- 3. Civitas -->
-            <li>
-                <a href="#" class="dropdown-toggle">
-                    <i class="fas fa-graduation-cap"></i> Civitas
-                </a>
-                <ul class="dropdown {{ request()->routeIs('admin.guru') || request()->routeIs('admin.siswa') || request()->routeIs('admin.strukturorganisasi') ? 'show' : '' }}">
-                    <li>
-                        <a href="{{ route('admin.guru') }}" class="{{ request()->routeIs('admin.guru') ? 'active' : '' }}">
-                            <i class="fas fa-chalkboard-teacher"></i> Data Guru
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.siswa') }}" class="{{ request()->routeIs('admin.siswa') ? 'active' : '' }}">
-                            <i class="fas fa-door-open"></i> Data Siswa
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.strukturorganisasi') }}" class="{{ request()->routeIs('admin.strukturorganisasi') ? 'active' : '' }}">
-                            <i class="fas fa-sitemap"></i> Struktur Organisasi
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- 4. Publikasi -->
-            <li>
-                <a href="#" class="dropdown-toggle">
-                    <i class="fas fa-newspaper"></i> Publikasi
-                </a>
-                <ul class="dropdown {{ request()->routeIs('admin.acara') || request()->routeIs('admin.prestasi') ? 'show' : '' }}">
-                    <li>
-                        <a href="{{ route('admin.acara') }}" class="{{ request()->routeIs('admin.acara') ? 'active' : '' }}">
-                            <i class="fas fa-calendar-alt"></i> Perayaan
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.prestasi') }}" class="{{ request()->routeIs('admin.prestasi') ? 'active' : '' }}">
-                            <i class="fas fa-trophy"></i> Prestasi
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- 5. Profil Sekolah -->
-            <li>
-                <a href="#" class="dropdown-toggle">
-                    <i class="fas fa-school"></i> Profil Sekolah
-                </a>
-                <ul class="dropdown {{ request()->routeIs('admin.ekstrakulikuler') || request()->routeIs('admin.fasilitas') || request()->routeIs('admin.sekolah') ? 'show' : '' }}">
-                    <li>
-                        <a href="{{ route('admin.sekolah') }}" class="{{ request()->routeIs('admin.sekolah') ? 'active' : '' }}">
-                            <i class="fas fa-school"></i> Sekolah
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.ekstrakulikuler') }}" class="{{ request()->routeIs('admin.ekstrakulikuler') ? 'active' : '' }}">
-                            <i class="fas fa-running"></i> Ekstrakurikuler
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.fasilitas') }}" class="{{ request()->routeIs('admin.fasilitas') ? 'active' : '' }}">
-                            <i class="fas fa-building"></i> Fasilitas
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
             <!-- 6. Pendaftaran -->
             <li>
-                <a href="#" class="dropdown-toggle">
+                <a href="#" class="dropdown-toggle {{ request()->routeIs('admin.informasipendaftaran') || request()->routeIs('admin.pendaftaran') ? 'active' : '' }}">
                     <i class="fas fa-user-plus"></i> Pendaftaran
                 </a>
                 <ul class="dropdown {{ request()->routeIs('admin.informasipendaftaran') || request()->routeIs('admin.pendaftaran') ? 'show' : '' }}">
@@ -139,16 +108,6 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-
-            <!-- 7. Logout -->
-            <li>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
             </li>
         </ul>
     </nav>
