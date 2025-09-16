@@ -18,11 +18,12 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\Superadmin\PegawaiController; 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DataPendaftarController;
 use App\Http\Controllers\NotifikasiController;
 
 
 // Public Routes
-Route::get('/', function () {return view('guest.home');})->name('guest.home');
+Route::get('/', [SekolahController::class, 'guest'])->name('guest.home');
 Route::get('/ProfilSekolah', function () { return view('guest.profilsekolah'); });
 Route::get('/guru', [GuruController::class, 'guest'])->name('guest.guru');
 Route::get('/kelas', [SiswaController::class, 'guest'])->name('guest.siswa');
@@ -61,31 +62,18 @@ Route::prefix('MIN')->name('siswa.')->middleware('auth:pendaftar')->group(functi
 });
 
 // Admin Routes
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
     Route::get('/dashboard', [AdminRoleController::class, 'dashboard'])->name('dashboard');
     Route::get('/', [AdminRoleController::class, 'dashboard'])->name('home');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/guru', [AdminRoleController::class, 'guru'])->name('guru');
-    Route::get('/siswa', [AdminRoleController::class, 'siswa'])->name('siswa');
-    Route::get('/fasilitas', [AdminRoleController::class, 'fasilitas'])->name('fasilitas');
-    Route::get('/prestasi', [AdminRoleController::class, 'prestasi'])->name('prestasi');
-    Route::get('/ekstrakulikuler', [AdminRoleController::class, 'extrakulikuler'])->name('ekstrakulikuler');
-    Route::get('/acara', [AdminRoleController::class, 'acara'])->name('acara');
-    Route::get('/admin', [AdminRoleController::class, 'admin'])->name('admin');
     Route::get('/informasipendaftaran', [AdminRoleController::class, 'informasipendaftaran'])->name('informasipendaftaran');
-    Route::get('/pendaftaran', [AdminRoleController::class, 'pendaftaran'])->name('pendaftaran');
-    Route::get('/sekolah', [AdminRoleController::class, 'sekolah'])->name('sekolah');
-    Route::get('/strukturorganisasi', [AdminRoleController::class, 'strukturorganisasi'])->name('strukturorganisasi');
     Route::get('/notifikasi', [NotifikasiController::class, 'adminIndex'])->name('notifikasi.index');
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
-    Route::post('/pendaftar/{id}/terima', [PendaftaranController::class, 'terima'])->name('pendaftar.terima');
-    Route::post('/pendaftar/{id}/tolak', [PendaftaranController::class, 'tolak'])->name('pendaftar.tolak');
-    Route::post('/pendaftar/{id}/komentar', [PendaftaranController::class, 'komentar'])->name('pendaftar.komentar');
 });
 
 
 // Super Admin Routes
-Route::prefix('superadmin')->name('superadmin.')->group(function () {
+Route::prefix('superadmin')->name('superadmin.')->middleware('auth:superadmin')->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('dashboard');
     
     // Guru Routes

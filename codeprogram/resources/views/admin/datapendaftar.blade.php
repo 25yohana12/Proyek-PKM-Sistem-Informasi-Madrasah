@@ -1,23 +1,23 @@
-@extends('layouts.superadmin')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
     <h2>Daftar Pendaftar</h2>
     <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nama Pendaftar</th>
-                <th>Email</th>
-                <th>NISN</th>
-                <th>Tempat, Tanggal Lahir</th>
-                <th>Jenis Kelamin</th>
-                <th>Telepon</th>
-                <th>Alamat</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($pendaftar as $item)
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>NISN</th>
+            <th>TTL</th>
+            <th>Jenis Kelamin</th>
+            <th>Telepon</th>
+            <th>Alamat</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($data as $item)
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->namaPendaftar }}</td>
@@ -28,8 +28,13 @@
                 <td>{{ $item->telepon }}</td>
                 <td>{{ $item->alamat }}</td>
             </tr>
-            @endforeach
-        </tbody>
-    </table>
+        @endforeach
+    </tbody>
+</table>
+
+{{-- Pagination --}}
+<div class="mt-3">
+    {{ $data->links() }}
+</div>
 </div>
 @endsection

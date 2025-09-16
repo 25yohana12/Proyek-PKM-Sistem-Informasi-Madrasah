@@ -75,16 +75,16 @@
         <!-- Notifikasi -->
         <li class="nav-item me-lg-3 position-relative">
           <button class="btn btn-notif position-relative" id="notifBtn" title="Notifikasi" type="button">
-            <!-- Ikon Bel (SVG) -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+            <!-- Ikon Bel -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
               <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
             </svg>
-            <!-- Badge Notifikasi -->
+            <!-- Badge -->
             <span class="notif-badge" id="notifBadge">{{ $notifCount ?? 0 }}</span>
           </button>
           
-          <!-- Popup Notifikasi -->
-          <div id="notifPopup" class="notif-popup" style="display:none;">
+          <!-- Popup -->
+          <div id="notifPopup" class="notif-popup">
             <div class="notif-popup-header">
               <strong>Notifikasi Terbaru</strong>
             </div>
@@ -92,7 +92,7 @@
               @if(isset($notifikasis) && $notifikasis->count() > 0)
                 @foreach($notifikasis->take(5) as $notif)
                   <li class="notif-popup-item {{ $notif->read ? 'notif-read' : 'notif-unread' }}">
-                    <a href="#" class="notif-link" data-id="{{ $notif->id }}">
+                    <a href="{{ route('admin.notifikasi.show', $notif->id) }}" class="notif-link" data-id="{{ $notif->id }}">
                       <span class="notif-msg">{{ $notif->pesan }}</span>
                       <span class="notif-time">{{ $notif->created_at->format('d M H:i') }}</span>
                     </a>
@@ -106,25 +106,30 @@
             </ul>
             @if(isset($notifikasis) && $notifikasis->count() > 5)
               <div class="notif-popup-footer text-center py-2">
-                <a href="#" class="btn btn-notif-more">Lihat Selengkapnya</a>
+                <a href="{{ route('admin.notifikasi.index') }}" class="btn btn-notif-more">Lihat Selengkapnya</a>
               </div>
             @endif
           </div>
         </li>
+
         <!-- Logout -->
         <li class="nav-item me-lg-3">
-          <a class="nav-link" href="{{ route('siswa.logout') }}" style="color:#000;">
-            <i class="fas fa-sign-out-alt me-1"></i>LogOut
-          </a>
+          <form action="{{ route('siswa.logout') }}" method="POST" style="display:inline;">
+            @csrf
+            <button type="submit" class="nav-link btn btn-link" style="color:#000; text-decoration:none;">
+              <i class="fas fa-sign-out-alt me-1"></i> LogOut
+            </button>
+          </form>
         </li>
-
       </ul>
     </div>
   </div>
 </nav>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
-/* Notification Styles - Same as dashboard.blade.php */
+/* Tombol notif */
 .btn-notif {
     background: linear-gradient(135deg, #6D8D79, #5a7466);
     color: #fff;
@@ -135,31 +140,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     position: relative;
     box-shadow: 0 4px 16px rgba(109,141,121,0.15);
-    transition: background 0.2s, box-shadow 0.2s;
+    cursor: pointer;
 }
 
-.btn-notif:hover {
-    background: linear-gradient(135deg, #5a7466, #6D8D79);
-    box-shadow: 0 8px 24px rgba(109,141,121,0.25);
-}
-
+/* Badge */
 .notif-badge {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 6px;
+    right: 6px;
     background: #ef4444;
     color: #fff;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 700;
     padding: 2px 7px;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(239,68,68,0.12);
 }
 
+/* Popup */
 .notif-popup {
+    display: none;
     position: absolute;
     top: 56px;
     right: 0;
@@ -167,21 +169,22 @@
     background: #fff;
     border-radius: 14px;
     box-shadow: 0 8px 32px rgba(109,141,121,0.18);
-    z-index: 99;
-    border: 1px solid #e2e8f0;
-    padding: 0;
+    z-index: 9999;
+    pointer-events: auto;
+}
+.notif-popup.hidden {
+    display: none;
+    pointer-events: none;
 }
 
+/* Header popup */
 .notif-popup-header {
-    padding: 14px 22px;
+    padding: 12px 18px;
     border-bottom: 1px solid #e2e8f0;
-    font-size: 1.08rem;
-    color: #2d3748;
-    font-weight: 700;
-    background: #f8fafc;
-    border-radius: 14px 14px 0 0;
+    font-weight: bold;
 }
 
+/* List notif */
 .notif-popup-list {
     list-style: none;
     margin: 0;
@@ -191,140 +194,49 @@
 }
 
 .notif-popup-item {
-    margin: 10px 14px;
+    margin: 8px 12px;
     border-radius: 10px;
     transition: background 0.2s;
-    box-shadow: 0 2px 8px rgba(109,141,121,0.07);
 }
 
 .notif-popup-item a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px;
+    padding: 10px 14px;
     text-decoration: none;
-    color: #2d3748;
-    font-size: 0.97rem;
-    border-radius: 10px;
+    color: #333;
 }
 
-.notif-unread {
-    background: #a1a7b3ff;
-}
+.notif-unread { background: #e0f2f1; }
+.notif-read { background: #fff; }
 
-.notif-read {
-    background: #fff;
-}
+.notif-popup-item a:hover { background: #f1f5f9; }
 
-.notif-popup-item a:hover {
-    background: #e2e8f0;
-}
-
-.notif-msg {
-    font-weight: 600;
-    flex: 1;
-    color: #374151;
-}
-
-.notif-time {
-    font-size: 0.85rem;
-    color: #a0aec0;
-    margin-left: 12px;
-    white-space: nowrap;
-}
-
-.notif-popup-empty {
-    text-align: center;
-    color: #64748b;
-    padding: 18px 0;
-    font-size: 0.98rem;
-}
-
-.notif-popup-footer {
-    border-top: 1px solid #e2e8f0;
-    background: #f8fafc;
-    border-radius: 0 0 14px 14px;
-}
-
-.btn-notif-more {
-    display: inline-block;
-    padding: 7px 18px;
-    font-size: 0.98rem;
-    color: #2d3748;
-    background: #e2e8f0;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.2s;
-}
-
-.btn-notif-more:hover {
-    background: #cbd5e1;
-    color: #1e293b;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .notif-popup {
-        width: 280px;
-        right: -10px;
-    }
-    
-    .btn-notif {
-        width: 44px;
-        height: 44px;
-        font-size: 1.2rem;
-    }
-}
+.notif-msg { font-weight: 600; }
+.notif-time { font-size: 0.8rem; color: #888; }
 </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const notifBtn = document.getElementById('notifBtn');
-    const notifPopup = document.getElementById('notifPopup');
-    const notifBadge = document.getElementById('notifBadge');
-    const notifLinks = document.querySelectorAll('.notif-link');
+  const notifBtn = document.getElementById('notifBtn');
+  const notifPopup = document.getElementById('notifPopup');
 
-    if (notifBtn && notifPopup) {
-        notifBtn.addEventListener('click', function(e) {
-            notifPopup.style.display = notifPopup.style.display === 'none' ? 'block' : 'none';
-            e.stopPropagation();
-        });
+  if (notifBtn && notifPopup) {
+    notifBtn.addEventListener('click', function(e) {
+      notifPopup.style.display = (notifPopup.style.display === 'block') ? 'none' : 'block';
+      e.stopPropagation();
+    });
 
-        document.addEventListener('click', function(e) {
-            if (!notifBtn.contains(e.target) && !notifPopup.contains(e.target)) {
-                notifPopup.style.display = 'none';
-            }
-        });
-
-        notifLinks.forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                let notifId = this.dataset.id;
-                fetch('/siswa/notifikasi/' + notifId + '/read', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Accept': 'application/json'
-                    }
-                }).then(response => response.json())
-                  .then(data => {
-                      if (data.success) {
-                          let count = parseInt(notifBadge.textContent);
-                          if (count > 0) notifBadge.textContent = count - 1;
-                          const parentItem = this.closest('.notif-popup-item');
-                          if (parentItem) {
-                              parentItem.classList.remove('notif-unread');
-                              parentItem.classList.add('notif-read');
-                          }
-                      }
-                  });
-            });
-        });
-    }
+    document.addEventListener('click', function(e) {
+      if (!notifBtn.contains(e.target) && !notifPopup.contains(e.target)) {
+        notifPopup.style.display = 'none';
+      }
+    });
+  }
 });
 </script>
 
-<!-- Bootstrap JS & Icons -->
+<!-- Bootstrap -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

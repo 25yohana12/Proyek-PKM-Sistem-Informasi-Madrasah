@@ -43,7 +43,6 @@ class StrukturOrganisasiController extends Controller
     }
 
     /* ───────────────────────── CREATE ──────────────────────── */
-use App\Models\Guru; // tambahkan ini di atas
 
 public function create()
 {

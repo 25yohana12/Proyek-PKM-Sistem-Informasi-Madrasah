@@ -3,13 +3,13 @@
 @section('content')
 <style>
   :root{
-    --brand:#34C759;        /* tombol/aksen */
-    --accent:#48b470;       /* hijau navbar kamu */
-    --ink:#194d2b;
-    --muted:#6c757d;
-    --danger:#dc3545;
-    --surface:#ffffff;
-    --border:#e8f4ec;
+    --brand:#34C759;        /* warna tombol utama */
+    --accent:#48b470;       /* warna aksen (judul section) */
+    --ink:#194d2b;          /* warna teks utama */
+    --muted:#6c757d;        /* teks keterangan */
+    --danger:#dc3545;       /* merah error */
+    --surface:#ffffff;      /* background kartu */
+    --border:#e8f4ec;       /* border halus */
   }
   .form-wrap{max-width:1100px;margin:0 auto;}
   .form-card{
@@ -23,19 +23,22 @@
     font-weight:700;color:var(--ink);
     border-left:6px solid var(--accent);
     padding-left:10px;margin:24px 0 12px;
+    font-size:1.1rem;
   }
   .form-label{font-weight:600}
   .form-label .req{color:var(--danger);margin-left:4px;}
   .note{color:var(--muted);font-size:.9rem}
   .btn-submit{
     background:var(--brand);border:0;color:#000;
-    padding:10px 16px;border-radius:12px;font-weight:600;
+    padding:10px 18px;border-radius:12px;font-weight:600;
+    transition:.2s;
   }
   .btn-submit:hover{background:#28a745;color:#fff}
-  .invalid-feedback{display:block}
+  .invalid-feedback{display:block;font-size:.85rem}
   .help-hint{font-size:.85rem;color:var(--muted)}
-  /* bikin jarak antar kolom pas */
+  /* jarak antar kolom */
   .row.g-3 > [class^="col"]{margin-top:.35rem}
+  input[type="file"].form-control{padding:6px}
 </style>
 
 <div class="container py-4 form-wrap">
@@ -106,14 +109,14 @@
         @error('nik') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Tempat Lahir <span class="req">*</span></label>
         <input type="text" name="tempatLahir" class="form-control @error('tempatLahir') is-invalid @enderror"
                value="{{ old('tempatLahir') }}">
         @error('tempatLahir') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Tanggal Lahir <span class="req">*</span></label>
         <input type="date" name="tanggalLahir" id="tanggalLahir"
               class="form-control @error('tanggalLahir') is-invalid @enderror"
@@ -123,7 +126,7 @@
         @enderror
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Jenis Kelamin <span class="req">*</span></label>
         <select name="jenisKelamin" class="form-select @error('jenisKelamin') is-invalid @enderror">
           <option value="" disabled {{ old('jenisKelamin') ? '' : 'selected' }}>-- Pilih --</option>
@@ -133,21 +136,21 @@
         @error('jenisKelamin') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">Jumlah Saudara <span class="req">*</span></label>
         <input type="number" name="jumlahSaudara" min="0" class="form-control @error('jumlahSaudara') is-invalid @enderror"
                value="{{ old('jumlahSaudara') }}">
         @error('jumlahSaudara') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">Anak Ke <span class="req">*</span></label>
         <input type="number" name="anakKe" min="1" class="form-control @error('anakKe') is-invalid @enderror"
                value="{{ old('anakKe') }}">
         @error('anakKe') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">Agama <span class="req">*</span></label>
         <select name="agama" class="form-select @error('agama') is-invalid @enderror">
           <option value="" disabled {{ old('agama') ? '' : 'selected' }}>-- Pilih --</option>
@@ -161,7 +164,7 @@
         @error('agama') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">Telepon/HP <span class="req">*</span></label>
         <div class="input-group">
           <select name="kode_negara" class="form-select" style="max-width: 100px;">
@@ -258,33 +261,33 @@
         @error('praSekolah') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">No. Kartu Keluarga <span class="req">*</span></label>
         <input type="text" name="noKartuKeluarga" maxlength="16" class="form-control @error('noKartuKeluarga') is-invalid @enderror"
                value="{{ old('noKartuKeluarga') }}" inputmode="numeric">
         @error('noKartuKeluarga') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-8">
+      <div class="col-md-6">
         <label class="form-label">Nama Kepala Keluarga <span class="req">*</span></label>
         <input type="text" name="kepalaKeluarga" class="form-control @error('kepalaKeluarga') is-invalid @enderror"
                value="{{ old('kepalaKeluarga') }}">
         @error('kepalaKeluarga') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Kartu Keluarga (jpg/png/pdf) <span class="req">*</span></label>
         <input type="file" name="fotoKartuKeluarga" class="form-control @error('fotoKartuKeluarga') is-invalid @enderror" accept=".jpg,.jpeg,.png,.pdf">
         @error('fotoKartuKeluarga') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Akte Lahir (jpg/png/pdf) <span class="req">*</span></label>
         <input type="file" name="fotoAkteLahir" class="form-control @error('fotoAkteLahir') is-invalid @enderror" accept=".jpg,.jpeg,.png,.pdf">
         @error('fotoAkteLahir') <div class="invalid-feedback">{{ $message }}</div> @enderror
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Foto Pendaftar (jpg/png) <span class="req">*</span></label>
         <input type="file" name="fotoPendaftar" class="form-control @error('fotoPendaftar') is-invalid @enderror" accept=".jpg,.jpeg,.png">
         @error('fotoPendaftar') <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -298,7 +301,7 @@
         <label class="form-label">Nama Ayah <span class="req">*</span></label>
         <input type="text" name="namaAyah" class="form-control" value="{{ old('namaAyah') }}">
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">Status Ayah <span class="req">*</span></label>
         <select name="statusAyah" class="form-select">
           <option value="" disabled {{ old('statusAyah') ? '' : 'selected' }}>-- Pilih --</option>
@@ -307,19 +310,19 @@
           <option value="Tidak Diketahui" {{ old('statusAyah')=='Tidak Diketahui'?'selected':'' }}>Tidak Diketahui</option>
         </select>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">NIK Ayah <span class="req">*</span></label>
         <input type="text" name="nikAyah" maxlength="16" class="form-control" value="{{ old('nikAyah') }}" inputmode="numeric">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Tempat Lahir Ayah <span class="req">*</span></label>
         <input type="text" name="tempatLahirAyah" class="form-control" value="{{ old('tempatLahirAyah') }}">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Tanggal Lahir Ayah <span class="req">*</span></label>
         <input type="date" name="tanggalLahirAyah" class="form-control" value="{{ old('tanggalLahirAyah') }}">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Pendidikan Ayah <span class="req">*</span></label>
         <select name="pendidikanAyah" class="form-select">
           <option value="" disabled {{ old('pendidikanAyah') ? '' : 'selected' }}>-- Pilih --</option>
@@ -349,7 +352,7 @@
         <label class="form-label">Nama Ibu <span class="req">*</span></label>
         <input type="text" name="namaIbu" class="form-control" value="{{ old('namaIbu') }}">
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">Status Ibu <span class="req">*</span></label>
         <select name="statusIbu" class="form-select">
           <option value="" disabled {{ old('statusIbu') ? '' : 'selected' }}>-- Pilih --</option>
@@ -357,19 +360,19 @@
           <option value="Meninggal" {{ old('statusIbu')=='Meninggal'?'selected':'' }}>Meninggal</option>
         </select>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">NIK Ibu <span class="req">*</span></label>
         <input type="text" name="nikIbu" maxlength="16" class="form-control" value="{{ old('nikIbu') }}" inputmode="numeric">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Tempat Lahir Ibu <span class="req">*</span></label>
         <input type="text" name="tempatLahirIbu" class="form-control" value="{{ old('tempatLahirIbu') }}">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Tanggal Lahir Ibu <span class="req">*</span></label>
         <input type="date" name="tanggalLahirIbu" class="form-control" value="{{ old('tanggalLahirIbu') }}">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Pendidikan Ibu <span class="req">*</span></label>
         <select name="pendidikanIbu" class="form-select">
           <option value="" disabled {{ old('pendidikanIbu') ? '' : 'selected' }}>-- Pilih --</option>
@@ -398,7 +401,7 @@
         <label class="form-label">Nama Wali</label>
         <input type="text" name="namaWali" class="form-control" value="{{ old('namaWali') }}">
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">Status Wali</label>
         <select name="statusWali" class="form-select">
           <option value="" disabled {{ old('statusWali') ? '' : 'selected' }}>-- Pilih --</option>
@@ -406,19 +409,19 @@
           <option value="Meninggal" {{ old('statusWali')=='Meninggal'?'selected':'' }}>Meninggal</option>
         </select>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label class="form-label">NIK Wali</label>
         <input type="text" name="nikWali" maxlength="16" class="form-control" value="{{ old('nikWali') }}" inputmode="numeric">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Tempat Lahir Wali</label>
         <input type="text" name="tempatLahirWali" class="form-control" value="{{ old('tempatLahirWali') }}">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Tanggal Lahir Wali</label>
         <input type="date" name="tanggalLahirWali" class="form-control" value="{{ old('tanggalLahirWali') }}">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Pendidikan Wali</label>
         <select name="pendidikanWali" class="form-select">
           <option value="" disabled {{ old('pendidikanWali') ? '' : 'selected' }}>-- Pilih --</option>
@@ -444,17 +447,17 @@
       {{-- ===================== ALAMAT & TRANSPORT ===================== --}}
       <div class="col-12"><div class="section-title">Alamat & Transportasi</div></div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Provinsi <span class="req">*</span></label>
         <input type="text" name="provinsi" class="form-control" value="{{ old('provinsi') }}">
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Kabupaten/Kota <span class="req">*</span></label>
         <input type="text" name="kabupaten" class="form-control" value="{{ old('kabupaten') }}">
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Status Rumah <span class="req">*</span></label>
         <select name="statusRumah" class="form-select">
           <option value="" disabled {{ old('statusRumah') ? '' : 'selected' }}>-- Pilih --</option>
@@ -464,22 +467,22 @@
         </select>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Kecamatan <span class="req">*</span></label>
         <input type="text" name="kecamatan" class="form-control" value="{{ old('kecamatan') }}">
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Desa/Kelurahan <span class="req">*</span></label>
         <input type="text" name="desa" class="form-control" value="{{ old('desa') }}">
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Alamat Lengkap <span class="req">*</span></label>
         <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}">
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Jarak Rumah ke Sekolah <span class="req">*</span></label>
         <select name="jarakRumah" class="form-select">
           <option value="" disabled {{ old('jarakRumah') ? '' : 'selected' }}>-- Pilih --</option>
@@ -489,7 +492,7 @@
         </select>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Transportasi ke Sekolah <span class="req">*</span></label>
         <select name="kendaraan" class="form-select">
           <option value="" disabled {{ old('kendaraan') ? '' : 'selected' }}>-- Pilih --</option>
@@ -499,7 +502,7 @@
         </select>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label">Waktu Perjalanan <span class="req">*</span></label>
         <select name="waktuPerjalanan" class="form-select">
           <option value="" disabled {{ old('waktuPerjalanan') ? '' : 'selected' }}>-- Pilih --</option>
