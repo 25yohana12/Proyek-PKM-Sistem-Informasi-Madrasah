@@ -66,6 +66,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/dashboard', [AdminRoleController::class, 'dashboard'])->name('dashboard');
     Route::get('/', [AdminRoleController::class, 'dashboard'])->name('home');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/Pendaftar', [PendaftaranController::class, 'index'])->name('pendaftaran');
     Route::get('/informasipendaftaran', [AdminRoleController::class, 'informasipendaftaran'])->name('informasipendaftaran');
     Route::get('/notifikasi', [NotifikasiController::class, 'adminIndex'])->name('notifikasi.index');
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
