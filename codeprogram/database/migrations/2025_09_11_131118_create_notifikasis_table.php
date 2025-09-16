@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->text('pesan');
+            $table->unsignedBigInteger('user_id')->nullable(); // <--- penting!
+            $table->unsignedBigInteger('data_id')->nullable(); // <--- opsional, relasi ke pendaftar
             $table->boolean('read')->default(false);
             $table->timestamps();
         });

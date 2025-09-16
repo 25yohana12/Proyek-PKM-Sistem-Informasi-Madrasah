@@ -9,7 +9,7 @@ class NotifikasiController extends Controller
 {
     public function adminIndex()
     {
-        $notifikasis = Notifikasi::orderBy('created_at', 'desc')->get();
+        $notifikasis = Notifikasi::whereNull('user_id')->orderBy('created_at', 'desc')->get();
         return view('admin.notifikasi.index', compact('notifikasis'));
     }
 
@@ -24,4 +24,5 @@ class NotifikasiController extends Controller
         $pendaftar = \App\Models\DataPendaftar::where('pendaftar_id', $notif->data_id)->first();
         return view('admin.notifikasi.show', compact('notif', 'pendaftar'));
     }
+    
 }

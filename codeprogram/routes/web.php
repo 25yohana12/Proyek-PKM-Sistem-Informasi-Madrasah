@@ -55,6 +55,9 @@ Route::prefix('MIN')->name('siswa.')->middleware('auth:pendaftar')->group(functi
     Route::get('/strukturorganisasi', [StrukturOrganisasiController::class, 'siswa'])->name('siswa.strukturorganisasi');
     Route::get('/pendaftaran/success', [PendaftaranController::class, 'success'])->name('success.pendaftaran');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/notifikasi', [SiswaNotifikasiController::class, 'index'])->name('notifikasi.index');
+    Route::post('/notifikasi/{id}/read', [SiswaNotifikasiController::class, 'read'])->name('notifikasi.read');
+    Route::post('/siswa/notifikasi/{id}/read', [SiswaNotifikasiController::class, 'read'])->name('siswa.notifikasi.read');
 });
 
 // Admin Routes
@@ -75,6 +78,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/strukturorganisasi', [AdminRoleController::class, 'strukturorganisasi'])->name('strukturorganisasi');
     Route::get('/notifikasi', [NotifikasiController::class, 'adminIndex'])->name('notifikasi.index');
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
+    Route::post('/pendaftar/{id}/terima', [PendaftaranController::class, 'terima'])->name('pendaftar.terima');
+    Route::post('/pendaftar/{id}/tolak', [PendaftaranController::class, 'tolak'])->name('pendaftar.tolak');
+    Route::post('/pendaftar/{id}/komentar', [PendaftaranController::class, 'komentar'])->name('pendaftar.komentar');
 });
 
 

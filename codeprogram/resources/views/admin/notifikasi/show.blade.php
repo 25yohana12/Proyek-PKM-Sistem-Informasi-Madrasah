@@ -1,3 +1,6 @@
+@php
+    $notifikasis = \App\Models\Notifikasi::whereNull('user_id')->orderBy('created_at', 'desc')->get();
+@endphp
 @extends('layouts.superadmin')
 
 @section('content')
@@ -256,55 +259,67 @@
         
         <!-- Action Buttons -->
         <div class="action-buttons">
-            <a href="#" class="btn-action btn-back" onclick="goBack()">
+            <a href="{{ route('admin.dashboard') }}" class="btn-action btn-back">
                 <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
             </a>
             
-            <button type="button" class="btn-action btn-approve" onclick="showApproveConfirm()">
-                <i class="fas fa-check-circle"></i> Terima
-            </button>
+            <!-- Form Terima -->
+            <form action="{{ route('admin.pendaftar.terima', $pendaftar->pendaftar_id) }}" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn-action btn-approve" onclick="return confirm('Terima pendaftar ini?')">
+                    <i class="fas fa-check-circle"></i> Terima
+                </button>
+            </form>
+
+            <!-- Form Tolak -->
+            <form action="{{ route('admin.pendaftar.tolak', $pendaftar->pendaftar_id) }}" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit" class="btn-action btn-reject" onclick="return confirm('Tolak pendaftar ini?')">
+                    <i class="fas fa-times-circle"></i> Tolak
+                </button>
+            </form>
             
-            <button type="button" class="btn-action btn-reject" onclick="showRejectConfirm()">
-                <i class="fas fa-times-circle"></i> Tolak
-            </button>
-            
+            <!-- Modal Komentar tetap pakai form -->
             <button type="button" class="btn-action btn-comment" data-bs-toggle="modal" data-bs-target="#komentarModal">
                 <i class="fas fa-comment-dots"></i> Komentar
             </button>
         </div>
         
-        <!-- Modal Komentar -->
+        <<!-- Modal Komentar -->
         <div class="modal fade" id="komentarModal" tabindex="-1" aria-labelledby="komentarModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="komentarModalLabel">
-                            <i class="fas fa-comment-alt me-2"></i>Kirim Komentar ke Pendaftar
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="komentar" class="form-label fw-bold">
-                                Komentar untuk: <span class="text-primary">{{ $pendaftar->namaPendaftar }}</span>
-                            </label>
-                            <textarea class="form-control" id="komentar" name="komentar" rows="5" 
-                                placeholder="Tuliskan komentar atau catatan untuk pendaftar...&#10;&#10;Contoh:&#10;- Mohon lengkapi dokumen yang masih kurang&#10;- Perlu perbaikan pada data orangtua&#10;- Silakan hubungi admin untuk informasi lebih lanjut"></textarea>
+                    <form action="{{ route('admin.pendaftar.komentar', $pendaftar->pendaftar_id) }}" method="POST">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="komentarModalLabel">
+                                <i class="fas fa-comment-alt me-2"></i>Kirim Komentar ke Pendaftar
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="alert alert-info alert-custom">
-                            <i class="fas fa-info-circle me-2"></i>
-                            <strong>Informasi:</strong> Komentar ini akan dikirim melalui email ke: 
-                            <strong>{{ $pendaftar->email }}</strong>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="komentar" class="form-label fw-bold">
+                                    Komentar untuk: <span class="text-primary">{{ $pendaftar->namaPendaftar }}</span>
+                                </label>
+                                <textarea class="form-control" id="komentar" name="komentar" rows="5" 
+                                    placeholder="Tuliskan komentar atau catatan untuk pendaftar...&#10;&#10;Contoh:&#10;- Mohon lengkapi dokumen yang masih kurang&#10;- Perlu perbaikan pada data orangtua&#10;- Silakan hubungi admin untuk informasi lebih lanjut" required></textarea>
+                            </div>
+                            <div class="alert alert-info alert-custom">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Informasi:</strong> Komentar ini akan dikirim ke notifikasi siswa dan email: 
+                                <strong>{{ $pendaftar->email }}</strong>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="fas fa-times"></i> Batal
-                        </button>
-                        <button type="button" class="btn btn-primary" onclick="sendComment()">
-                            <i class="fas fa-paper-plane"></i> Kirim Komentar
-                        </button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                <i class="fas fa-times"></i> Batal
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i> Kirim Komentar
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

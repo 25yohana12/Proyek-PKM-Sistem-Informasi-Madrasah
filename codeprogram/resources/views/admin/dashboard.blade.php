@@ -1,3 +1,6 @@
+@php
+    $notifikasis = \App\Models\Notifikasi::whereNull('user_id')->orderBy('created_at', 'desc')->get();
+@endphp
 @extends('layouts.superadmin')
 
 @section('title', 'Dashboard')
