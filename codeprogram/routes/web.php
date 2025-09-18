@@ -57,8 +57,8 @@ Route::prefix('MIN')->name('siswa.')->middleware('auth:pendaftar')->group(functi
     Route::get('/pendaftaran/success', [PendaftaranController::class, 'success'])->name('success.pendaftaran');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/notifikasi', [SiswaNotifikasiController::class, 'index'])->name('notifikasi.index');
+    Route::get('/notifikasi/{id}', [SiswaNotifikasiController::class, 'show'])->name('notifikasi.show');
     Route::post('/notifikasi/{id}/read', [SiswaNotifikasiController::class, 'read'])->name('notifikasi.read');
-    Route::post('/siswa/notifikasi/{id}/read', [SiswaNotifikasiController::class, 'read'])->name('siswa.notifikasi.read');
 });
 
 // Admin Routes
