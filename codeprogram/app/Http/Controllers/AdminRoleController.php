@@ -11,6 +11,7 @@ use App\Models\Acara;
 use Illuminate\Http\Request;
 use App\Models\DataPendaftar;
 use App\Models\Notifikasi;
+use App\Models\InformasiPendaftaran;
 
 class AdminRoleController extends Controller
 {

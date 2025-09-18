@@ -58,32 +58,32 @@
         </div>
         <div class="card-body">
             <div class="dashboard-grid">
-                <a href="{{ route('superadmin.guru.index') }}" class="stat-card">
+                <a href="#" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-chalkboard-user"></i></div>
                     <div class="stat-label">Guru</div>
                     <div class="stat-value">{{ $guruCount }}</div>
                 </a>
-                <a href="{{ route('superadmin.siswa.index') }}" class="stat-card">
+                <a href="#" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
                     <div class="stat-label">Siswa</div>
                     <div class="stat-value">{{ $siswaCount }}</div>
                 </a>
-                <a href="{{ route('superadmin.fasilitas.index') }}" class="stat-card">
+                <a href="#" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-building"></i></div>
                     <div class="stat-label">Fasilitas</div>
                     <div class="stat-value">{{ $fasilitasCount }}</div>
                 </a>
-                <a href="{{ route('superadmin.prestasi.index') }}" class="stat-card">
+                <a href="#" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-trophy"></i></div>
                     <div class="stat-label">Prestasi</div>
                     <div class="stat-value">{{ $prestasiCount }}</div>
                 </a>
-                <a href="{{ route('superadmin.ekstrakurikuler.index') }}" class="stat-card">
+                <a href="#" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-volleyball"></i></div>
                     <div class="stat-label">Ekstrakurikuler</div>
                     <div class="stat-value">{{ $ekstrakurikulerCount }}</div>
                 </a>
-                <a href="{{ route('superadmin.acara.index') }}" class="stat-card">
+                <a href="#" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
                     <div class="stat-label">Acara</div>
                     <div class="stat-value">{{ $acaraCount }}</div>

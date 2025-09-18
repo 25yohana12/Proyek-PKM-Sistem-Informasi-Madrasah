@@ -39,7 +39,7 @@
                     <div class="stat-label">Fasilitas</div>
                     <div class="stat-value">{{ $fasilitasCount }}</div>
                 </a>
-                <a href="{{ route('superadmin.prestasi.index') }}" class="stat-card">
+                <a href="#" class="stat-card">
                     <div class="stat-icon"><i class="fas fa-trophy"></i></div>
                     <div class="stat-label">Prestasi</div>
                     <div class="stat-value">{{ $prestasiCount }}</div>

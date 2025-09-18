@@ -103,7 +103,6 @@
 
             <div class="links">
                 Belum punya Akun? <a href="/registrasi">Registrasi</a> |
-                <a href="#">Lupa Password</a> |
                 <a href="/">Beranda</a>
             </div>
 
