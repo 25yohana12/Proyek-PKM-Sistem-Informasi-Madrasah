@@ -20,6 +20,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataPendaftarController;
 use App\Http\Controllers\NotifikasiController;
+use Illuminate\Support\Facades\Auth;
 
 
 // Public Routes
@@ -38,6 +39,12 @@ Route::get('/registrasi', [PendaftaranController::class, 'registerAwal'])->name(
 Route::post('/registrasi', [PendaftaranController::class, 'storeAwal'])->name('siswa.store_awal');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/'); // kembali ke halaman home
+})->name('logout');
 
 // Siswa Routes
 Route::prefix('MIN')->name('siswa.')->middleware('auth:pendaftar')->group(function () {

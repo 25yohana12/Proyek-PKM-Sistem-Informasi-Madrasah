@@ -107,6 +107,9 @@
             </div>
 
             <button type="submit">MASUK</button>
+            <button type="button" onclick="window.location.href='{{ url('/') }}'" style="background:#28a745; margin-top:10px;">
+                Kembali
+            </button>
         </form>
 
         <div class="characters">
