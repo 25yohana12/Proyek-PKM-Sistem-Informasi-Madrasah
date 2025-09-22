@@ -20,9 +20,11 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataPendaftarController;
 use App\Http\Controllers\NotifikasiController;
-
+use App\Http\Controllers\Auth\GoogleController;
 
 // Public Routes
+Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'callback']);
 Route::get('/', [SekolahController::class, 'guest'])->name('guest.home');
 Route::get('/ProfilSekolah', function () { return view('guest.profilsekolah'); });
 Route::get('/guru', [GuruController::class, 'guest'])->name('guest.guru');
