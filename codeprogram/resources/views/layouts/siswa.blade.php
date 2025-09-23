@@ -3,16 +3,17 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIN Toba Samosir</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIN Toba Samosir</title>
 
-    <!-- Link to Bootstrap 5 CSS (for responsive design) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
-    <!-- Link to Custom CSS File -->
-    <link rel="stylesheet" href="{{ asset('css/layoutguest.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/layoutguest.css') }}">
+
 
     @yield('styles')
 </head>
