@@ -137,7 +137,7 @@
                                             </div>
                                             <h3 class="empty-title">Belum ada fasilitas</h3>
                                             <p class="empty-subtitle">Mulai dengan menambahkan fasilitas pertama Anda</p>
-                                            <button class="btn btn-primary" onclick="window.location.href='{{ route('fasilitas.create') }}'">
+                                            <button class="btn btn-primary" onclick="window.location.href='{{ route('superadmin.fasilitas.create') }}'">
                                                 <i class="fas fa-plus"></i>
                                                 Tambah Fasilitas
                                             </button>
