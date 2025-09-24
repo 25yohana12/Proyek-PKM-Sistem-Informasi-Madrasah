@@ -117,11 +117,11 @@
                             <i class="fas fa-list-ul"></i> Daftar Pendaftar
                         </a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="{{ route('admin.datapendaftar') }}" class="{{ request()->routeIs('admin.datapendaftar') ? 'active' : '' }}">
                             <i class="fas fa-table"></i> Data Pendaftar
                         </a>
-                    </li>
+                    </li> -->
                     <li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:inline;">
                             @csrf

@@ -1,7 +1,7 @@
 @php
     $notifikasis = \App\Models\Notifikasi::whereNull('data_id')->orderBy('created_at', 'desc')->get();
 @endphp
-@extends('layouts.superadmin')
+@extends('layouts.admin')
 
 @section('content')
 <style>
@@ -316,7 +316,7 @@
         
         <!-- Action Buttons -->
         <div class="action-buttons">
-            <a href="{{ route('admin.dashboard') }}" class="btn-action btn-back">
+            <a href="{{ route('admin.pendaftaran') }}" class="btn-action btn-back">
                 <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
             </a>
             

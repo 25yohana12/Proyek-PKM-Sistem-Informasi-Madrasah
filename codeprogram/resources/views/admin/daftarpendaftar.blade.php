@@ -45,70 +45,59 @@
                         <input type="text" placeholder="Cari nama pendaftar..." class="form-control">
                         <i class="fas fa-search"></i>
                     </div>
-                    <div class="filter-buttons">
+                    <!-- <div class="filter-buttons">
                         <select class="form-control">
                             <option value="">Semua Status</option>
                             <option value="pending">Pending</option>
                             <option value="diterima">Diterima</option>
                             <option value="ditolak">Ditolak</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Table -->
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Lengkap</th>
-                                <th>NISN</th>
-                                <th>Tanggal Daftar</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <!-- <th>NISN</th>
+                                <th>TTL</th>
+                                <th>Jenis Kelamin</th> -->
+                                <th>Telepon</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($pendaftars as $index => $pendaftar)
+                            @foreach ($pendaftars as $item)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $pendaftar->nama_lengkap }}</td>
-                                    <td>{{ $pendaftar->nisn }}</td>
-                                    <td>{{ $pendaftar->tanggal_daftar?->format('d F Y') }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->namaPendaftar }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <!-- <td>{{ $item->nisn }}</td>
+                                    <td>{{ $item->tempatLahir }}, {{ $item->tanggalLahir }}</td>
+                                    <td>{{ $item->jenisKelamin }}</td> -->
+                                    <td>{{ $item->telepon }}</td>
                                     <td>
-                                        <span class="badge badge-{{ $pendaftar->status_pendaftaran == 'diterima' ? 'success' : ($pendaftar->status_pendaftaran == 'ditolak' ? 'danger' : 'warning') }}">
-                                            {{ ucfirst($pendaftar->status_pendaftaran) }}
-                                        </span>
+                                        @if($item->konfirmasi == 'Diterima')
+                                            <span class="badge badge-success">Diterima</span>
+                                        @elseif($item->konfirmasi == 'Ditolak')
+                                            <span class="badge badge-danger">Ditolak</span>
+                                        @else
+                                            <span class="badge badge-warning">Menunggu</span>
+                                        @endif
                                     </td>
                                     <td>
-                                        <div class="action-buttons">
-                                            <a href="#" class="btn btn-sm btn-info">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-warning">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <form action="#" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Hapus data ini?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
+                                        <a href="{{ route('admin.notifikasi.show', $item->pendaftar_id) }}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-eye"></i>
+                                            Detail
+                                        </a>
                                     </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6" class="text-center">
-                                        <div class="empty-state">
-                                            <i class="fas fa-user-plus"></i>
-                                            <h4>Belum Ada Pendaftar</h4>
-                                            <p>Data pendaftar akan muncul di sini setelah ada yang mendaftar</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -116,8 +105,9 @@
                 <!-- Pagination -->
                 <div class="pagination-section">
                     <div class="pagination-info">
-                        Menampilkan {{ $pendaftars->count() }} dari {{ $pendaftars->count() }} data
+                        Menampilkan {{ $pendaftars->count() }} dari {{ $pendaftars->total() }} data
                     </div>
+                    {{ $pendaftars->links() }}
                 </div>
             </div>
         </div>
