@@ -9,11 +9,9 @@
                 <th>#</th>
                 <th>Nama Pendaftar</th>
                 <th>Email</th>
-                <th>NISN</th>
-                <th>Tempat, Tanggal Lahir</th>
-                <th>Jenis Kelamin</th>
-                <th>Telepon</th>
-                <th>Alamat</th>
+                <th>No Telepon</th>
+                <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -22,11 +20,19 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->namaPendaftar }}</td>
                 <td>{{ $item->email }}</td>
-                <td>{{ $item->nisn }}</td>
-                <td>{{ $item->tempatLahir }}, {{ $item->tanggalLahir }}</td>
-                <td>{{ $item->jenisKelamin }}</td>
                 <td>{{ $item->telepon }}</td>
-                <td>{{ $item->alamat }}</td>
+                <td>
+                    @if($item->konfirmasi == 'Diterima')
+                        <span class="badge bg-success">Diterima</span>
+                    @elseif($item->konfirmasi == 'Ditolak')
+                        <span class="badge bg-danger">Ditolak</span>
+                    @else
+                        <span class="badge bg-warning">Menunggu</span>
+                    @endif
+                </td>
+                <td>
+                    <a href="{{ route('admin.notifikasi.show', $item->pendaftar_id) }}" class="btn btn-info btn-sm">Lihat Detail</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

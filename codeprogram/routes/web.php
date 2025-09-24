@@ -79,6 +79,11 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::get('/informasipendaftaran', [AdminRoleController::class, 'informasipendaftaran'])->name('informasipendaftaran');
     Route::get('/notifikasi', [NotifikasiController::class, 'adminIndex'])->name('notifikasi.index');
     Route::get('/notifikasi/{id}', [NotifikasiController::class, 'show'])->name('notifikasi.show');
+
+    // Pendaftar management routes
+    Route::post('pendaftar/{id}/terima', [PendaftaranController::class, 'terima'])->name('pendaftar.terima');
+    Route::post('pendaftar/{id}/tolak', [PendaftaranController::class, 'tolak'])->name('pendaftar.tolak');
+    Route::post('pendaftar/{id}/komentar', [PendaftaranController::class, 'komentar'])->name('pendaftar.komentar');
 });
 
 

@@ -1,5 +1,5 @@
 @php
-    $notifikasis = \App\Models\Notifikasi::whereNull('user_id')->orderBy('created_at', 'desc')->get();
+    $notifikasis = \App\Models\Notifikasi::whereNull('data_id')->orderBy('created_at', 'desc')->get();
 @endphp
 @extends('layouts.superadmin')
 
@@ -164,14 +164,71 @@
     .table-bordered img:hover {
         transform: scale(1.1);
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* Status badge styling */
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .status-belum {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 2px solid #ffc107;
+    }
+    
+    .status-diterima {
+        background-color: #d1e7dd;
+        color: #0f5132;
+        border: 2px solid #28a745;
+    }
+    
+    .status-ditolak {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 2px solid #dc3545;
+    }
+    
+    .status-icon {
+        font-size: 16px;
     }
 </style>
 <div class="container py-4">
     <h2 class="mb-4">Detail Pendaftar</h2>
     @if($pendaftar)
         <table class="table table-bordered">
-            <tr><th>Nama</th><td>{{ $pendaftar->namaPendaftar }}</td></tr>
+            <tr><th>Nama Pendaftar</th><td>{{ $pendaftar->namaPendaftar }}</td></tr>
             <tr><th>Email</th><td>{{ $pendaftar->email }}</td></tr>
+            <tr>
+                <th>Status Pendaftaran</th>
+                <td>
+                    @if($pendaftar->konfirmasi == 'Diterima')
+                        <span class="status-badge status-diterima">
+                            <i class="fas fa-check-circle status-icon"></i>
+                            Diterima
+                        </span>
+                    @elseif($pendaftar->konfirmasi == 'Ditolak')
+                        <span class="status-badge status-ditolak">
+                            <i class="fas fa-times-circle status-icon"></i>
+                            Ditolak
+                        </span>
+                    @else
+                        <span class="status-badge status-belum">
+                            <i class="fas fa-clock status-icon"></i>
+                            Menunggu Konfirmasi
+                        </span>
+                    @endif
+                </td>
+            </tr>
             <tr><th>NISN</th><td>{{ $pendaftar->nisn }}</td></tr>
             <tr><th>Telepon</th><td>{{ $pendaftar->telepon }}</td></tr>
             <tr><th>Tempat Lahir</th><td>{{ $pendaftar->tempatLahir }}</td></tr>
@@ -263,29 +320,41 @@
                 <i class="fas fa-arrow-left"></i> Kembali ke Dashboard
             </a>
             
-            <!-- Form Terima -->
-            <form action="{{ route('admin.pendaftar.terima', $pendaftar->pendaftar_id) }}" method="POST" style="display:inline;">
-                @csrf
-                <button type="submit" class="btn-action btn-approve" onclick="return confirm('Terima pendaftar ini?')">
-                    <i class="fas fa-check-circle"></i> Terima
-                </button>
-            </form>
+            @if($pendaftar->konfirmasi == 'Belum')
+                <!-- Form Terima -->
+                <form action="{{ route('admin.pendaftar.terima', $pendaftar->pendaftar_id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn-action btn-approve" onclick="return confirm('Terima pendaftar ini?')">
+                        <i class="fas fa-check-circle"></i> Terima
+                    </button>
+                </form>
 
-            <!-- Form Tolak -->
-            <form action="{{ route('admin.pendaftar.tolak', $pendaftar->pendaftar_id) }}" method="POST" style="display:inline;">
-                @csrf
-                <button type="submit" class="btn-action btn-reject" onclick="return confirm('Tolak pendaftar ini?')">
-                    <i class="fas fa-times-circle"></i> Tolak
-                </button>
-            </form>
+                <!-- Form Tolak -->
+                <form action="{{ route('admin.pendaftar.tolak', $pendaftar->pendaftar_id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn-action btn-reject" onclick="return confirm('Tolak pendaftar ini?')">
+                        <i class="fas fa-times-circle"></i> Tolak
+                    </button>
+                </form>
+            @elseif($pendaftar->konfirmasi == 'Diterima')
+                <div class="alert alert-success alert-custom">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Status:</strong> Pendaftar ini sudah <strong>DITERIMA</strong>
+                </div>
+            @elseif($pendaftar->konfirmasi == 'Ditolak')
+                <div class="alert alert-danger alert-custom">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Status:</strong> Pendaftar ini sudah <strong>DITOLAK</strong>
+                </div>
+            @endif
             
-            <!-- Modal Komentar tetap pakai form -->
+            <!-- Modal Komentar tetap bisa digunakan -->
             <button type="button" class="btn-action btn-comment" data-bs-toggle="modal" data-bs-target="#komentarModal">
                 <i class="fas fa-comment-dots"></i> Komentar
             </button>
         </div>
         
-        <<!-- Modal Komentar -->
+        <!-- Modal Komentar -->
         <div class="modal fade" id="komentarModal" tabindex="-1" aria-labelledby="komentarModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">

@@ -152,13 +152,12 @@ class PendaftaranController extends Controller
 
         $pendaftar->save();
 
-Notifikasi::create([
-    'judul' => 'Pendaftaran Berhasil',
-    'pesan' => $pendaftar->namaPendaftar . ' telah berhasil melakukan pendaftaran!!',
-    'data_id' => $pendaftar->pendaftar_id, // wajib
-    'read' => false,
-    'user_id' => null, // biarkan null untuk siswa
-]);
+        Notifikasi::create([
+            'judul' => 'Pendaftaran Berhasil',
+            'pesan' => $pendaftar->namaPendaftar . ' telah berhasil melakukan pendaftaran!!',
+            'data_id' => $pendaftar->pendaftar_id,
+            'read' => false,
+        ]);
 
         return redirect()->route('siswa.success.pendaftaran');
     }
@@ -175,13 +174,12 @@ Notifikasi::create([
         $pendaftar->konfirmasi = 'Diterima';
         $pendaftar->save();
 
-        // Notifikasi ke siswa (user_id = id siswa)
+        // Notifikasi ke siswa
         Notifikasi::create([
-            'judul'             => 'Status Pendaftaran',
-            'pesan'             => 'Selamat, pendaftaran Anda telah DITERIMA.',
-            'read'              => false,
-            'dataPendaftar_id'  => $pendaftar->pendaftar_id,
-            'user_id'           => $pendaftar->pendaftar_id, // pakai pendaftar_id, bukan user_id
+            'judul' => 'Status Pendaftaran',
+            'pesan' => 'Selamat, pendaftaran Anda telah DITERIMA.',
+            'read' => false,
+            'data_id' => $pendaftar->pendaftar_id,
         ]);
 
         return redirect()->back()->with('success', 'Pendaftar diterima dan notifikasi dikirim.');
@@ -194,13 +192,12 @@ Notifikasi::create([
         $pendaftar->konfirmasi = 'Ditolak';
         $pendaftar->save();
 
-        // Notifikasi ke siswa (user_id = id siswa)
+        // Notifikasi ke siswa
         Notifikasi::create([
             'judul' => 'Status Pendaftaran',
             'pesan' => 'Maaf, pendaftaran Anda DITOLAK.',
             'read' => false,
             'data_id' => $pendaftar->pendaftar_id,
-            'user_id' => $pendaftar->user_id,
         ]);
 
         return redirect()->back()->with('success', 'Pendaftar ditolak dan notifikasi dikirim.');
@@ -212,13 +209,12 @@ Notifikasi::create([
         $pendaftar = DataPendaftar::findOrFail($id);
         $komentar = $request->input('komentar');
 
-        // Notifikasi ke siswa (user_id = id siswa)
+        // Notifikasi ke siswa
         Notifikasi::create([
             'judul' => 'Komentar Admin',
             'pesan' => $komentar,
             'read' => false,
             'data_id' => $pendaftar->pendaftar_id,
-            'user_id' => $pendaftar->user_id,
         ]);
 
         return redirect()->back()->with('success', 'Komentar dikirim ke siswa.');
