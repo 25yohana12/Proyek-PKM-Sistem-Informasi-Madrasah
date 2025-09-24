@@ -296,7 +296,7 @@
         font-weight: 500;
     }
     .content-card {
-        background: white;
+        background: transparent;
         border-radius: 20px;
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
         overflow: hidden;
