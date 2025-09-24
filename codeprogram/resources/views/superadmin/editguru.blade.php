@@ -37,7 +37,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Perbarui</button>
-        <a href="{{ route('superadmin.data.guru') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('superadmin.guru.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 </div>
 
@@ -140,6 +140,78 @@
         li {
             font-size: 14px;
             margin-bottom: 5px;
+        }
+
+        /* Style untuk label */
+        .form-label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        /* Style untuk input dan textarea */
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Style untuk tombol */
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Style untuk container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        .text-muted {
+            color: #6c757d;
         }
     </style>
 @endsection

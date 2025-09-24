@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use App\Models\SuperAdmin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GuruController extends Controller
 {
@@ -111,7 +112,7 @@ public function update(Request $request, $guru_id)
         'deskripsi' => $request->deskripsi,
     ]);
 
-    return redirect()->route('superadmin.data.guru')->with('success', 'Data guru berhasil diperbarui!');
+    return redirect()->route('superadmin.guru.index')->with('success', 'Data guru berhasil diperbarui!');
 }
 
     // Menghapus data guru berdasarkan ID
@@ -119,7 +120,7 @@ public function update(Request $request, $guru_id)
     {
         $guru = Guru::findOrFail($id);
         $guru->delete();
-        return redirect()->route('superadmin.data.guru')->with('success', 'Data guru berhasil dihapus!');
+        return redirect()->route('superadmin.guru.index')->with('success', 'Data guru berhasil dihapus!');
     }
 
         public function guest()
