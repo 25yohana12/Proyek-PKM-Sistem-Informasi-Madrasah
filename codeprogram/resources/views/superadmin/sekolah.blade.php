@@ -24,7 +24,13 @@
         </div>
 
         <div class="card-body">
-            @if(!isset($sekolah) || !$sekolah)
+            @php
+                $sekolahData = is_object($sekolah) && !$sekolah instanceof \Illuminate\Database\Eloquent\Collection 
+                    ? $sekolah 
+                    : ($sekolah->first() ?? null);
+            @endphp
+            
+            @if(!$sekolahData)
                 <div class="empty-state-full">
                     <i class="fas fa-info-circle"></i>
                     <h3>Belum Ada Data Sekolah</h3>
@@ -34,24 +40,24 @@
                 <div class="info-grid">
                     <div class="form-group">
                         <div class="form-label">Nama Sekolah</div>
-                        <div class="form-value">{{ $sekolah->namaSekolah ?? 'Belum Diisi' }}</div>
+                        <div class="form-value">{{ $sekolahData->namaSekolah ?? 'Belum Diisi' }}</div>
                     </div>
 
                     <div class="form-group">
                         <div class="form-label">Alamat</div>
-                        <div class="form-value">{{ $sekolah->alamat ?? 'Belum Diisi' }}</div>
+                        <div class="form-value">{{ $sekolahData->alamat ?? 'Belum Diisi' }}</div>
                     </div>
 
                     <div class="form-group">
                         <div class="form-label">Telepon</div>
-                        <div class="form-value">{{ $sekolah->telepon ?? 'Belum Diisi' }}</div>
+                        <div class="form-value">{{ $sekolahData->telepon ?? 'Belum Diisi' }}</div>
                     </div>
 
                     <div class="form-group">
                         <div class="form-label">Email</div>
                         <div class="form-value">
-                            @if(!empty($sekolah->email))
-                                <a href="mailto:{{ $sekolah->email }}">{{ $sekolah->email }}</a>
+                            @if(!empty($sekolahData->email))
+                                <a href="mailto:{{ $sekolahData->email }}">{{ $sekolahData->email }}</a>
                             @else
                                 Belum Diisi
                             @endif
@@ -62,11 +68,11 @@
                         <div class="form-label">Instagram</div>
                         <div class="form-value">
                             @php
-                                $ig = $sekolah->instagram ?? null;
+                                $ig = $sekolahData->instagram ?? null;
                                 $igUrl = $ig ? (Str::startsWith($ig, ['http://','https://']) ? $ig : 'https://instagram.com/'.ltrim($ig,'@')) : null;
                             @endphp
                             @if($igUrl)
-                                <a href="{{ $igUrl }}" target="_blank" rel="noopener">{{ $sekolah->instagram }}</a>
+                                <a href="{{ $igUrl }}" target="_blank" rel="noopener">{{ $sekolahData->instagram }}</a>
                             @else
                                 Belum Diisi
                             @endif
@@ -77,11 +83,11 @@
                         <div class="form-label">Facebook</div>
                         <div class="form-value">
                             @php
-                                $fb = $sekolah->facebook ?? null;
+                                $fb = $sekolahData->facebook ?? null;
                                 $fbUrl = $fb ? (Str::startsWith($fb, ['http://','https://']) ? $fb : 'https://facebook.com/'.$fb) : null;
                             @endphp
                             @if($fbUrl)
-                                <a href="{{ $fbUrl }}" target="_blank" rel="noopener">{{ $sekolah->facebook }}</a>
+                                <a href="{{ $fbUrl }}" target="_blank" rel="noopener">{{ $sekolahData->facebook }}</a>
                             @else
                                 Belum Diisi
                             @endif
@@ -90,7 +96,7 @@
                 </div>
 
                 <div class="action-row">
-                    <a href="{{ route('superadmin.sekolah.edit', $sekolah->sekolah_id) }}" class="btn btn-primary">
+                    <a href="{{ route('superadmin.sekolah.edit', $sekolahData->sekolah_id) }}" class="btn btn-primary">
                         <i class="fas fa-pen"></i>
                         Edit Data
                     </a>
