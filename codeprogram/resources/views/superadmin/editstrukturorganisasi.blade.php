@@ -8,6 +8,16 @@
         <h1 class="h4 mb-0">Edit Struktur Organisasi</h1>
         <a href="{{ route('superadmin.strukturOrganisasi.index') }}" class="btn btn-secondary">‹ Kembali</a>
     </div>
+     {{-- Tampilkan error validasi --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form action="{{ route('strukturOrganisasi.update', $strukturOrganisasi) }}"
           method="POST" enctype="multipart/form-data"

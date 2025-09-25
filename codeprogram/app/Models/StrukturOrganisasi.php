@@ -14,7 +14,7 @@ class StrukturOrganisasi extends Model
      * (Perlu didefinisikan karena memakai camelCase,
      *  bukan snake_case bawaan Laravel.)
      */
-    protected $table = 'strukturOrganisasi';
+    protected $table = 'strukturoganisasi';
 
     /**
      * Primary key kustom.

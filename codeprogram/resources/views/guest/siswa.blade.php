@@ -10,7 +10,7 @@
       @forelse($siswas as $siswa)
         <article class="student-card">
           <div class="photo">
-            <img src="{{ asset('images/siswa.jpg') }}" alt="Kelas {{ $siswa->kelas }}">
+            <img src="{{ $siswa->gambar ? asset('storage/'.$siswa->gambar) : asset('images/siswa.jpg') }}" alt="Kelas {{ $siswa->kelas }}">
           </div>
 
 

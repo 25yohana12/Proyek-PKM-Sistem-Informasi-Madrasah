@@ -37,7 +37,6 @@ public function index()
     // Menyimpan data guru
 public function store(Request $request)
 {
-    // Validasi input dari form
     $request->validate([
         'namaGuru' => 'required|string|max:255',
         'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -46,15 +45,13 @@ public function store(Request $request)
         'deskripsi' => 'required|string',
     ]);
 
-    // Menyimpan file gambar jika ada
+    // Simpan gambar ke storage/app/public/guru
     if ($request->hasFile('gambar')) {
-        $imageName = time() . '.' . $request->gambar->extension();
-        $request->gambar->move(public_path('storage'), $imageName);
+        $imageName = $request->file('gambar')->store('guru', 'public');
     } else {
         $imageName = null;
     }
 
-    // Menyimpan data guru ke database dengan superAdmin_id yang ditentukan (secara default sudah 1)
     Guru::create([
         'namaGuru' => $request->namaGuru,
         'gambar' => $imageName,
@@ -63,7 +60,7 @@ public function store(Request $request)
         'deskripsi' => $request->deskripsi,
     ]);
 
-    return redirect()->route('superadmin.guru.store')->with('success', 'Data guru berhasil ditambahkan!');
+    return redirect()->route('superadmin.guru.index')->with('success', 'Data guru berhasil ditambahkan!');
 }
 
     // Menampilkan form untuk mengedit data guru
@@ -76,34 +73,26 @@ public function store(Request $request)
     // Mengupdate data guru
 public function update(Request $request, $guru_id)
 {
-    // Validasi input dari form
     $request->validate([
         'namaGuru' => 'required|string|max:255',
         'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'nip' => 'required|string|max:255|unique:guru,nip,' . $guru_id . ',guru_id', // Pastikan memakai guru_id dan bukan id
+        'nip' => 'required|string|max:255|unique:guru,nip,' . $guru_id . ',guru_id',
         'posisi' => 'required|string|max:255',
         'deskripsi' => 'required|string',
     ]);
 
-    // Menemukan data guru berdasarkan guru_id
     $guru = Guru::findOrFail($guru_id);
 
-    // Menyimpan gambar baru jika ada perubahan gambar
     if ($request->hasFile('gambar')) {
         // Hapus gambar lama jika ada
-        if ($guru->gambar && file_exists(public_path('storage/' . $guru->gambar))) {
-            unlink(public_path('storage/' . $guru->gambar));
+        if ($guru->gambar && Storage::disk('public')->exists($guru->gambar)) {
+            Storage::disk('public')->delete($guru->gambar);
         }
-
-        // Menyimpan gambar baru
-        $imageName = time() . '.' . $request->gambar->extension();
-        $request->gambar->move(public_path('storage'), $imageName);
+        $imageName = $request->file('gambar')->store('guru', 'public');
     } else {
-        // Jika tidak ada perubahan gambar, gunakan gambar lama
         $imageName = $guru->gambar;
     }
 
-    // Update data guru di database
     $guru->update([
         'namaGuru' => $request->namaGuru,
         'gambar' => $imageName,

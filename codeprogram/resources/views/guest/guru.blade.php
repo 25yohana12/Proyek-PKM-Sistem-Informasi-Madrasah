@@ -24,7 +24,7 @@
         <div class="guru-card">
           <div class="img-wrap">
             <img
-              src="{{ $guru->gambar_path ? asset('storage/'.$guru->gambar_path) : asset('images/guru.jpg') }}"
+              src="{{ $guru->gambar ? asset('storage/'.$guru->gambar) : asset('images/guru.jpg') }}"
               alt="Foto {{ $guru->namaGuru }}"
               class="guru-img">
           </div>

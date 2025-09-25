@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('strukturOrganisasi', function (Blueprint $table) {
+        Schema::table('strukturorganisasi', function (Blueprint $table) {
             // Menambahkan kolom baru
             $table->enum('jenis', ['Guru', 'Staff'])->after('nip');
             $table->string('pendidikan_terakhir', 100)->nullable()->after('jenis');
@@ -24,7 +24,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('strukturOrganisasi', function (Blueprint $table) {
+        Schema::table('strukturorganisasi', function (Blueprint $table) {
             // Hapus kolom jika rollback
             $table->dropColumn(['jenis', 'pendidikan_terakhir', 'tanggal_lahir']);
         });
