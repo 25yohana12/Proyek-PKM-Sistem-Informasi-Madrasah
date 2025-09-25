@@ -122,7 +122,8 @@
                             <i class="fas fa-table"></i> Data Pendaftar
                         </a>
                     </li> -->
-                    <li>
+                </ul>
+                <li>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:inline;">
                             @csrf
                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-danger">
@@ -130,7 +131,6 @@
                             </a>
                         </form>
                     </li>
-                </ul>
             </li>
         </ul>
     </nav>
