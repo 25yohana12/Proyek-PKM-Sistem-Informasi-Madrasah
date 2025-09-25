@@ -17,6 +17,12 @@
     </div>
     
 <section class="about-us">
+    <style>
+        .about-us {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    </style>
     <h2>Tentang Kami</h2>
     <p>Bismillahirrahmanirrahim<br>
 
