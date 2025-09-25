@@ -34,6 +34,13 @@
     transition:.2s;
   }
   .btn-submit:hover{background:#28a745;color:#fff}
+  .btn-back{
+    background:#6c757d;border:0;color:#fff;
+    padding:10px 18px;border-radius:12px;font-weight:600;
+    transition:.2s;margin-right:10px;text-decoration:none;
+    display:inline-block;
+  }
+  .btn-back:hover{background:#5a6268;color:#fff}
   .invalid-feedback{display:block;font-size:.85rem}
   .help-hint{font-size:.85rem;color:var(--muted)}
   /* jarak antar kolom */
@@ -514,6 +521,9 @@
 
       {{-- ===================== AKSI ===================== --}}
       <div class="col-12 mt-2">
+        <a href="http://127.0.0.1:8000/MIN/home" class="btn-back">
+          <i class="fas fa-arrow-left"></i> Kembali
+        </a>
         <button type="submit" class="btn btn-submit">Kirim Pendaftaran</button>
       </div>
 

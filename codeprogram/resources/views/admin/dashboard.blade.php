@@ -17,7 +17,9 @@
             <!-- Button Notifikasi -->
             <button class="btn btn-notif position-relative" id="notifBtn" title="Notifikasi" type="button">
                 <i class="fas fa-bell"></i>
-                <span class="notif-badge" id="notifBadge">{{ $notifCount ?? 0 }}</span>
+                @if(($notifCount ?? 0) > 0)
+                    <span class="notif-badge" id="notifBadge">{{ $notifCount }}</span>
+                @endif
             </button>
             <!-- Popup Notifikasi -->
             <div id="notifPopup" class="notif-popup" style="display:none;">
@@ -399,6 +401,7 @@
     }
 </style>
 @endsection
+
 @section('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -420,8 +423,15 @@ document.addEventListener('DOMContentLoaded', function() {
     notifLinks.forEach(function(link) {
         link.addEventListener('click', function() {
             // Kurangi badge saat notif diklik
-            let count = parseInt(notifBadge.textContent);
-            if (count > 0) notifBadge.textContent = count - 1;
+            if (notifBadge) {
+                let count = parseInt(notifBadge.textContent);
+                if (count > 1) {
+                    notifBadge.textContent = count - 1;
+                } else {
+                    // Hapus badge jika count menjadi 0
+                    notifBadge.remove();
+                }
+            }
             // Optional: AJAX untuk mark as read di backend (bisa ditambahkan jika ingin real-time)
         });
     });

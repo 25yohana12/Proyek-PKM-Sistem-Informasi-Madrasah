@@ -50,7 +50,7 @@
             Kegiatan
           </a>
           <ul class="dropdown-menu" aria-labelledby="kegiatanDropdown">
-            <li><a class="dropdown-item" href="{{ route('guest.acara') }}">Perayaan & Event</a></li>
+            <li><a class="dropdown-item" href="{{ route('guest.acara') }}">Perayaan</a></li>
             <li><a class="dropdown-item" href="{{ route('guest.prestasi') }}">Prestasi</a></li>
           </ul>
         </li>
@@ -58,7 +58,7 @@
         {{-- PPDB / PENDAFTARAN --}}
         <li class="nav-item dropdown me-lg-3">
           <a class="nav-link dropdown-toggle" href="#" id="ppdbDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#000;">
-            PPDB
+            Informasi
           </a>
           <ul class="dropdown-menu" aria-labelledby="ppdbDropdown">
             <li><a class="dropdown-item" href="{{ route('siswa.register_awal') }}">Formulir</a></li>

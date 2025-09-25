@@ -75,7 +75,7 @@
         </li> -->
         <li>
             <a href="{{ route('superadmin.siswa.index') }}" class="{{ request()->routeIs('superadmin.siswa.*') ? 'active' : '' }}">
-                <i class="fas fa-door-open"></i> Data Siswa
+                <i class="fas fa-door-open"></i> Data Kelas
             </a>
         </li>
         <li>

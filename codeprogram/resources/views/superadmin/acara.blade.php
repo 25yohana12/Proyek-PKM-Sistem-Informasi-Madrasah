@@ -137,10 +137,10 @@
                             </div>
                             <h3 class="empty-title">Belum ada acara</h3>
                             <p class="empty-subtitle">Mulai dengan menambahkan acara pertama Anda</p>
-                            <button class="btn btn-primary" onclick="window.location.href='{{ route('superadmin.acara.create') }}'">
+                            <!-- <button class="btn btn-primary" onclick="window.location.href='{{ route('superadmin.acara.create') }}'">
                                 <i class="fas fa-plus"></i>
                                 Tambah Acara
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                 @endif

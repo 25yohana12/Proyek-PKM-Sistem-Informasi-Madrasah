@@ -60,7 +60,7 @@
             Kegiatan
           </a>
           <ul class="dropdown-menu" aria-labelledby="kegiatanDropdown">
-            <li><a class="dropdown-item" href="{{ route('siswa.siswa.acara') }}">Perayaan & Event</a></li>
+            <li><a class="dropdown-item" href="{{ route('siswa.siswa.acara') }}">Perayaan</a></li>
             <li><a class="dropdown-item" href="{{ route('siswa.siswa.prestasi') }}">Prestasi</a></li>
           </ul>
         </li>
@@ -68,7 +68,7 @@
         {{-- PPDB / PENDAFTARAN --}}
         <li class="nav-item dropdown me-lg-3">
           <a class="nav-link dropdown-toggle" href="#" id="ppdbDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#000;">
-            PPDB
+            Informasi
           </a>
           <ul class="dropdown-menu" aria-labelledby="ppdbDropdown">
             <li><a class="dropdown-item" href="{{ route('siswa.create.pendaftaran') }}">Formulir</a></li>
@@ -80,7 +80,9 @@
         <li class="nav-item me-lg-3 position-relative">
           <button class="btn btn-notif position-relative" id="notifBtn" title="Notifikasi" type="button">
             <i class="bi bi-bell-fill" style="font-size: 1.2rem;"></i>
-            <span class="notif-badge" id="notifBadge">{{ $notifCount }}</span>
+            @if($notifCount > 0)
+              <span class="notif-badge" id="notifBadge">{{ $notifCount }}</span>
+            @endif
           </button>
 
           <div id="notifPopup" class="notif-popup">
@@ -132,6 +134,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   const notifBtn = document.getElementById('notifBtn');
   const notifPopup = document.getElementById('notifPopup');
+  const notifBadge = document.getElementById('notifBadge');
 
   if (notifBtn && notifPopup) {
     notifBtn.addEventListener('click', function(e) {
@@ -143,6 +146,22 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!notifBtn.contains(e.target) && !notifPopup.contains(e.target)) {
         notifPopup.style.display = 'none';
       }
+    });
+
+    // Handle notification click to reduce badge count
+    const notifLinks = document.querySelectorAll('.notif-link');
+    notifLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (notifBadge) {
+          let count = parseInt(notifBadge.textContent);
+          if (count > 1) {
+            notifBadge.textContent = count - 1;
+          } else {
+            // Remove badge if count becomes 0
+            notifBadge.remove();
+          }
+        }
+      });
     });
   }
 });
