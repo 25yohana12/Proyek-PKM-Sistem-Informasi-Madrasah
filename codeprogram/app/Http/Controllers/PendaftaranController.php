@@ -70,7 +70,7 @@ class PendaftaranController extends Controller
             'jenisKelamin'    => 'nullable|in:Laki-laki,Perempuan',
             'jumlahSaudara'   => 'nullable|integer',
             'anakKe'          => 'nullable|integer',
-            'agama'           => 'nullable|in:Islam',
+            'agama'           => 'nullable|in:Islam,Kristen,Katolik,Hindu,Buddha,Konghucu',
             'citaCita'        => 'nullable|string|max:255',
             'telepon'         => 'nullable|string|max:50',
             'hobi'            => 'nullable|string|max:255',
