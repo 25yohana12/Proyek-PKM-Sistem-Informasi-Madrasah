@@ -94,6 +94,10 @@
 
             <button type="submit">REGISTER</button>
 
+            <button type="button" onclick="window.location.href='{{ url('/login') }}'" style="background:#28a745; color:white; margin-top:10px; width:100%; border:none; border-radius:5px; padding:12px; cursor:pointer;">
+                Kembali
+            </button>
+
             <div class="login-link">
                 Sudah Punya Akun? <a href="/login">Login</a>
             </div>
