@@ -17,6 +17,22 @@
 
     @yield('styles')
 </head>
+<style>
+  html, body {
+    height: 100%;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  main {
+    flex: 1 0 auto;
+  }
+  .footer-bottom {
+    flex-shrink: 0;
+  }
+</style>
 
 <body>
     <!-- Include the Navbar Component -->
@@ -49,7 +65,7 @@
         </div>
     </div>
   </footer>
-  <footer style="background-color:#000; widht:1000px; font-family:'Arial',sans-serif;">
+  <footer class="footer-bottom" style="background-color:#000; font-family:'Arial',sans-serif;">
     <div class="text-center py-2" style="background:#000; color:#fff; font-size:14px;">
       © 2025 Madrasah. All Rights Reserved. | Website by Institut Teknologi Del
     </div>

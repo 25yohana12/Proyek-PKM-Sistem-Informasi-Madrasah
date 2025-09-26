@@ -17,7 +17,6 @@ h1,h2,h3,p{margin:0} body{color:var(--ink)}
 /* halaman: lebih dekat ke pinggir */
 .page{
   width:100%;
-  height: 100%;
   margin:0 auto;      /* center horizontal */
   padding:0 12px;     /* jarak aman kiri-kanan */
 }
