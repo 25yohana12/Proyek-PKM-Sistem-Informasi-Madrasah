@@ -17,7 +17,7 @@
     <!-- Form Card -->
     <div class="content-card">
         <div class="card-body p-5">
-            <form action="{{ route('superadmin.siswa.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('superadmin.siswa.store') }}" method="POST" enctype="multipart/form-data" id="kelasForm">
                 @csrf
 
                 <div class="mb-4">
@@ -32,22 +32,23 @@
 
                 <div class="row">
                     <div class="col-md-4 mb-4">
-                        <label for="jumlahMurid" class="form-label fw-semibold">Jumlah Murid</label>
+                        <label for="jumlahMurid" class="form-label fw-semibold">Jumlah Murid (Total)</label>
                         <input type="number" name="jumlahMurid" id="jumlahMurid" 
                             class="form-control form-control-lg text-center" 
-                            placeholder="0" min="0">
+                            placeholder="0" min="0" readonly style="background-color: #f8f9fa;">
+                        <small class="text-muted">Otomatis dihitung dari jumlah siswa + siswi</small>
                     </div>
                     <div class="col-md-4 mb-4">
                         <label for="jumlahSiswa" class="form-label fw-semibold">Jumlah Siswa (Laki-laki)</label>
                         <input type="number" name="jumlahSiswa" id="jumlahSiswa" 
                             class="form-control form-control-lg text-center" 
-                            placeholder="0" min="0">
+                            placeholder="0" min="0" oninput="calculateTotal()">
                     </div>
                     <div class="col-md-4 mb-4">
                         <label for="jumlahSiswi" class="form-label fw-semibold">Jumlah Siswi (Perempuan)</label>
                         <input type="number" name="jumlahSiswi" id="jumlahSiswi" 
                             class="form-control form-control-lg text-center" 
-                            placeholder="0" min="0">
+                            placeholder="0" min="0" oninput="calculateTotal()">
                     </div>
                 </div>
 
@@ -127,4 +128,54 @@
         font-weight: 600;
     }
 </style>
+@endsection
+
+@section('scripts')
+<script>
+function calculateTotal() {
+    const jumlahSiswa = parseInt(document.getElementById('jumlahSiswa').value) || 0;
+    const jumlahSiswi = parseInt(document.getElementById('jumlahSiswi').value) || 0;
+    const totalMurid = jumlahSiswa + jumlahSiswi;
+    
+    document.getElementById('jumlahMurid').value = totalMurid;
+    
+    // Visual feedback
+    const jumlahMuridInput = document.getElementById('jumlahMurid');
+    if (totalMurid > 0) {
+        jumlahMuridInput.style.backgroundColor = '#d4edda';
+        jumlahMuridInput.style.borderColor = '#28a745';
+    } else {
+        jumlahMuridInput.style.backgroundColor = '#f8f9fa';
+        jumlahMuridInput.style.borderColor = '#ced4da';
+    }
+}
+
+// Form validation
+document.getElementById('kelasForm').addEventListener('submit', function(e) {
+    const jumlahSiswa = parseInt(document.getElementById('jumlahSiswa').value) || 0;
+    const jumlahSiswi = parseInt(document.getElementById('jumlahSiswi').value) || 0;
+    const jumlahMurid = parseInt(document.getElementById('jumlahMurid').value) || 0;
+    
+    // Validasi: jumlah murid harus sama dengan jumlah siswa + siswi
+    if (jumlahMurid !== (jumlahSiswa + jumlahSiswi)) {
+        e.preventDefault();
+        alert('Error: Jumlah murid harus sama dengan jumlah siswa laki-laki + perempuan!');
+        return false;
+    }
+    
+    // Validasi: minimal harus ada 1 murid
+    if (jumlahMurid === 0) {
+        e.preventDefault();
+        alert('Peringatan: Silakan masukkan jumlah siswa laki-laki dan/atau perempuan!');
+        return false;
+    }
+    
+    return true;
+});
+
+// Initialize calculation on page load
+document.addEventListener('DOMContentLoaded', function() {
+    calculateTotal();
+});
+</script>
 @endsection

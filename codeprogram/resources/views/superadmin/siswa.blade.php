@@ -78,7 +78,7 @@
                     @endforeach
                 </div>
             @else
-                <div class="empty-state">
+                <!-- <div class="empty-state">
                     <div class="empty-content">
                         <div class="empty-icon">
                             <i class="fas fa-chalkboard"></i>
@@ -89,7 +89,7 @@
                             <i class="fas fa-plus"></i> Tambah Data
                         </a>
                     </div>
-                </div>
+                </div> -->
             @endif
         </div>
     </div>

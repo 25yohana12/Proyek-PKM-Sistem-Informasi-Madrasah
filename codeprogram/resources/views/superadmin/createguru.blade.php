@@ -72,14 +72,14 @@
                 </div>
 
                 <!-- Deskripsi -->
-                <div class="mb-3">
+                <!-- <div class="mb-3">
                     <label for="deskripsi" class="form-label fw-semibold">Deskripsi</label>
                     <textarea class="form-control @error('deskripsi') is-invalid @enderror" 
                               id="deskripsi" name="deskripsi" rows="3" required>{{ old('deskripsi') }}</textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                </div>
+                </div> -->
 
                 <!-- Buttons -->
                 <button type="submit" class="btn btn-success">Simpan</button>
