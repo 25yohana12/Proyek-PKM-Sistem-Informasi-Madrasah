@@ -8,7 +8,7 @@
         <div class="page-header">
             <div class="header-content">
                 <h1 class="page-title">
-                    <span class="emoji">🏆</span> Daftar Prestasi
+                     Daftar Prestasi
                 </h1>
                 <p class="page-subtitle">Kelola data prestasi siswa dan sekolah</p>
             </div>
@@ -40,12 +40,12 @@
             </div>
             <div class="card-body">
                 <!-- Search -->
-                <div class="filter-section">
+                <!-- <div class="filter-section">
                     <div class="search-box">
                         <input type="text" placeholder="Cari prestasi..." class="form-control">
                         <i class="fas fa-search"></i>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Prestasi Grid -->
                 <div class="prestasi-grid">
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                     @empty
-                        <div class="empty-state-full">
+                        <!-- <div class="empty-state-full">
                             <i class="fas fa-trophy"></i>
                             <h3>Belum Ada Prestasi</h3>
                             <p>Tambahkan prestasi pertama untuk memulai</p>
@@ -111,7 +111,7 @@
                                 <i class="fas fa-plus"></i>
                                 Tambah Prestasi Pertama
                             </a>
-                        </div>
+                        </div> -->
                     @endforelse
                 </div>
 
