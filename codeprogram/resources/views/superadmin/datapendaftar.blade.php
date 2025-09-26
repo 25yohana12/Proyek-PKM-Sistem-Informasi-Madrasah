@@ -31,7 +31,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('admin.notifikasi.show', $item->pendaftar_id) }}" class="btn btn-info btn-sm">Lihat Detail</a>
+                    <a href="{{ route('superadmin.datapendaftar.show', $item->pendaftar_id) }}" class="btn btn-info btn-sm">Lihat Detail</a>
                 </td>
             </tr>
             @endforeach

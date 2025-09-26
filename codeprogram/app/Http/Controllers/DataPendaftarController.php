@@ -33,9 +33,19 @@ class DataPendaftarController extends Controller
         $pendaftar->delete();
         return redirect()->route('admin.pendaftaran')->with('success', 'Data berhasil dihapus!');
     }
+
     public function datapendaftar()
     {
         $data = \App\Models\DataPendaftar::paginate(25);
         return view('admin.datapendaftar', compact('data'));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $pendaftar = DataPendaftar::findOrFail($id);
+        return view('superadmin.showdetail', compact('pendaftar'));
     }
 }

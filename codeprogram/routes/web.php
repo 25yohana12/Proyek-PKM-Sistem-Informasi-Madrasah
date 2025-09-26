@@ -224,4 +224,15 @@ Route::prefix('superadmin')->name('superadmin.')->middleware('auth:superadmin')-
         Route::delete('{id}', [AdminController::class, 'destroy'])->name('destroy');
     });
 
+    // Data Pendaftar Routes
+    Route::prefix('datapendaftar')->name('datapendaftar.')->group(function () {
+        Route::get('/', [DataPendaftarController::class, 'index'])->name('index');
+        Route::get('/{id}', [DataPendaftarController::class, 'show'])->name('show');
+        Route::get('/{id}/edit', [DataPendaftarController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [DataPendaftarController::class, 'update'])->name('update');
+        Route::delete('/{id}', [DataPendaftarController::class, 'destroy'])->name('destroy');
+        Route::post('/{id}/terima', [DataPendaftarController::class, 'terima'])->name('terima');
+        Route::post('/{id}/tolak', [DataPendaftarController::class, 'tolak'])->name('tolak');
+    });
+
 });
