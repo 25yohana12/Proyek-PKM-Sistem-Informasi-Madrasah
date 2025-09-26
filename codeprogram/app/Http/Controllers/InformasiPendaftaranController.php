@@ -55,7 +55,7 @@ class InformasiPendaftaranController extends Controller
         $informasi = InformasiPendaftaran::findOrFail($id);
         $informasi->update($request->all());
 
-        return redirect()->route('superadmin.informasi.index')->with('success', 'Informasi pendaftaran berhasil diperbarui.');
+        return redirect()->route('superadmin.informasipendaftaran.index')->with('success', 'Informasi pendaftaran berhasil diperbarui.');
     }
 
     public function guest()
