@@ -3,9 +3,9 @@
 @section('content')
 <style>
   :root{
-    --brand:#1b8f4b;        /* hijau utama */
-    --mint:#eaf7f1;         /* latar kartu lembut */
-    --mint-strong:#dff2e8;  /* latar badge/strip */
+    --brand:#1b8f4b;
+    --mint:#eaf7f1;
+    --mint-strong:#dff2e8;
     --ink:#0f172a;
     --muted:#667085;
     --radius:18px;
@@ -15,31 +15,23 @@
   *{box-sizing:border-box}
   body{color:var(--ink)}
   h1,h2,h3,p{margin:0}
-
-  /* Layout */
   .wrap{margin:28px auto;padding:0 16px}
-
-  /* Kartu umum */
-.card{
-  background:#fff;
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  padding:24px 26px;
-  margin:28px auto;       /* otomatis rata tengah */
-  border:1px solid #eef3ef;
-  max-width: 1000px;      /* atur lebar maksimal card */
-  width: 100%;            /* biar responsif */
-}
+  .card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:24px 26px;
+    margin:28px auto;
+    border:1px solid #eef3ef;
+    max-width: 1000px;
+    width: 100%;
+  }
   .card.mint{background:var(--mint)}
-
-  /* Judul seksi */
   .title-center{
     text-align:center;color:var(--brand);font-weight:900;letter-spacing:.04em;
     font-size:clamp(22px,3.6vw,30px);
   }
   .subtext{margin-top:10px;line-height:1.7;color:var(--ink);font-size:16px}
-
-  /* List jadwal dengan ikon */
   .info-list{margin-top:16px;display:grid;gap:10px}
   .info-item{display:flex;align-items:flex-start;gap:12px;color:var(--ink)}
   .info-icon{
@@ -51,14 +43,10 @@
   .info-label{font-weight:800;color:var(--brand);margin-right:6px}
   .info-text{color:var(--ink)}
   .muted{color:var(--muted)}
-
-  /* Strip pengumuman kecil */
   .strip{
     background:var(--mint-strong);padding:14px;border-radius:14px;margin-top:16px;
     border:1px solid #e1efe6
   }
-
-  /* Prosedur */
   .proc-title{
     text-align:center;color:var(--brand);font-weight:900;
     letter-spacing:.05em;font-size:clamp(22px,3.6vw,30px);margin-bottom:12px
@@ -77,8 +65,6 @@
     color:#0b5f3b;font-weight:900;text-transform:uppercase;letter-spacing:.02em
   }
   .step-desc{color:var(--ink);line-height:1.8;margin-left:2px}
-
-  /* Responsif kecil */
   @media (max-width:520px){
     .card{padding:18px}
     .step{padding:14px}
@@ -93,26 +79,26 @@
 
     <p class="subtext">
       MIN Toba Samosir membuka pendaftaran siswa baru untuk tahun ajaran
-      <strong>{{ $informasi->tahunAjaran }}</strong>. Berikut jadwal penting yang perlu diperhatikan:
+      <strong>{{ $informasi->tahunAjaran ?? '-' }}</strong>. Berikut jadwal penting yang perlu diperhatikan:
     </p>
 
     <div class="info-list">
       <!-- Jadwal Pendaftaran -->
       <div class="info-item">
         <div class="info-icon" aria-hidden="true">
-          <!-- calendar -->
           <svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h4V2zm14 8H3v10h18V10zM3 8h18V6H3v2z"/></svg>
         </div>
         <div class="info-text">
           <span class="info-label">Jadwal Pendaftaran:</span>
-          <strong>{{ \Carbon\Carbon::parse($informasi->tanggalPendaftaran)->translatedFormat('d F Y') }}</strong>
+          <strong>
+            {{ $informasi && $informasi->tanggalPendaftaran ? \Carbon\Carbon::parse($informasi->tanggalPendaftaran)->translatedFormat('d F Y') : '-' }}
+          </strong>
         </div>
       </div>
 
       <!-- Waktu -->
       <div class="info-item">
         <div class="info-icon" aria-hidden="true">
-          <!-- clock -->
           <svg viewBox="0 0 24 24"><path d="M12 1a11 11 0 1 0 .001 22.001A11 11 0 0 0 12 1zm1 11V6h-2v8h7v-2h-5z"/></svg>
         </div>
         <div class="info-text">
@@ -124,7 +110,6 @@
       <!-- Tempat -->
       <div class="info-item">
         <div class="info-icon" aria-hidden="true">
-          <!-- map-pin -->
           <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
         </div>
         <div class="info-text">
@@ -139,24 +124,26 @@
       <div class="info-list">
         <div class="info-item">
           <div class="info-icon" aria-hidden="true">
-            <!-- megaphone -->
             <svg viewBox="0 0 24 24"><path d="M3 10v4a1 1 0 0 0 1 1h2l6 4V5L6 9H4a1 1 0 0 0-1 1zM20 5l-5 3v8l5 3V5z"/></svg>
           </div>
           <div class="info-text">
             <span class="info-label">Pengumuman Hasil Seleksi:</span>
-            <strong>{{ \Carbon\Carbon::parse($informasi->tanggalPengumuman)->translatedFormat('d F Y') }}</strong>
+            <strong>
+              {{ $informasi && $informasi->tanggalPengumuman ? \Carbon\Carbon::parse($informasi->tanggalPengumuman)->translatedFormat('d F Y') : '-' }}
+            </strong>
             <span class="muted"> • Diumumkan melalui papan pengumuman sekolah dan website resmi MIN Toba Samosir.</span>
           </div>
         </div>
 
         <div class="info-item">
           <div class="info-icon" aria-hidden="true">
-            <!-- repeat/loop -->
             <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4V6H7a3 3 0 0 0-3 3v1H2V9a5 5 0 0 1 5-5h10V1zm-5 17H7v3l-4-4 4-4v3h10a3 3 0 0 0 3-3v-1h2v1a5 5 0 0 1-5 5z"/></svg>
           </div>
           <div class="info-text">
             <span class="info-label">Daftar Ulang:</span>
-            <strong>{{ \Carbon\Carbon::parse($informasi->tanggalPenutupan)->translatedFormat('d F Y') }}</strong>
+            <strong>
+              {{ $informasi && $informasi->tanggalPenutupan ? \Carbon\Carbon::parse($informasi->tanggalPenutupan)->translatedFormat('d F Y') : '-' }}
+            </strong>
             <span class="muted"> • Kantor MIN Toba Samosir</span>
           </div>
         </div>
@@ -167,19 +154,18 @@
     <div class="info-list" style="margin-top:16px">
       <div class="info-item">
         <div class="info-icon" aria-hidden="true">
-          <!-- users -->
           <svg viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zM8 13a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm8 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zM8 15c-2.67 0-8 1.34-8 4v2h8v-2a5.27 5.27 0 0 1 1.29-3.34A10.43 10.43 0 0 0 8 15z"/></svg>
         </div>
         <div class="info-text">
           <span class="info-label">Jumlah Siswa yang Diterima:</span>
-          <strong>{{ $informasi->jumlahSiswa }} siswa</strong>
+          <strong>{{ $informasi->jumlahSiswa ?? '-' }} siswa</strong>
         </div>
       </div>
     </div>
 
     <div class="strip" style="margin-top:16px">
       <h3 class="step-title" style="margin-bottom:6px">Pengumuman</h3>
-      <p class="subtext" style="margin-top:0">{{ $informasi->pengumuman }}</p>
+      <p class="subtext" style="margin-top:0">{{ $informasi->pengumuman ?? '-' }}</p>
     </div>
   </section>
 
