@@ -98,11 +98,6 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('superadmin.galeri.index') }}" class="{{ request()->routeIs('superadmin.galeri.*') ? 'active' : '' }}">
-                <i class="fas fa-images"></i> Galeri
-            </a>
-        </li>
-        <li>
             <a href="{{ route('superadmin.prestasi.index') }}" class="{{ request()->routeIs('superadmin.prestasi.*') ? 'active' : '' }}">
                 <i class="fas fa-trophy"></i> Prestasi
             </a>
