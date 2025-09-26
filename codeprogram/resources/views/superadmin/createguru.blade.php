@@ -50,17 +50,22 @@
                 <div class="mb-3">
                     <label for="nip" class="form-label fw-semibold">NIP</label>
                     <input type="text" class="form-control @error('nip') is-invalid @enderror" 
-                           id="nip" name="nip" value="{{ old('nip') }}" required>
+                           id="nip" name="nip" value="{{ old('nip') }}" required
+                           maxlength="18" pattern="[0-9]{1,18}" inputmode="numeric"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 18)"
+                           placeholder="Masukkan NIP (maksimal 18 digit)">
                     @error('nip')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                    <!-- <small class="form-text text-muted">NIP harus berupa angka dengan maksimal 18 digit</small> -->
                 </div>
 
                 <!-- Posisi -->
                 <div class="mb-3">
-                    <label for="posisi" class="form-label fw-semibold">Jabatan</label>
+                    <label for="posisi" class="form-label fw-semibold">Jabatan/Posisi</label>
                     <input type="text" class="form-control @error('posisi') is-invalid @enderror" 
-                           id="posisi" name="posisi" value="{{ old('posisi') }}" required>
+                           id="posisi" name="posisi" value="{{ old('posisi') }}" required
+                           placeholder="Contoh: Kepala Sekolah, Guru Kelas, dll">
                     @error('posisi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
