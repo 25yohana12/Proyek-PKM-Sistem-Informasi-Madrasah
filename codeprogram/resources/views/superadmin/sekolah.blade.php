@@ -22,7 +22,6 @@
                 Informasi Utama
             </h2>
         </div>
-
         <div class="card-body">
             @php
                 $sekolahData = is_object($sekolah) && !$sekolah instanceof \Illuminate\Database\Eloquent\Collection 

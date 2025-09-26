@@ -36,13 +36,20 @@
 <section class="principal">
     <h2>Kepala Sekolah</h2>
     <div class="principal-content">
-        <img src="{{ asset('images/kepalasekolah.jpg') }}" alt="Principal" class="principal-img">
-        <div class="principal-text">
-            <p>Nama Kepala Madrasah : <strong>DHj. Syukriani, S.Pd.I., M.Pd</strong><br>Pendidikan Terakhir : S2 – Pendidikan Agama Islam, Magister Pendidikan (M.Pd) di UIN Ar-Raniry Banda Aceh. <br>Moto : <strong>“ Berkolaborasi Membangun Generasi Emas Berilmu, Beriman, dan Berdaya Saing Untuk Mewujudkan Madrasah Bermutu, Maju, dan Mendunia.“</strong></p>
-            <p>Assalamu'alaikum warahmatullahi wabarakatuh
-            Madrasah Ibtidaiyah Negeri (MIN) adalah satuan pendidikan dasar yang dikelola oleh Kementerian Agama (Kemenag) dan berciri khas agama Islam. MIN setara dengan Sekolah Dasar (SD) dan ditempuh dalam waktu 6 tahun, mulai dari kelas 1 sampai kelas 6.
-            Kurikulum MIN sama dengan SD, namun dengan porsi pelajaran agama Islam yang lebih banyak. Selain pelajaran umum seperti matematika, bahasa Indonesia, dan IPA, di MIN juga terdapat pelajaran-pelajaran seperti: Alquran Hadits, Aqidah Akhlaq, Fiqih, Sejarah Kebudayaan Islam, Bahasa Arab. Lulusan MIN dapat melanjutkan pendidikan ke madrasah tsanawiyah (MTs) atau Sekolah Menengah Pertama.</p>
-        </div>
+    <img src="{{ asset('images/KepalaSekolah.png') }}" alt="Shofhan Ahmadi Nasution M.Si" class="principal-img">
+    <div class="principal-text">
+        <p>
+            Nama Kepala Madrasah : <strong>Shofhan Ahmadi Nasution M.Si</strong><br>
+            Pendidikan Terakhir : Magister Sains (M.Si) di UIN Ar-Raniry Banda Aceh.<br>
+            Moto : <strong>“Berkolaborasi Membangun Generasi Emas Berilmu, Beriman, dan Berdaya Saing Untuk Mewujudkan Madrasah Bermutu, Maju, dan Mendunia.”</strong>
+        </p>
+        <p>
+            Assalamu'alaikum warahmatullahi wabarakatuh.<br>
+            Madrasah Ibtidaiyah Negeri (MIN) adalah lembaga pendidikan dasar yang dikelola oleh Kementerian Agama Republik Indonesia dengan ciri khas pembelajaran agama Islam. MIN setara dengan Sekolah Dasar (SD) dan ditempuh selama enam tahun, mulai dari kelas 1 hingga kelas 6. Kurikulum MIN mencakup mata pelajaran umum seperti Matematika, Bahasa Indonesia, dan Ilmu Pengetahuan Alam (IPA), serta mata pelajaran agama Islam yang lebih intensif, antara lain Al-Qur'an Hadits, Aqidah Akhlaq, Fiqih, Sejarah Kebudayaan Islam, dan Bahasa Arab. Lulusan MIN memiliki kesempatan melanjutkan pendidikan ke tingkat berikutnya, baik ke Madrasah Tsanawiyah (MTs) maupun Sekolah Menengah Pertama (SMP).
+        </p>
+    </div>
+</div>
+
     </div>
 </section>
 

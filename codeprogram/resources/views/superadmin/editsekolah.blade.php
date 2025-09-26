@@ -12,12 +12,10 @@
             <label for="namaSekolah" class="form-label">Nama Sekolah</label>
             <input type="text" name="namaSekolah" id="namaSekolah" class="form-control" value="{{ old('namaSekolah', $sekolah->namaSekolah) }}" required>
         </div>
-
         <div class="mb-3">
             <label for="alamat" class="form-label">Alamat</label>
             <input type="text" name="alamat" id="alamat" class="form-control" value="{{ old('alamat', $sekolah->alamat) }}" required>
         </div>
-
         <div class="mb-3">
             <label for="telepon" class="form-label">Telepon</label>
             <input type="text" name="telepon" id="telepon" class="form-control" value="{{ old('telepon', $sekolah->telepon) }}" required>
