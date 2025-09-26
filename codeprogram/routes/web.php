@@ -11,6 +11,7 @@ use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\AcaraController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SiswaNotifikasiController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\StrukturOrganisasiController;
 use App\Http\Controllers\InformasiPendaftaranController;

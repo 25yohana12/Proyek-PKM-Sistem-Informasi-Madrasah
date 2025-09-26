@@ -22,7 +22,7 @@ class SiswaNotifikasiController extends Controller
         return view('siswa.notifikasi.index', compact('notifikasi'));
     }
 
-    public function show($id)
+   public function show($id)
     {
         $pendaftar = auth()->guard('pendaftar')->user();
 
@@ -37,7 +37,6 @@ class SiswaNotifikasiController extends Controller
 
         return view('siswa.notifikasi.show', compact('notif', 'pendaftar'));
     }
-
     public function read($id)
     {
         $pendaftar = auth()->guard('pendaftar')->user();
