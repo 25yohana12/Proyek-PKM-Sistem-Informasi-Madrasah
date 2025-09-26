@@ -23,7 +23,7 @@
                 </h2>
             </div>
             <div class="card-body">
-                <form action="{{ route('superadmin.informasipendaftaran.update', $informasi->informasi_id) }}" method="POST" class="modern-form">
+                <form action="{{ route('superadmin.informasipendaftaran.update', $informasi->informasi_id) }}" method="POST" class="modern-form" id="informasiForm">
                     @csrf
                     @method('PUT')
 
@@ -56,10 +56,12 @@
                                name="tanggalPendaftaran" 
                                class="form-control @error('tanggalPendaftaran') is-invalid @enderror" 
                                value="{{ old('tanggalPendaftaran', $informasi->tanggalPendaftaran?->format('Y-m-d')) }}"
+                               onchange="validateDates()"
                                required>
                         @error('tanggalPendaftaran')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        <div id="tanggalPendaftaranError" class="invalid-feedback" style="display: none;"></div>
                     </div>
 
                     <!-- Tanggal Penutupan -->
@@ -73,10 +75,12 @@
                                name="tanggalPenutupan" 
                                class="form-control @error('tanggalPenutupan') is-invalid @enderror" 
                                value="{{ old('tanggalPenutupan', $informasi->tanggalPenutupan?->format('Y-m-d')) }}"
+                               onchange="validateDates()"
                                required>
                         @error('tanggalPenutupan')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        <div id="tanggalPenutupanError" class="invalid-feedback" style="display: none;"></div>
                     </div>
 
                     <!-- Tanggal Pengumuman -->
@@ -90,10 +94,12 @@
                                name="tanggalPengumuman" 
                                class="form-control @error('tanggalPengumuman') is-invalid @enderror" 
                                value="{{ old('tanggalPengumuman', $informasi->tanggalPengumuman?->format('Y-m-d')) }}"
+                               onchange="validateDates()"
                                required>
                         @error('tanggalPengumuman')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        <div id="tanggalPengumumanError" class="invalid-feedback" style="display: none;"></div>
                     </div>
 
                     <!-- Jumlah Siswa -->
@@ -132,7 +138,7 @@
 
                     <!-- Form Actions -->
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
                             <i class="fas fa-save"></i>
                             <span>Simpan Perubahan</span>
                         </button>
@@ -346,4 +352,109 @@
             }
         }
     </style>
+@endsection
+
+@section('scripts')
+<script>
+function validateDates() {
+    const tanggalPendaftaran = document.getElementById('tanggalPendaftaran').value;
+    const tanggalPenutupan = document.getElementById('tanggalPenutupan').value;
+    const tanggalPengumuman = document.getElementById('tanggalPengumuman').value;
+    
+    // Clear previous errors
+    clearErrors();
+    
+    let isValid = true;
+    
+    // Convert to Date objects for comparison
+    const startDate = new Date(tanggalPendaftaran + 'T00:00:00');
+    const endDate = new Date(tanggalPenutupan + 'T00:00:00');
+    const announcementDate = new Date(tanggalPengumuman + 'T00:00:00');
+    
+    // Validate start date is not in the past (optional)
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    if (tanggalPendaftaran && startDate < today) {
+        showError('tanggalPendaftaran', 'Tanggal pendaftaran tidak boleh di masa lalu');
+        isValid = false;
+    }
+    
+    // Validate end date is after start date
+    if (tanggalPendaftaran && tanggalPenutupan) {
+        if (endDate <= startDate) {
+            showError('tanggalPenutupan', 'Tanggal penutupan harus setelah tanggal mulai pendaftaran');
+            isValid = false;
+        }
+    }
+    
+    // Validate announcement date is after end date
+    if (tanggalPenutupan && tanggalPengumuman) {
+        if (announcementDate <= endDate) {
+            showError('tanggalPengumuman', 'Tanggal pengumuman harus setelah tanggal penutupan pendaftaran');
+            isValid = false;
+        }
+    }
+    
+    // Validate announcement date is after start date
+    if (tanggalPendaftaran && tanggalPengumuman) {
+        if (announcementDate <= startDate) {
+            showError('tanggalPengumuman', 'Tanggal pengumuman harus setelah tanggal mulai pendaftaran');
+            isValid = false;
+        }
+    }
+    
+    // Enable/disable submit button
+    const submitBtn = document.getElementById('submitBtn');
+    if (isValid) {
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        submitBtn.style.cursor = 'pointer';
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+        submitBtn.style.cursor = 'not-allowed';
+    }
+    
+    return isValid;
+}
+
+function showError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    const errorDiv = document.getElementById(fieldId + 'Error');
+    
+    field.classList.add('is-invalid');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+}
+
+function clearErrors() {
+    const fields = ['tanggalPendaftaran', 'tanggalPenutupan', 'tanggalPengumuman'];
+    
+    fields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        const errorDiv = document.getElementById(fieldId + 'Error');
+        
+        field.classList.remove('is-invalid');
+        if (errorDiv) {
+            errorDiv.style.display = 'none';
+            errorDiv.textContent = '';
+        }
+    });
+}
+
+// Form submission validation
+document.getElementById('informasiForm').addEventListener('submit', function(e) {
+    if (!validateDates()) {
+        e.preventDefault();
+        alert('Mohon perbaiki tanggal yang tidak valid sebelum menyimpan!');
+        return false;
+    }
+});
+
+// Initialize validation on page load
+document.addEventListener('DOMContentLoaded', function() {
+    validateDates();
+});
+</script>
 @endsection
