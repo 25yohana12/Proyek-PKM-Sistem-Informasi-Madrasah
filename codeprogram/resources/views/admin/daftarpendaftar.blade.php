@@ -12,12 +12,12 @@
                 </h1>
                 <p class="page-subtitle">Kelola data pendaftar siswa baru</p>
             </div>
-            <div class="header-actions">
+            <!-- <div class="header-actions">
                 <a href="#" class="btn btn-primary">
                     <i class="fas fa-plus"></i>
                     <span>Tambah Pendaftar</span>
                 </a>
-            </div>
+            </div> -->
         </div>
 
         <!-- Success Message -->
