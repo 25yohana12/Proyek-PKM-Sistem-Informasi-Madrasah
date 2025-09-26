@@ -152,6 +152,7 @@ body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
     background-color: #fdfdfd;
     color: var(--text-dark);
+    
 }
 
 h2 {

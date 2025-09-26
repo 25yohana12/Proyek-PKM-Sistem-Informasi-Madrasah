@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#a8dfb0; font-family:'Arial',sans-serif; font-size:18px;">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color:#a8dfb0; font-family:'Arial',sans-serif; font-size:18px; z-index:1030;">
   <div class="container-fluid">
 
     {{-- Brand --}}
